@@ -1,0 +1,23 @@
+/* import core themes */
+@import url('core/bootstrap-scaffolding.css');
+@import url('core/bootstrap-base.css');
+@import url('core/bootstrap-components.css');
+@import url('core/bootstrap-addons.css');
+@import url('core/bootstrap-miscellaneous.css');
+
+
+
+/* import customize */
+@import url('customization.css');
+
+
+/* import addons */
+/*@import url('prettyPhoto.css');*/
+@import url('flexslider.css');
+@import url('font-awesome.css');
+@import url('jquery-ui.css');
+@import url('responsiveslides.css');
+@import url('owl.carousel.css');
+
+/* responsive design */
+@import url('core/bootstrap-responsive.css');

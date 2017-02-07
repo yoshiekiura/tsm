@@ -1,0 +1,17 @@
+setting file/folder permission:
+===============================
+assets/downloads
+assets/import
+assets/userfiles
+assets/userfiles.thumbs
+assets/images/administrator
+assets/images/bank
+assets/images/cache
+assets/images/captcha
+assets/images/catalog
+assets/images/gallery
+assets/images/gallery_item
+assets/images/member
+assets/images/news
+assets/images/slider
+counter.dat
