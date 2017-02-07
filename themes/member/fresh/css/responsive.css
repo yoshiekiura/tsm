@@ -1,0 +1,195 @@
+/***
+Responsive Theme. 
+Based on http://getbootstrap.com/css/#responsive-utilities-classes
+***/
+
+/* LARGE MEDIA */
+/* Google Nexus 10 2560x1560 px (10.1 inches / 300ppi)*/
+/* Microsoft Surface RT 1366x768 px (10.6 inches / 155 ppi)*/
+/* Samsung Galaxy Note 10.1 1280x800 px (10.1 inches / 149 ppi)*/
+/* iPad3 2048x1536 px (9.7 inches / 264 ppi)*/
+/* iPad / iPad2 1024x768 px (9.7 inches / 132 ppi)*/
+/* iPhone 5 640x1136 px (4 inches / 326 ppi)*/
+/* iPhone 4 640x960 px (3.5 inches / 326 ppi)*/
+/* iPhone 320x480 px (3.5 inches / 163 ppi)*/
+
+
+/***
+Form Medium Devices Up To Large Devices
+***/
+@media (min-width: 992px) and (max-width: 1200px) {  
+
+}
+
+/***
+From Medium Devices Up To Larger Devices
+***/
+
+@media (min-width: 992px) { 
+
+}
+
+/***
+Up To Medium Devices
+***/
+
+@media (max-width:991px) { 
+	#user_info .box-body ul li .img-thumbnail {
+		width: 80px;
+	}
+
+	#user_info .box-body ul li .col-md-3 {
+		width: 120px;
+		display: inline-block;
+		float: left;
+	}
+
+	#user_info .box-body ul li .col-md-3 > div {text-align: left!important;} 
+	#user_info .box-body ul li .col-md-9 {
+		min-width: 66.6666666666%;
+		width: auto;
+		display: inline-block;
+		float: left;
+	}
+	#user_info .box-body ul li .badge {left: 20px;}
+
+	.small-box {text-align: left;}
+}
+
+/***
+From Small Devices Up To Medium Devices
+***/
+
+@media (min-width: 768px) and (max-width: 991px) { 
+
+} 
+
+/***
+Extra Small Devices Only
+***/
+
+@media (max-width: 767px) { 
+	.sidebar-mini .main-header {
+		/*margin-left: 0!important;*/
+		-webkit-transition: -webkit-transform .3s ease-in-out,width .3s ease-in-out;
+		-moz-transition: -moz-transform .3s ease-in-out,width .3s ease-in-out;
+		-o-transition: -o-transform .3s ease-in-out,width .3s ease-in-out;
+		transition: transform .3s ease-in-out,width .3s ease-in-out;
+	}
+	.sidebar-open .main-header {
+		/*margin-left: 230px!important;*/
+		-webkit-transform: translate(230px, 0);
+		-ms-transform: translate(230px, 0);
+		-o-transform: translate(230px, 0);
+	}
+	.sidebar-mini .main-header .logo {position: relative; top: 50px;}
+	.sidebar-mini .main-header .navbar {
+		position: fixed;
+		top: 0;
+	}
+	.sidebar-mini .main-header .logo .logo-img {text-align: center;}
+	.sidebar-mini .main-header .logo .logo-img img {
+		height: 70px;
+		display: block;
+		margin: 0 auto;
+	}
+	.main-header .logo .logo-lg {margin-top: -10px;}
+	.main-header .sidebar-toggle {
+		font-size: 30px;
+		line-height: 20px;
+	}
+	.dropdown-toggle .hidden-xs {
+		display: inline-block!important;
+		padding-left: 10px;
+		font-weight: bolder;
+	}
+	.navbar-custom-menu>.navbar-nav>li {
+		position: static;
+		height: 50px;
+	}
+	.main-sidebar {
+		padding-top: 10px;
+	}
+}
+
+@media (min-width: 481px) and (max-width: 550px)  {
+
+}
+
+/***
+The Most Extra Small Devices Landscape Mode Only
+***/
+
+@media (max-width: 480px) {
+	#user_info .box-body ul li .img-thumbnail {
+		width: 70px;
+	}
+
+	#user_info .box-body ul li .col-md-3 {
+		width: 100px;
+		display: inline-block;
+		float: left;
+	}
+
+	#user_info .box-body ul li .col-md-3 > div {text-align: left!important;} 
+	#user_info .box-body ul li .col-md-9 {
+		width: 66.6666666666%;
+		display: inline-block;
+		float: left;
+	}
+	#user_info .box-body ul li .badge {left: 20px;}
+	#widget_komisiboard .col-xs-6 {
+		width: 100%;
+		display: block;
+	}
+
+	.main-footer > a {
+		display: block;
+		font-size: 11px;
+	}
+	.main-footer {text-align: center;font-size: 12px;}
+
+}
+
+/***
+The Most Extra Small Devices Portrait Mode Only
+***/
+
+@media (max-width: 320px) {
+	.sidebar-mini .main-header .logo .logo-img {padding-top: 20px;}
+	.sidebar-mini .main-header .logo .logo-img img {
+		height: 50px;
+		display: block;
+		margin: 0 auto;
+	}
+	#user_info .box-body ul li .img-thumbnail {
+		width: 65px;
+	}
+
+	#user_info .box-body ul li .col-md-3 {
+		width: 85px;
+		display: inline-block;
+		float: left;
+	}
+
+	#user_info .box-body ul li .col-md-3 > div {text-align: left!important;} 
+	#user_info .box-body ul li .col-md-9 {
+		width: 50%;
+		display: inline-block;
+		float: left;
+	}
+	#user_info .box-body ul li .badge {left: 20px;}
+	#widget_komisiboard .col-xs-6 {
+		width: 100%;
+		display: block;
+	}
+	#user_info .box-body ul li span {font-size: 12px;}
+	#widget_komisiboard .small-box .inner h2 {
+		font-size: 32px;
+	}
+	.small-box h3 {font-size: 28px; margin: 10px 0 5px 0;}
+}	
+
+@media (min-width: 176px) and (max-width: 800px) {
+
+}

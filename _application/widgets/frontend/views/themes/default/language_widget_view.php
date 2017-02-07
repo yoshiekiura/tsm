@@ -1,0 +1,1 @@
+<a href="<?php echo base_url() . 'language/change/' . $language_code; ?>" style="background:url('<?php echo base_url() . _dir_flag . $language_icon; ?>') no-repeat;"><?php echo $language_name; ?></a>
