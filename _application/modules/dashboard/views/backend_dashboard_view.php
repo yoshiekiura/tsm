@@ -108,6 +108,11 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php if (count($arr_total_bonus) == 0): ?>
+                        <tr>
+                            <td colspan="3" class="text-center">Data belum ada.</td>
+                        </tr>
+                    <?php endif ?>
                     <?php foreach ($arr_total_bonus as $bonus): ?>
                     <tr>
                         <td><strong><?php echo $bonus->report_bonus_item_label; ?></strong></td>
@@ -139,77 +144,6 @@
         </div>
     </div>
 </div>
-
-<!-- <div class="row">
-    <div class="col-md-12">
-
-        <div class="panel panel-primary">
-
-            <div class="panel-body">
-
-                <div class="row">
-                    <h1>Total Bonus <a href="<?php echo base_url() ?>backend/dashboard/detail_bonus">(detail bonus)</a></h1> 
-
-                    <table class="table table-condensed">
-                        <colgroup> 
-
-                            <col class="col-xs-9"> 
-
-                        </colgroup> 
-                        <thead> 
-                            <tr>
-                                <th style="font-size: 15px;">Bonus Sponsor</th> 
-                                <th style="font-size: 15px"><?php echo "Rp. " . number_format($get_total_bonus->bonus_sponsor); ?></th>
-                            </tr>
-                            <tr> 
-                                <th style="font-size: 15px;">Bonus Gen Sponsor</th> 
-                                <th style="font-size:15px"><?php echo "Rp. " . number_format($get_total_bonus->bonus_gen_sponsor); ?></th>
-                            </tr> 
-                            <tr> 
-                                <th style="font-size: 15px;">Bonus Profit Sharing</th> 
-                                <th style="font-size: 15px"><?php echo "Rp. " . number_format($get_total_bonus->bonus_profit_sharing); ?></th>
-                            </tr> 
-                            <tr> 
-                                <th style="font-size: 15px;">Bonus Royalti Payment</th> 
-                                <th style="font-size: 15px"><?php echo "Rp. " . number_format($get_total_bonus->bonus_royalti); ?></th>
-                            </tr> 
-                            <tr> 
-                                <th style="font-size: 20px;">Total Bonus</th> 
-                                <th style="font-size: 20px"><?php echo "Rp. " . number_format($get_total_bonus->bonus_sponsor + $get_total_bonus->bonus_gen_sponsor + $get_total_bonus->bonus_profit_sharing + $get_total_bonus->bonus_royalti); ?></th>
-                            </tr> 
-                        </thead> 
-                        <tbody> 
-                            <tr>
-
-                    </table>
-                </div>
-            </div>
-            <div class="panel-body">
-
-                <div class="row">
-                    <h1>Total Bonus Paid </h1> 
-
-                    <table class="table table-condensed">
-                        <colgroup> 
-
-                            <col class="col-xs-9"> 
-
-                        </colgroup> 
-                        <thead> 
-                            <tr> 
-                                <th style="font-size: 20px;"></th> 
-                                <th style="font-size: 20px"><?php echo "Rp. " . number_format($get_total_bonus_paid->total_bonus); ?></th>
-                            </tr> 
-                        </thead> 
-                        <tbody> 
-                            <tr>
-
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 
 <script type="text/javascript">
     $(function () {
