@@ -51,9 +51,13 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'fay';
-$db['default']['database'] = 'tasmina_db';
+$db['default']['username'] = 'esoftdre_tasbih';
+$db['default']['password'] = 'ZM-L5!w1uDE(';
+$db['default']['database'] = 'esoftdre_tasmina';
+
+// $db['default']['username'] = 'root';
+// $db['default']['password'] = 'fay';
+// $db['default']['database'] = 'tasmina_db';
 
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
