@@ -18,7 +18,7 @@ $config['transfer']['daily'] = array(
     'type' => 'cash',
     'bonus_min' => 20000,
     'arr_bonus' => array(
-        'sponsor'
+        'sponsor','match','node'
     ),
     'adm_charge' => 0,
     'adm_charge_type' => 'value'
@@ -29,7 +29,7 @@ $config['transfer']['weekly'] = array(
     'type' => 'cash',
     'bonus_min' => 20000,
     'arr_bonus' => array(
-        'match','node'
+        
     ),
     'adm_charge' => 0,
     'adm_charge_type' => 'value'
