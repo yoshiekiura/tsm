@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php $frontend_widget = new widget(); ?><!DOCTYPE html>
 
 <!-- 
     Version : 3.0
@@ -54,19 +54,8 @@
             <div class="top-info">
                 <div class="container">
                     <div class="row">
-
                         <div class="col-md-8 col-md-push-4">
-                            <ul class="sosmed">
-                                <li>
-                                    <span><i class="fa fa-phone"></i>&nbsp; Phone</span> <?php echo $this->site_configuration['phone']; ?>
-                                </li>
-                                <li>
-                                    <span><i class="fa fa-phone-square"></i>&nbsp; Hotline</span> 1234 5678 910
-                                </li>
-                                <li>
-                                    <span><i class="fa fa-envelope-o"></i>&nbsp; Email</span> <?php echo $this->site_configuration['email']; ?>
-                                </li>
-                            </ul>
+                            <?php $frontend_widget->run('widget/frontend_contact_widget', 'top'); ?>
                         </div>
                     </div>
                 </div>
@@ -91,10 +80,7 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="navbar-collapse">
                             <ul class="nav navbar-nav" id="nav">
-                                <?php
-                                $var = new widget();
-                                $var->run('menu/frontend_menu_top_widget');
-                                ?>
+                                <?php $frontend_widget->run('menu/frontend_menu_top_widget'); ?>
                             </ul>
                         </div><!-- /.navbar-collapse -->
                     </nav>

@@ -17,7 +17,7 @@
                     if ($row->news_image != '' && file_exists(_dir_news . $row->news_image)) {
                         $news_image = '<img src="' . base_url() . 'media/' . _dir_news . '250/250/' . $row->news_image . '" alt="' . $row->news_image . '" title="' . $row->news_title . '">';
                     } else {
-                        $news_image = '';
+                        $news_image = '<img src="' . $themes_url . '/uploads/news/mekkah.jpg" alt="' . $row->news_image . '" title="' . $row->news_title . '">';
                     }
 
                     echo '<li>

@@ -11,10 +11,10 @@
                 if (!empty($query)) {
                     foreach ($query as $row) {
                         echo'<li class="col-md-4 col-sm-6 col-xs-12 no-left">';
-                        if (!empty($row->gallery_image)) {
+                        if (!empty($row->gallery_image) && file_exists(_dir_gallery . $row->gallery_image)) {
                             $image = '<img src="' . base_url() . _dir_gallery . $row->gallery_image . '" alt="' . $row->gallery_title . '" title="' . $row->gallery_title . '">';
                         } else {
-                            $image = '';
+                            $image = '<img src="' . $themes_url . '/uploads/news/mekkah.jpg" alt="' . $row->gallery_title . '" title="' . $row->gallery_title . '">';
                         }
                         echo' <div class="cover">';
                         echo'<span><a href="' . base_url() . 'gallery/detail_gallery/' . $row->gallery_id . '" title="View Album">';
