@@ -13,19 +13,31 @@ class frontend_news_widget extends Widget {
         $data['themes_url'] = 'themes/frontend/' . $this->site_configuration['frontend_themes'];
         $this->load->library('pagination');
 
-        //pagination
-        $offset = (int) $this->uri->segment(3, 0);
-        $limit = 10;
-        $config['base_url'] = site_url('news/show');
-        $config['total_rows'] = $this->widget_model->get_news_list(0, 10000)->num_rows();
-        $config['per_page'] = $limit;
-        $config['uri_segment'] = 3;
-        $this->pagination->initialize($config);
-        $data['pagination'] = $this->pagination->create_links();
+        $data['widget_title'] = 'Berita';
+        $data['query'] = $this->widget_model->get_news_list(0, 7);
+        $this->render($widget_themes . 'news_widget_view', $data);
+    }
+
+    public function artikel() {
+        $this->load->model("widget/widget_model");
+        $widget_themes = 'themes/frontend/' . $this->site_configuration['frontend_themes'] . '/widgets/';
+        $data['themes_url'] = 'themes/frontend/' . $this->site_configuration['frontend_themes'];
+        $this->load->library('pagination');
 
         $data['widget_title'] = 'Berita';
-        $data['query'] = $this->widget_model->get_news_list($offset, $limit);
+        $data['query'] = $this->widget_model->get_news_list(0, 7, 1);
         $this->render($widget_themes . 'news_widget_view', $data);
+    }
+
+    public function tausiyah() {
+        $this->load->model("widget/widget_model");
+        $widget_themes = 'themes/frontend/' . $this->site_configuration['frontend_themes'] . '/widgets/';
+        $data['themes_url'] = 'themes/frontend/' . $this->site_configuration['frontend_themes'];
+        $this->load->library('pagination');
+
+        $data['widget_title'] = 'Tausiyah';
+        $data['query'] = $this->widget_model->get_news_list(0, 7, 2);
+        $this->render($widget_themes . 'tausiyah_widget_view', $data);
     }
 
 }

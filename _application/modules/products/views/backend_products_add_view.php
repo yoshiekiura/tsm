@@ -12,7 +12,7 @@
                 <label class="control-label col-md-2">Nama Produk</label>
                 <div class="col-md-10">
                     <div class="input-group" id="defaultrange">
-                        <?php echo form_input('name', (isset($this->arr_flashdata['input_name'])) ? $this->arr_flashdata['input_title'] : '', 'size="40" class="form-control"'); ?>
+                        <?php echo form_input('name', (isset($this->arr_flashdata['input_name'])) ? $this->arr_flashdata['input_name'] : '', 'size="40" class="form-control"'); ?>
                     </div>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                 <label class="control-label col-md-2">Deskripsi Produk</label>
                 <div class="col-md-10">
                     <div class="input-group" id="defaultrange">
-                        <?php echo form_textarea('description', (isset($this->arr_flashdata['input_composition'])) ? $this->arr_flashdata['input_composition'] : '', 'cols="40" rows="5" class="form-control"'); ?>
+                        <?php echo form_textarea_tinymce('description', (isset($this->arr_flashdata['input_description'])) ? $this->arr_flashdata['input_description'] : '', 'PageGenerator'); ?>
                     </div>
                 </div>
             </div>

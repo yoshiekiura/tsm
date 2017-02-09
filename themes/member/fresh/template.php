@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>FAiR SYSTEM -  <?php echo $this->site_configuration['title']; ?></title>
+        <title><?php echo $this->site_configuration['title']; ?></title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.6 -->
@@ -245,11 +245,10 @@
                 <!-- Logo -->
                 <a href="<?php echo base_url(); ?>" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
-                    <span class="logo-mini"><b>F</b>S</span>
+                    <span class="logo-mini">T<b>S</b>M</span>
                     <!-- logo images for regular state and mobile devices -->
                     <span class="logo-img">
-                        <img src="<?php echo $themes_url; ?>/images/logo_.png" title="Green TravelLink" class="img-responsive">
-                  <span class="logo-lg"><b>FAiR </b> SYSTEM</span>
+                        <img src="<?php echo base_url(_dir_site_config . $this->site_configuration['logo']); ?>" title="<?php echo $this->site_configuration['title']; ?> " class="img-responsive">
                     </span>
                     <!-- logo for regular state and mobile devices -->
                   

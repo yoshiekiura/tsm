@@ -39,7 +39,7 @@ if ($query->num_rows() > 0) {
                     <label class="control-label col-md-2">Deskripsi Produk</label>
                     <div class="col-md-10">
                         <div class="input-group" id="defaultrange">
-                            <?php echo form_textarea('description', (isset($this->arr_flashdata['input_description'])) ? $this->arr_flashdata['input_description'] : $row->product_description, 'cols="40" rows="5" class="form-control"'); ?>
+                            <?php echo form_textarea_tinymce('description', (isset($this->arr_flashdata['input_description'])) ? $this->arr_flashdata['input_description'] : $row->product_description, 'PageGenerator'); ?>
                         </div>
                     </div>
                 </div>

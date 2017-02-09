@@ -8,7 +8,7 @@
         <?php echo form_hidden('uri_string', uri_string()); ?>
         <div class="form-body">
 
-            <div class="form-group">
+            <div class="form-group hide">
                 <label class="control-label col-md-2">Tipe Tempat</label>
                 <div class="col-md-10">
                     <div class="input-group" id="defaultrange">

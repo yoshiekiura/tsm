@@ -18,6 +18,15 @@
             </div>
 
             <div class="form-group">
+                <label class="control-label col-md-2">Kategori Berita</label>
+                <div class="col-md-10">
+                    <div class="input-group" id="defaultrange">
+                        <?php echo form_dropdown('news_category', $category_options, (isset($this->arr_flashdata['input_news_category'])) ? $this->arr_flashdata['input_news_category'] : '', ' class="form-control"'); ?>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label class="control-label col-md-2">Deskripsi</label>
                 <div class="col-md-10">
                     <div class="input-group" id="defaultrange">

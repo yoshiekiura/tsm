@@ -28,7 +28,7 @@ a:hover, a:active, a:focus {
 }
 .sidebar-mini .main-header .logo {
 	background-color: #60bc1e;
-	height: 130px;
+	height: 120px;
 	position: fixed;
 
 	background: #ffffff;
@@ -44,7 +44,12 @@ a:hover, a:active, a:focus {
 	display: inline-block;
 	width: 100%;
 	padding-top: 0px;
+	max-height: 120px;
 	margin-bottom: -10px;
+}
+.sidebar-mini .main-header .logo .logo-img img {
+	display: inline-block;
+	max-height: 120px;
 }
 .skin-blue .main-header .logo:hover {
 	background-color: #54ad11;

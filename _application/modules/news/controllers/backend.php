@@ -33,7 +33,7 @@ class Backend extends Backend_Controller {
             'Pengelolaan Web' => '#',
             'Berita' => 'backend/news/show',
         );
-        
+        $data['category_options'] = $this->backend_news_model->get_news_category_options('string');
         template('backend', 'news/backend_news_list_view', $data);
     }
 
@@ -50,6 +50,7 @@ class Backend extends Backend_Controller {
         $data['image_width'] = $this->image_width;
         $data['image_height'] = $this->image_height;
         $data['form_action'] = 'backend_service/news/act_add';
+        $data['category_options'] = $this->backend_news_model->get_news_category_options('array');
 
         template('backend', 'news/backend_news_add_view', $data);
     }
@@ -69,6 +70,7 @@ class Backend extends Backend_Controller {
         $data['image_width'] = $this->image_width;
         $data['image_height'] = $this->image_height;
         $data['form_action'] = 'backend_service/news/act_edit';
+        $data['category_options'] = $this->backend_news_model->get_news_category_options('array');
 
         template('backend', 'news/backend_news_edit_view', $data);
     }

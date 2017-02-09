@@ -73,7 +73,7 @@ function get_data() {
                 'cell' => array(
                     'product_id' => $row->product_id,
                     'product_name' => $row->product_name,
-                    'product_description' => nl2br($row->product_description),
+                    'product_description' => substr(strip_tags($row->product_description), 0, 300),
                     'product_price_member' => $this->function_lib->set_number_format($row->product_price_member),
                     'product_price_non' => $this->function_lib->set_number_format($row->product_price_non),
                     'product_image' => $image,

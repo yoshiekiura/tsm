@@ -4,7 +4,7 @@ class Widget {
 
     public $module_path;
 
-    function run($file = '') {
+    function run($file = '', $act='run') {
         $args = func_get_args();
         $module = '';
 
@@ -31,7 +31,7 @@ class Widget {
 
         $widget->module_path = $path;
 
-        return call_user_func_array(array($widget, 'run'), array_slice($args, 1));
+        return call_user_func_array(array($widget, $act), array_slice($args, 1));
     }
 
     function render($view, $data = array()) {

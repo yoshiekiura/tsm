@@ -45,6 +45,7 @@ define('_dir_site_config', 'assets/images/site/');
 define('_dir_reward', 'assets/images/reward/');
 define('_dir_products','assets/images/products/');
 define('_dir_products_item','assets/images/products_item/');
+define('_dir_leader','assets/images/leader/');
 
 /*
  * ---------------------------------------------------------------

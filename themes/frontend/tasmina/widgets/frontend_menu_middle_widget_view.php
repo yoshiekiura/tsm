@@ -19,7 +19,7 @@ if (array_key_exists('0', $arr_menu)) {
         $first_word = strtok($menu_value->menu_title, ' ');
         $first_word_else = substr($menu_value->menu_title, strpos($menu_value->menu_title, ' '));
         echo '<li>
-                <a class="img-effect" title="' . $menu_value->menu_title . '" href="#">
+                <a class="img-effect" title="' . $menu_value->menu_title . '" href="' . $menu_link . '">
                     <span>' . $first_word . '</span>' . $first_word_else . '
                 </a>
             </li>';

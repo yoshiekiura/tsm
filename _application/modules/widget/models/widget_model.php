@@ -25,9 +25,13 @@ class widget_model extends CI_Model {
         return $this->db->get('site_news');
     }
 
-    public function get_news_list($offset = 0, $limit = 20) {
+    public function get_news_list($offset = 0, $limit = 20, $category_id=false) {
         $this->db->select("*, DATE_FORMAT(news_input_datetime, '%M %D, %Y') AS news_input_date", false);
         $this->db->from('site_news');
+        $this->db->join('site_news_category', 'news_category_id=news_news_category_id');
+        if ($category_id !== false) {
+            $this->db->where('news_is_active', $category_id);
+        }
         $this->db->where(array('news_is_active' => '1'));
         $this->db->order_by('news_input_datetime', 'desc');
         $this->db->offset($offset);
@@ -46,12 +50,12 @@ class widget_model extends CI_Model {
         return $this->db->get();
     }
 
-    public function get_event_list_widget() {
+    public function get_event_list_widget($limit=6) {
         $this->db->select("*, DATE_FORMAT(event_input_datetime, '%M %D, %Y') AS event_input_date", false);
         $this->db->from('site_event');
         $this->db->where(array('event_is_active' => '1'));
         $this->db->order_by('event_input_datetime', 'desc');
-        $this->db->limit(6);
+        $this->db->limit($limit);
         return $this->db->get();
     }
 
@@ -166,6 +170,42 @@ class widget_model extends CI_Model {
         $query = $this->db->query($sql);
         return $query;
         $this->db->cache_off();
+    }
+
+    public function get_last_gallery($limit=6) {
+        $this->db->from('site_gallery');
+        $this->db->where(array('gallery_is_active' => '1'));
+        $this->db->order_by('gallery_date', 'desc');
+        $this->db->limit($limit);
+
+        return $this->db->get();
+    }
+
+    public function get_data_contact($limit=6) {
+        $this->db->from('site_contact_us');
+        $this->db->where(array('contact_us_is_active' => '1'));
+        $this->db->order_by('contact_us_id', 'asc');
+        $this->db->limit($limit);
+
+        return $this->db->get();
+    }
+
+    public function get_data_leader($limit=6) {
+        $this->db->from('site_leader');
+        $this->db->where(array('leader_is_active' => '1'));
+        $this->db->order_by('leader_id', 'asc');
+        $this->db->limit($limit);
+
+        return $this->db->get();
+    }
+
+    public function get_data_product($limit=6) {
+        $this->db->from('site_product');
+        $this->db->where(array('product_is_active' => '1'));
+        $this->db->order_by('product_id', 'asc');
+        $this->db->limit($limit);
+
+        return $this->db->get();
     }
 
 }

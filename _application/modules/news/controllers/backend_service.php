@@ -96,6 +96,8 @@ class Backend_service extends Backend_Service_Controller {
     function get_data() {
         $params = isset($_POST) ? $_POST : array();
         $params['table'] = "site_news";
+        $params['join'] = "INNER JOIN site_news_category ON news_news_category_id=news_category_id";
+        $params['where'] = "news_category_is_active = 1";
         $query = $this->function_lib->get_query_data($params);
         $total = $this->function_lib->get_query_data($params, true);
 
@@ -129,6 +131,7 @@ class Backend_service extends Backend_Service_Controller {
                 'cell' => array(
                     'news_id' => $row->news_id,
                     'news_title' => $row->news_title,
+                    'news_category_title' => $row->news_category_title,
                     'news_short_content' => $row->news_short_content,
                     'news_source' => $row->news_source,
                     'news_input_datetime' => convert_datetime($row->news_input_datetime, 'id'),
@@ -157,12 +160,14 @@ class Backend_service extends Backend_Service_Controller {
             $this->session->set_flashdata('input_short_content', $this->input->post('short_content'));
             $this->session->set_flashdata('input_news_content', $this->input->post('news_content'));
             $this->session->set_flashdata('input_source', $this->input->post('source'));
+            $this->session->set_flashdata('input_news_category', $this->input->post('news_category'));
             redirect($this->input->post('uri_string'));
         } else {
             $news_title = $this->input->post('title');
             $news_short_content = $this->input->post('short_content');
             $news_content = $this->input->post('news_content');
             $news_source = $this->input->post('source');
+            $news_category = $this->input->post('news_category');
             $datetime = date("Y-m-d H:i:s");
 
             $data = array();
@@ -172,6 +177,7 @@ class Backend_service extends Backend_Service_Controller {
             $data['news_source'] = $news_source;
             $data['news_input_administrator_id'] = $this->session->userdata('administrator_id');
             $data['news_input_datetime'] = $datetime;
+            $data['news_news_category_id'] = $news_category;
             $data['news_is_active'] = 1;
 
             if ($this->upload->fileUpload('image', $this->file_dir, $this->allowed_file_type)) {
@@ -212,6 +218,7 @@ class Backend_service extends Backend_Service_Controller {
             $this->session->set_flashdata('input_short_content', $this->input->post('short_content'));
             $this->session->set_flashdata('input_news_content', $this->input->post('news_content'));
             $this->session->set_flashdata('input_source', $this->input->post('source'));
+            $this->session->set_flashdata('input_news_category', $this->input->post('news_category'));
             redirect($this->input->post('uri_string'));
         } else {
             
@@ -220,6 +227,7 @@ class Backend_service extends Backend_Service_Controller {
             $news_short_content = $this->input->post('short_content');
             $news_content = $this->input->post('news_content');
             $news_source = $this->input->post('source');
+            $news_category = $this->input->post('news_category');
             $news_old_image = $this->input->post('old_image');
 
             $data = array();
@@ -227,6 +235,7 @@ class Backend_service extends Backend_Service_Controller {
             $data['news_short_content'] = $news_short_content;
             $data['news_content'] = $news_content;
             $data['news_source'] = $news_source;
+            $data['news_news_category_id'] = $news_category;
             $data['news_input_administrator_id'] = $this->session->userdata('administrator_id');
 
             if ($this->upload->fileUpload('image', $this->file_dir, $this->allowed_file_type)) {

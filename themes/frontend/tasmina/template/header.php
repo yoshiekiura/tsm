@@ -84,7 +84,7 @@
                                 <span></span>
                             </button>
                             <div class="navbar-brand">
-                                <a href="#" class="logo" alt="logo"><img src="<?php echo base_url('assets/images/site/' . $this->site_configuration['logo']); ?>" alt="<?php echo $this->site_configuration['title']; ?>"></a>
+                                <a href="#" class="logo" alt="logo"><img src="<?php echo base_url(_dir_site_config . $this->site_configuration['logo']); ?>" alt="<?php echo $this->site_configuration['title']; ?>"></a>
                             </div>
                         </div>
 

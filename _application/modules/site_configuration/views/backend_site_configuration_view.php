@@ -20,7 +20,7 @@ if ($query->num_rows() > 0) {
                     echo '<div class="col-md-10">';
                     echo '<div class="input-group" id="defaultrange">';
                     if ($row->configuration_type == 'boolean') {
-                        $options = array(0 => 'Ya', 1 => 'Tidak');
+                        $options = array(1 => 'Ya', 0 => 'Tidak');
                         echo form_dropdown($row->configuration_name, $options, (isset($this->arr_flashdata[$input_name])) ? $this->arr_flashdata[$input_name] : $row->configuration_value, 'class="form-control"');
                     } elseif ($row->configuration_type == 'text') {
                         echo form_input($row->configuration_name, (isset($this->arr_flashdata[$input_name])) ? $this->arr_flashdata[$input_name] : $row->configuration_value, 'size="130" class="form-control"');

@@ -7,6 +7,7 @@
         dataType: 'json',
         colModel: [
             { display: 'Judul', name: 'news_title', width: 300, sortable: true, align: 'left' },
+            { display: 'Kategori', name: 'news_category_title', width: 300, sortable: true, align: 'left' },
             { display: 'Tanggal Input', name: 'news_input_datetime', width: 180, sortable: true, align: 'center' },
             { display: 'Aktif', name: 'news_is_active', width: 40, sortable: true, align: 'center' },
             { display: 'Ubah', name: 'edit', width: 40, sortable: false, align: 'center', datasource: false },
@@ -27,6 +28,7 @@
         searchitems: [
             { display: 'Judul', name: 'news_title', type: 'text', isdefault: true },
             { display: 'Tanggal Input', name: 'news_input_datetime', type: 'date' },
+            { display: 'Kategori', name: 'news_news_category_id', type: 'select', option: '<?php echo $category_options ?>' },
             { display: 'Status Aktif', name: 'news_is_active', type: 'select', option: '1:Aktif|0:Tidak Aktif' },
         ],
         sortname: "news_id",

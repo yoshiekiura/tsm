@@ -25,7 +25,7 @@ if ($query->num_rows() > 0) {
             <?php echo form_hidden('id', $this->uri->segment(4)); ?>
             <?php echo form_hidden('old_image', $row->event_image); ?>
             <div class="form-body">
-                <div class="form-group">
+                <div class="form-group hide">
                     <label class="control-label col-md-2">Tipe Tempat</label>
                     <div class="col-md-10">
                         <div class="input-group" id="defaultrange">

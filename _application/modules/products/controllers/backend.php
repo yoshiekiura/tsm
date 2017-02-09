@@ -15,6 +15,7 @@ class Backend extends Backend_Controller{
         parent::__construct();
 
         $this->load->model('products/backend_products_model');
+        $this->load->helper('tinymce');
         $this->load->helper('form');
 
         $this->file_dir = _dir_products;

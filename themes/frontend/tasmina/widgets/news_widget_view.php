@@ -1,43 +1,61 @@
-<div id="widget-news">
-    <h2>
-        Berita Terbaru <strong>Green Travellink</strong>
-    </h2>
-    <?php
-    if ($query->num_rows() > 0) {
-
-        foreach ($query->result() as $row_news) {
-            $text = substr($row_news->news_short_content, 0, 350);
-            $date = $row_news->news_input_datetime;
-            $tahun = substr($date, 0, 4);
-            $bulan = substr($date, 5, 2);
-            $tanggal = substr($date, 8, 2);
-            
-          
-            if (!empty($row_news->news_image)) {
-                $image = '<img class="img-responsive img-thumbnail" src="' . base_url() . _dir_news .  $row_news->news_image . '" class="img-responsive">';
-            } else
-                $image = '';
-            ?>
-
-            <div class="item-news">
-                <div class="col-md-4 no-left">
-                    <a href="<?php echo base_url() . 'news/detail/' . $row_news->news_id . '/' . url_title($row_news->news_title); ?>" class="thumbnail">
-                        <?php echo $image; ?>
-                    </a>
-                </div>
-                <div class="col-md-8 no-right">
-                    <h4 class="title"><a href="<?php echo base_url() . 'news/detail/' . $row_news->news_id . '/' . url_title($row_news->news_title); ?>"><?php echo $row_news->news_title; ?></a></h4>
-                    <small class="meta meta-date"><i class="fa fa-calendar"></i>&nbsp; <?php echo $tanggal . ' / ' . $bulan . ' / '  . $tahun; ?></small>
-                    <p class="meta meta-desc "><?php echo $text; ?></p>
-                </div>
-            </div>
-
+<!-- News Widget -->
+<div role="tabpanel" class="tab-pane fade in active" id="content-1">
+    <div class="widget_list list_article">
+        <div class="row">
             <?php
-        }
-    } else {
-        echo 'Maaf, berita belum dimuat.';
-    }
-    ?>
+            $news_row_count = $query->num_rows();
+            if ($news_row_count > 0) {
+                $news_data = $query->result();
+                $row_news = array_shift($news_data);
+                $text = substr($row_news->news_short_content, 0, 350);
+                $date = date_converter($row_news->news_input_datetime, 'l, j F Y H:i');
 
+                if (!empty($row_news->news_image) && file_exists(_dir_news . $row_news->news_image)) {
+                    $image = base_url() . _dir_news .  $row_news->news_image;
+                    $image = '<img src="' . $image . '" title="' . $row_news->news_title . '">';
+                } else {
+                    $image = '';
+                }
 
+                echo '<div class="col-md-5">
+                        <div class="list_headline">
+                            <div class="list_img">
+                                ' . $image . '
+                            </div>
+                            <div class="list_text">
+                                <span class="list_meta_date">' . $date . '</span>
+                                <h4 class="list_title"><a href="' . base_url() . 'news/detail/' . $row_news->news_id . '/' . url_title($row_news->news_title) . '">' . $row_news->news_title . '</a></h4>
+                                <span class="list_excerpt">' . $text . '</span>
+                            </div>
+                        </div>
+                    </div>';
+                echo '<div class="col-md-7"> <ul>';
+                foreach ($news_data as $row_news) {
+                    $text = substr($row_news->news_short_content, 0, 150);
+                    $date = date_converter($row_news->news_input_datetime, 'l, j F Y H:i');
+                  
+                    if (!empty($row_news->news_image) && file_exists(_dir_news . $row_news->news_image)) {
+                        $image = base_url() . _dir_news .  $row_news->news_image;
+                        $image = '<img src="' . $image . '" title="' . $row_news->news_title . '">';
+                    } else {
+                        $image = '';
+                    }
+                    echo '<li class="item">
+                        <div class="list_img">
+                            ' . $image . '
+                        </div>
+                        <div class="list_text">
+                            <h4 class="list_title"><a href="' . base_url() . 'news/detail/' . $row_news->news_id . '/' . url_title($row_news->news_title) . '">' . $row_news->news_title . '</a></h4>
+                            <span class="list_meta_date">' . $date . '</span>
+                        </div>
+                    </li>';
+                }
+                echo "</ul></div>";
+            } else {
+                echo 'Maaf, berita belum dimuat.';
+            }
+            ?>
+        </div>
+    </div>
 </div>
+<!-- END News Widget -->
