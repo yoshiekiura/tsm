@@ -9,7 +9,7 @@
                             <div class="sh"></div>
                         </h4>
                         <?php echo $query->page_home_content ?>
-                        <a href="#" class="btn btn-default"><i class="fa fa-ellipsis-v"></i>&nbsp; Selengkapnya</a>
+                        <!-- <a href="#" class="btn btn-default"><i class="fa fa-ellipsis-v"></i>&nbsp; Selengkapnya</a> -->
                     </div>
                 </div>
             </div>

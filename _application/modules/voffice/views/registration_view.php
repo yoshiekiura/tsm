@@ -217,10 +217,37 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
             check_member_data('reg_nama_upline', $("#reg_upline").val());
         });
 
+        $("#reg_repassword, #reg_password").blur(function() {
+            $(".help-block.password_msg").remove();    
+            if ($("#reg_password").val() != '') {
+                if ($("#reg_password").val() != $("#reg_repassword").val()) {
+                    $("#reg_repassword, #reg_password").parent().addClass('has-error');
+                    $("#reg_repassword").after('<span class="help-block password_msg">Password dan Konfirmasi Password tidak sama.</span>');
+                    toggle_submit('disabled');
+                } else {
+                    $("#reg_repassword, #reg_password").parent().removeClass('has-error').addClass('has-success');
+                    $(".help-block.password_msg").remove();    
+                    toggle_submit('enable');
+                }
+            } else {
+                toggle_submit('disabled');
+                $("#reg_password").parent().addClass('has-error');
+                $("#reg_password").after('<span class="help-block password_msg">Password harus diisi.</span>');
+            }
+        });
+
         // $("#reg_nama").blur(function() {
         //     $("#reg_nasabah_bank").val($(this).val());
         // });
     });
+
+    function toggle_submit(status) {
+        if (status=='enable') {
+            $('button[name=register]').removeAttr('disabled');
+        } else {
+            $('button[name=register]').attr('disabled','disabled');
+        }
+    }
 
     function check_member_data(id, code) {
         if (code.length > 0) {

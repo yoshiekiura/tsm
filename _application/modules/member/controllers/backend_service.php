@@ -152,13 +152,13 @@ class Backend_service extends Backend_Service_Controller {
         $this->load->library('upload');
         $this->load->library('image_lib');
         $this->form_validation->set_rules('account_username', '<b>Username</b>', 'required|min_length[5]|max_length[15]|callback_username_check[' . $this->input->post('id') . ']');
-        $this->form_validation->set_rules('name', '<b>Nama Lengkap</b>', 'required');
-        $this->form_validation->set_rules('nickname', '<b>Nama Alias</b>', 'required');
-        $this->form_validation->set_rules('detail_address', '<b>Alamat</b>', 'required');
+        $this->form_validation->set_rules('name', '<b>Nama Lengkap</b>', 'required|callback_validate_name[Nama Lengkap]');
+        // $this->form_validation->set_rules('nickname', '<b>Nama Alias</b>', 'required');
+        // $this->form_validation->set_rules('detail_address', '<b>Alamat</b>', 'required');
         $this->form_validation->set_rules('city_id', '<b>Kota / Kabupaten</b>', 'required');
         $this->form_validation->set_rules('detail_sex', '<b>Jenis Kelamin</b>', 'required');
-        $this->form_validation->set_rules('detail_birth_date', '<b>Tanggal Lahir</b>', 'required');
-        $this->form_validation->set_rules('mobilephone', '<b>No. Handphone</b>', 'required');
+        // $this->form_validation->set_rules('detail_birth_date', '<b>Tanggal Lahir</b>', 'required');
+        $this->form_validation->set_rules('mobilephone', '<b>No. Handphone</b>', 'required|callback_validate_phone');
 
         if ($this->form_validation->run($this) == FALSE) {
             $this->session->set_flashdata('confirmation', '<div class="error alert alert-danger">' . validation_errors() . '</div>');
@@ -408,6 +408,49 @@ class Backend_service extends Backend_Service_Controller {
         } else {
             $this->session->set_flashdata('confirmation', '<div class="error alert alert-danger">Terjadi kesalahan pada sistem.</div>');
             redirect('backend/dashboard');
+        }
+    }
+
+    function validate_phone($num) {
+        $is_error = false;
+        // validasi karakter (hanya angka)
+        if ( ! ctype_digit($num)) {
+            $is_error = true;
+            $msg = '<b>Nomor Handphone</b> hanya boleh mengandung karakter angka.';
+        }
+
+        // blacklist phone_number
+        $black_list = array('12345678', '01234567');
+        $max_length = 8;
+        for ($i=0; $i <= $max_length; $i++) { 
+            $black_list[] = str_repeat($i, $max_length);
+        }
+        if ($is_error == false && in_array(substr($num, 0, $max_length), $black_list)) {
+            $is_error = true;
+            $msg = '<b>Nomor Handphone</b> tidak valid.';
+        }
+
+        if (!$is_error) {
+            return true;
+        } else {
+            $this->form_validation->set_message('validate_phone', $msg);
+            return false;
+        }
+    }
+
+    function validate_name($name, $label='Nama') {
+        $is_error = false;
+        // validasi karakter (hanya angka dan spasi)
+        if ( ! preg_match("/^[a-zA-Z ]+$/", $name)) {
+            $is_error = true;
+            $msg = '<b>' . $label . '</b> hanya boleh mengandung karakter huruf dan spasi.';
+        }
+
+        if (!$is_error) {
+            return true;
+        } else {
+            $this->form_validation->set_message('validate_name', $msg);
+            return false;
         }
     }
 

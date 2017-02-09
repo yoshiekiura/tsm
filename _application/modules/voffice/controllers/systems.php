@@ -59,7 +59,7 @@ class Systems extends Member_Controller {
         $this->load->library('image_lib');
         $this->form_validation->set_rules('account_username', '<b>Username</b>', 'required|min_length[5]|max_length[15]|callback_username_check[' . $this->session->userdata('network_id') . ']');
         $this->form_validation->set_rules('name', '<b>Nama Lengkap</b>', 'required|min_length[3]|callback_validate_name[Nama Lengkap]');
-        $this->form_validation->set_rules('nickname', '<b>Nama Alias</b>', 'required|min_length[3]|callback_validate_name[Nama Alias]');
+        // $this->form_validation->set_rules('nickname', '<b>Nama Alias</b>', 'required|min_length[3]|callback_validate_name[Nama Alias]');
         $this->form_validation->set_rules('detail_address', '<b>Alamat</b>', 'required');
         $this->form_validation->set_rules('city_id', '<b>Kota / Kabupaten</b>', 'required');
         $this->form_validation->set_rules('detail_sex', '<b>Jenis Kelamin</b>', 'required');
