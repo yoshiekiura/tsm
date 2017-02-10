@@ -24,6 +24,7 @@ class Backend extends Backend_Controller {
         $this->year = date('Y');
     }
 
+    /* REWARD REPORT */
     function reward() {
         $data['arr_breadcrumbs'] = array(
             'Laporan' => '#',
@@ -38,6 +39,13 @@ class Backend extends Backend_Controller {
         $this->backend_service = new Backend_service_reward();
         $this->backend_service->get_reward_log_data_service();
     }
+
+    function export_reward_data() {
+        include_once(dirname(__FILE__) . "/backend_service_reward.php");
+        $this->backend_service = new Backend_service_reward();
+        $this->backend_service->export_data();
+    }
+    /* END REWARD REPORT */
 
     function financial($period='global') {
         include_once(dirname(__FILE__) . "/backend_service_financial.php");

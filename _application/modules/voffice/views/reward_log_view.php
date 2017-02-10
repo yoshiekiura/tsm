@@ -17,9 +17,9 @@
             { display: 'Tanggal diproses', name: 'process_date', width: 150, sortable: true, align: 'center' },
             { display: 'Nama Admin', name: 'administrator_name', width: 150, sortable: true, align: 'center' },
         ],
-        buttons_right: [
-            { display: 'Export Excel', name: 'excel', bclass: 'excel', onpress: export_data, urlaction: '<?php echo $this->module_url; ?>/export_log_data' },
-        ],
+        // buttons_right: [
+        //     { display: 'Export Excel', name: 'excel', bclass: 'excel', onpress: export_data, urlaction: '<?php echo $this->module_url; ?>/export_log_data' },
+        // ],
         searchitems: [
             { display: 'Tanggal Claim', name: 'reward_qualified_date', type: 'date', isdefault: true },
         ],

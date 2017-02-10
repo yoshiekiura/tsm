@@ -31,6 +31,8 @@ class Backend_service_reward extends Backend_Controller {
         header("Content-type: application/json");
         // print_r(json_encode($query->result()));die();
         $page = isset($_POST['page']) ? $_POST['page'] : 1;
+        $max = isset($_POST['rp']) ? $_POST['rp'] : 10;
+        $num = (($page-1)*$max)+1;
         $json_data = array('page' => $page, 'total' => $total, 'rows' => array());
         $administrator = array('-'=>'-');
         foreach ($query->result() as $row) {
@@ -50,7 +52,7 @@ class Backend_service_reward extends Backend_Controller {
             
             $entry = array('id' => $row->reward_qualified_id,
                 'cell' => array(
-                    'no' => $page++,
+                    'no' => $num++,
                     'network_code' => $row->network_code,
                     'member_name' => $row->member_name,
                     'reward_cond_node_left' => $this->function_lib->set_number_format($row->reward_cond_node_left),
@@ -135,5 +137,157 @@ class Backend_service_reward extends Backend_Controller {
                     return $query;
                 }
 
+    }
+
+    function export_data() {
+        $params = isset($_POST) ? $_POST : array();
+        
+        $data = array();
+        $data['title'] = 'Data Reward Member';
+        $data['params'] = $params;
+        $query = $this->get_member_reward_data($params);
+        if ($query->num_rows() > 0) {
+            $administrator = array('-'=>'-');
+            $page=1;
+            foreach ($query->result() as $row) {
+                //status
+                if ( ! isset($administrator[$row->administrator_id])) {
+                    $administrator[$row->administrator_id] = $row->administrator_name;
+                }
+                
+                $entry = array(
+                    'no' => $page++,
+                    'network_code' => $row->network_code,
+                    'member_name' => $row->member_name,
+                    'reward_cond_node_left' => $this->function_lib->set_number_format($row->reward_cond_node_left),
+                    'reward_cond_node_right' => $this->function_lib->set_number_format($row->reward_cond_node_right),
+                    'reward_qualified_condition_node_left' => $this->function_lib->set_number_format($row->reward_qualified_condition_node_left),
+                    'reward_qualified_condition_node_right' => $this->function_lib->set_number_format($row->reward_qualified_condition_node_right),
+                    'reward_qualified_reward_bonus' => $row->reward_qualified_reward_bonus,
+                    'reward_qualified_status' => strtoupper($row->reward_qualified_status),
+                    'reward_qualified_status_raw' => $row->reward_qualified_status,
+                    'reward_qualified_date' => convert_date($row->reward_qualified_date, 'id'),
+                    'claim_datetime' => date_converter($row->claim_datetime, 'd F Y H:i:s'),
+                    'process_date' => (($row->process_date != '-') ? date_converter($row->process_date, 'd F Y H:i:s') : '-'),
+                    'administrator_name' => $administrator[$row->administrator_id]
+                );
+                
+                $data['query'][] = (object) $entry;
+            } 
+        } else {
+            $data['query'] = array();
+        }
+        $data['column'] = isset($_POST['column']) ? $_POST['column'] : array();
+        $this->export_excel_data($data);
+    }
+
+    function export_excel_data($data = false) {
+        if ($data) {
+            $this->CI->load->library('Excel');
+
+            // Initiate cache
+            $cacheMethod = PHPExcel_CachedObjectStorageFactory::cache_to_phpTemp;
+            $cacheSettings = array('memoryCacheSize' => '32MB');
+            PHPExcel_Settings::setCacheStorageMethod($cacheMethod, $cacheSettings);
+
+            $arr_style_title = array(
+                'borders' => array(
+                    'allborders' => array(
+                        'style' => PHPExcel_Style_Border::BORDER_THIN
+                    )
+                ),
+                'fill' => array(
+                    'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                    'color' => array('rgb' => 'EEEEEE')
+                ),
+                'alignment' => array(
+                    'wrap' => true,
+                    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+                ),
+            );
+
+            $arr_style_content = array(
+                'borders' => array(
+                    'allborders' => array(
+                        'style' => PHPExcel_Style_Border::BORDER_THIN
+                    )
+                ),
+                'alignment' => array(
+                    'wrap' => true,
+                    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+                ),
+            );
+
+            extract($data);
+            
+            $filename = url_title($title) . '-' . date("YmdHis");
+            $arr_column_name = json_decode($column['name']);
+            $arr_column_show = json_decode($column['show']);
+            $arr_column_align = json_decode($column['align']);
+            $arr_column_title = json_decode($column['title']);
+
+            $first_column = $cell_column = 'A';
+            $cell_row = $first_row = 1;
+            $excel = new PHPExcel();
+            $excel->getProperties()->setTitle($title)->setSubject($title);
+            $excel->getActiveSheet()->setTitle(substr($title, 0, 31));
+            $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+            $excel->getDefaultStyle()->getFont()->setName('Calibri');
+            $excel->getDefaultStyle()->getFont()->setSize(10);
+
+            //title
+            $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->getFont()->setBold(true);
+            $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->getFont()->setSize(13);
+            $excel->setActiveSheetIndex(0)->setCellValue($cell_column . $cell_row, strtoupper($title));
+            $cell_row++;
+            $excel->setActiveSheetIndex(0)->setCellValue($cell_column . $cell_row, 'Tanggal Export : ' . convert_datetime(date("Y-m-d H:i:s"), 'id'));
+            $cell_row++;
+            $cell_row++;
+
+            if (is_array($arr_column_title)) {
+                $cell_column = $first_column;
+                $excel->getActiveSheet()->getRowDimension($cell_row)->setRowHeight(20);
+                foreach ($arr_column_title as $id => $value) {
+                    if ($arr_column_show[$id] == true) {
+                        $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER_CONTINUOUS);
+                        $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->getFont()->setBold(true)->setSize(11);
+                        $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->applyFromArray($arr_style_title);
+                        $excel->getActiveSheet()->getColumnDimension($cell_column)->setWidth(ceil(1.5 * strlen($value) + 0.6));
+
+                        $excel->setActiveSheetIndex(0)->setCellValue($cell_column . $cell_row, strtoupper($value));
+                        $cell_column++;
+                    }
+                }
+                $cell_row++;
+            }
+
+            foreach ($query as $row) {
+                $cell_column = $first_column;
+                $excel->getActiveSheet()->getRowDimension($cell_row)->setRowHeight(17);
+                foreach ($arr_column_name as $id => $value) {
+                    if ($arr_column_show[$id] == true) {
+                        if (!isset($row->$value)) {
+                            $data = '';
+                        } else {
+                            $data = $row->$value;
+                        }
+                        $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->getAlignment()->setHorizontal($arr_column_align[$id]);
+                        $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->applyFromArray($arr_style_content);
+                        $excel->setActiveSheetIndex(0)->setCellValueExplicit($cell_column . $cell_row, $data, PHPExcel_Cell_DataType::TYPE_STRING);
+                        $cell_column++;
+                    }
+                }
+                $cell_row++;
+            }
+
+
+            header('Content-Type: application/vnd.ms-excel');
+            header('Content-Disposition: attachment;filename="' . $filename . '.xls"');
+            header('Cache-Control: max-age=0');
+
+            $write = PHPExcel_IOFactory::createWriter($excel, 'Excel5');
+            $write->save('php://output');
+            exit;
+        }
     }
 }

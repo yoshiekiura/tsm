@@ -20,15 +20,15 @@
             { display: 'Tanggal Diproses', name: 'process_date', width: 150, sortable: true, align: 'center' },
             { display: 'Nama Admin', name: 'administrator_name', width: 150, sortable: true, align: 'center' },
         ],
-        // buttons_right: [
-        //     { display: 'Export Excel', name: 'excel', bclass: 'excel', onpress: export_data, urlaction: '<?php echo $this->module_url; ?>/export_log_data' },
-        // ],
+        buttons_right: [
+            { display: 'Export Excel', name: 'excel', bclass: 'excel', onpress: export_data, urlaction: '<?php echo $this->module_url; ?>/export_reward_data' },
+        ],
         searchitems: [
             { display: 'Kode Member', name: 'network_code', type: 'text' },
             { display: 'Nama Member', name: 'member_name', type: 'text' },
             { display: 'Tanggal Claim', name: 'reward_qualified_date', type: 'date', isdefault: true },
             { display: 'Tanggal Diproses', name: 'process_date', type: 'date' },
-            { display: 'Status', name: 'reward_qualified_status', type: 'select', option: 'approve:Approve|pending:Pending|reject:Reject' },
+            { display: 'Status', name: 'reward_qualified_status', type: 'select', option: 'approved:Approved|pending:Pending|rejected:Rejected' },
         ],
         sortname: "reward_qualified_id",
         sortorder: "desc",
