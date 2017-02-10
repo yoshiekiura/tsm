@@ -205,6 +205,15 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
     </div>
 </div>
 <script>
+    var new_sponsor_name = false, new_sponsor_code = false;
+    var delay = (function(){
+        var timer = 0;
+        return function(callback, ms){
+            clearTimeout (timer);
+            timer = setTimeout(callback, ms);
+        };
+    })();
+
     $(document).ready(function() {
         check_member_data('reg_nama_sponsor', $("#reg_sponsor").val());
         check_member_data('reg_nama_upline', $("#reg_upline").val());
@@ -234,6 +243,19 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
                 $("#reg_password").parent().addClass('has-error');
                 $("#reg_password").after('<span class="help-block password_msg">Password harus diisi.</span>');
             }
+        });
+
+        $("#reg_no_rekening_bank").keyup(function() {
+            toggle_submit('disabled');
+
+            $(this).parent().removeClass('has-error').removeClass('has-success');
+            $('#info_change_sponsor').remove();
+            $(".help-block.no_rek_msg").remove();    
+            $(this).after('<span class="help-block no_rek_msg">Sedang mencari nomor rekening yang sama..</span>');
+            
+            delay(function(){
+                check_no_rekening('reg_no_rekening_bank', $("#reg_no_rekening_bank").val());
+            }, 2000);
         });
 
         // $("#reg_nama").blur(function() {
@@ -273,13 +295,63 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
         }
     }
 
+    function check_no_rekening(id, no_rek) {
+        if (no_rek.length > 0) {
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url('voffice/registration/check_rekening'); ?>',
+                data: {no_rek: no_rek},
+                dataType: 'json',
+                async: false,
+                beforeSend: function() {
+                    $(".help-block.no_rek_msg").remove();
+                    $("#" + id).after('<span class="help-block no_rek_msg">Sedang mencari nomor rekening yang sama..</span>');
+                },
+                success: function(results) {
+                    $(".help-block.no_rek_msg").remove();
+                    if (results.status=='success') {
+                        $("#" + id).parent().removeClass('has-error').addClass('has-success');
+                        if (results.change == 'yes') {
+                            new_sponsor_code = results.sponsor_network_code;
+                            new_sponsor_name = results.sponsor_name;
+                            var htmlinfo = '<div class="col-md-10 col-md-push-2" id="info_change_sponsor"><br>' +
+                            '<div class="alert alert-info"> <div class="titleInfo"><b>Perubahan Sponsor</b></div>' +
+                                '<ul> <li>Sponsor akan berubah dari <strong>' + $("#reg_nama_sponsor").html() + ' (' + $("#reg_sponsor").val().toUpperCase() + ')</strong>' +
+                                ' menjadi <strong>' + results.sponsor_name + ' (' + results.sponsor_network_code + ')</strong></li> </ul>' +
+                            '</div> </div>';
+                            $("#" + id).closest('.form-group').append(htmlinfo);
+                            $("#" + id).after('<span class="help-block no_rek_msg">'+results.message+'</span>');
+                        } else if (results.change == 'no') {
+                            $("#" + id).after('<span class="help-block no_rek_msg">'+results.message+'</span>');
+                        }
+                        toggle_submit('enable');
+                    } else if(results.status == 'failed') {
+                        new_sponsor_code = false;
+                        new_sponsor_name = false;
+                        $(".help-block.no_rek_msg").remove();
+                        $("#" + id).parent().addClass('has-error');
+                        $("#" + id).after('<span class="help-block no_rek_msg">'+results.message+'</span>');
+                    }
+                }
+            });
+        }
+    }
+
     function confirmation() {
-        var sponsor = $("#reg_sponsor").val().toUpperCase();
+        if (new_sponsor_code !== false) {
+            var sponsor = new_sponsor_code;
+        } else {
+            var sponsor = $("#reg_sponsor").val().toUpperCase();
+        }
         var upline = $("#reg_upline").val().toUpperCase();
         var nama_anda = $("#reg_nama").val().toUpperCase();
         var jumlah_hu = $('input[name=reg_paket]:checked').val()
         var posisi = $('input[name=reg_posisi]:checked').val()
-        var nama_sponsor = $("#reg_nama_sponsor").html();
+        if (new_sponsor_name !== false) {
+            var nama_sponsor = new_sponsor_name;
+        } else {
+            var nama_sponsor = $("#reg_nama_sponsor").html();
+        }
         var nama_upline = $("#reg_nama_upline").html();
 
         if (sponsor.length > 0 && upline.length > 0) {

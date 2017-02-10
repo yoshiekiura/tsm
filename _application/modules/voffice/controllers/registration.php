@@ -100,9 +100,24 @@ class Registration extends Member_Controller {
         $data['type_reg_text'] = 'Kloning';
 
         $data['query_bank'] = $this->function_lib->get_list_bank();
-        $data['form_action'] = 'voffice/registration/process';
+        $data['form_action'] = 'voffice/registration/process_clone';
 
         template('member', 'voffice/registration_clone_view', $data);
+    }
+
+    public function process_clone() {
+        /* =========== OVERRIDE POST CLONE DATA =========== */
+        $arr_member_detail = $this->mlm_function->get_arr_member_detail($this->session->userdata('network_id'));
+        $_POST['reg_nama'] = $arr_member_detail['member_name'];
+        $_POST['reg_email'] = $arr_member_detail['member_email'];
+        $_POST['reg_handphone'] = $arr_member_detail['member_mobilephone'];
+        $_POST['reg_id_bank'] = $arr_member_detail['member_bank_id'];
+        $_POST['reg_cabang_bank'] = $arr_member_detail['member_bank_branch'];
+        $_POST['reg_kota_bank'] = $arr_member_detail['member_bank_city'];
+        $_POST['reg_nasabah_bank'] = $arr_member_detail['member_bank_account_name'];
+        $_POST['reg_no_rekening_bank'] = $arr_member_detail['member_bank_account_no'];
+        /* =========== OVERRIDE POST CLONE DATA =========== */
+        $this->process();
     }
 
     public function process() {
@@ -200,6 +215,7 @@ class Registration extends Member_Controller {
 
                 //data member detail
                 $arr_member_detail = array();
+                $arr_member_detail['member_detail_email'] = $_POST['reg_email'];
 
                 //data member account
                 $arr_member_account = array();
@@ -229,6 +245,10 @@ class Registration extends Member_Controller {
 
                 $upline = 0;
                 $_SESSION['network_code'] = array();
+
+                /* INITIAL SPONSOR */
+                $arr_network['network_initial_sponsor_network_id'] = $sponsor_network_id;
+                /* END INITIAL SPONSOR */
 
                 // cek no rek di sys_member_bank
                 $cek_no_rek = $this->function_lib->get_one('sys_member_bank', 'member_bank_network_id', array('member_bank_account_no'=>$_POST['reg_no_rekening_bank']));
@@ -603,6 +623,67 @@ class Registration extends Member_Controller {
             $this->form_validation->set_message('validate_name', $msg);
             return false;
         }
+    }
+
+    public function check_rekening() {
+        header("Content-type: application/json");
+        $result = array();
+        $rek = $this->input->post('no_rek');
+        $is_error = false;
+
+        // validasi panjang karakter 
+        if (strlen($rek) < 8) {
+            $is_error = true;
+            $result['message'] = 'Nomor Rekening harus memiliki panjang minimal 8 karakter.';
+        }
+
+        // validasi karakter (hanya angka)
+        if ( ! ctype_digit($rek) && $is_error == false) {
+            $is_error = true;
+            $result['message'] = 'Nomor Rekening hanya boleh mengandung karakter angka.';
+        }
+
+        // ambil no rekening root
+        $root_rek = $this->function_lib->get_one('sys_member_bank', 'member_bank_account_no', array('member_bank_network_id'=>1));
+        if ($is_error == false && $rek == $root_rek) {
+            $is_error = true;
+            $result['message'] = 'Nomor Rekening tidak bisa digunakan.';
+        }
+
+        // blacklist no rek
+        $black_list = array('12345678', '01234567');
+        $max_length = 8;
+        for ($i=0; $i <= $max_length; $i++) { 
+            $black_list[] = str_repeat($i, $max_length);
+        }
+        if ($is_error == false && in_array(substr($rek, 0, $max_length), $black_list)) {
+            $is_error = true;
+            $result['message'] = 'Nomor Rekening tidak valid.';
+        }
+
+        if (!$is_error) {
+
+            // get member bank cek no rek di sys_member_bank
+            $cek_no_rek = $this->function_lib->get_one('sys_member_bank', 'member_bank_network_id', array('member_bank_account_no'=>$rek));
+            if ( ! empty($cek_no_rek) OR $cek_no_rek != '') {
+                $parent_group_network_id = $this->function_lib->get_one('sys_network_group', 'network_group_parent_network_id', array('network_group_member_network_id'=>$cek_no_rek));
+                $parent_sponsor_network_id = $this->function_lib->get_one('sys_network', 'network_sponsor_network_id', array('network_id'=>$parent_group_network_id));
+
+                $result['sponsor_network_id'] = $parent_sponsor_network_id;
+                $result['sponsor_network_code'] = $this->function_lib->get_one('sys_network', 'network_code', array('network_id'=>$parent_sponsor_network_id));
+                $result['sponsor_name'] = $this->mlm_function->get_member_name($parent_sponsor_network_id);
+                $result['message'] = 'Perubahan Data Sponsor.';
+                $result['change'] = 'yes';
+            } else {
+                $result['message'] = 'Nomor Rekening valid.';
+                $result['change'] = 'no';
+            }
+            $result['status'] = 'success';
+        } else {
+            $result['status'] = 'failed';
+        }
+
+        echo json_encode($result);
     }
 
 }

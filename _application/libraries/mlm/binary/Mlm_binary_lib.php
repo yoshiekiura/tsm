@@ -102,6 +102,7 @@ class Mlm_binary_lib extends Mlm_lib {
             SET network_code = '" . $member_code . "',
             network_position = '" . $this->network_position . "',
             network_sponsor_network_id = '" . $this->network_sponsor_network_id . "',
+            network_initial_sponsor_network_id = '" . $this->network_initial_sponsor_network_id . "',
             network_upline_network_id = '" . $this->network_upline_network_id . "'
         ";
         $feedback = $this->CI->db->query($sql_insert);
