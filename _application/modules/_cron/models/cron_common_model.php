@@ -109,9 +109,9 @@ class Cron_common_model extends CI_Model {
         if ($query->num_rows() > 0) {
             foreach ($query->result_array() as $bonus_log) {
                 /* UPDATE bonus_[daily|weekly|monthly]_saldo */
-                $data = array();
-                $data['bonus_' . $periode . '_saldo'] = $bonus_log[$periode . '_bonus'];
-                $this->function_lib->update_data('sys_bonus', 'bonus_network_id', $bonus_log['bonus_log_network_id'], $data);
+                $this->db->set('bonus_' . $periode . '_saldo', $bonus_log[$periode . '_bonus'], FALSE);
+                $this->db->where('bonus_network_id', $bonus_log['bonus_log_network_id']);
+                $this->db->update('sys_bonus');
             }
         }
     }
