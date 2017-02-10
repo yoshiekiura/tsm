@@ -19,8 +19,11 @@ if ($query->num_rows() > 0) {
                     echo '<label class="control-label col-md-3">' . $row->configuration_title . '</label>';
                     echo '<div class="col-md-6">';
                     echo '<div class="input-group" id="defaultrange">';
-                    if ($row->configuration_type == 'boolean') {
+                    if ($row->configuration_type == 'boolean_reverse') {
                         $options = array(0 => 'Ya', 1 => 'Tidak');
+                        echo form_dropdown($row->configuration_name, $options, (isset($this->arr_flashdata[$input_name])) ? $this->arr_flashdata[$input_name] : $row->configuration_value, 'class="form-control"');
+                    } elseif ($row->configuration_type == 'boolean') {
+                        $options = array(1 => 'Ya', 0 => 'Tidak');
                         echo form_dropdown($row->configuration_name, $options, (isset($this->arr_flashdata[$input_name])) ? $this->arr_flashdata[$input_name] : $row->configuration_value, 'class="form-control"');
                     } elseif ($row->configuration_type == 'text') {
                         echo form_input($row->configuration_name, (isset($this->arr_flashdata[$input_name])) ? $this->arr_flashdata[$input_name] : $row->configuration_value, 'size="130" class="form-control"');
