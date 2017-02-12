@@ -313,15 +313,7 @@ class Registration extends Member_Controller {
                     $this->netgrow_node->execute();
 
                     // akhir netgrow node
-                    // ---------------------------------------------------------
-                    // ---------------------------------------------------------
-                    // netgrow qualified
-                    // $this->netgrow_qualified->set_network_id($reg_network_id);
-                    // $this->netgrow_qualified->set_date($date);
-                    // $this->netgrow_qualified->execute();
-                    // akhir netgrow qualified
-                    // ---------------------------------------------------------
-                    // ---------------------------------------------------------
+                   
                     // netgrow sponsor
 
                     $this->netgrow_sponsor->set_network_id($reg_network_id);
@@ -453,6 +445,13 @@ class Registration extends Member_Controller {
                 $this->session->set_flashdata('input_reg_id_bank', $this->input->post('reg_id_bank'));
                 $this->session->set_flashdata('input_reg_nasabah_bank', $this->input->post('reg_nasabah_bank'));
                 $this->session->set_flashdata('input_reg_no_rekening_bank', $this->input->post('reg_no_rekening_bank'));
+
+                if ($this->input->post('reg_paket')) {
+                    for ($join_paket = 1; $join_paket <= $this->input->post('reg_paket'); $join_paket++) {
+                        $this->session->set_flashdata('input_reg_serial[$join_paket]',$_POST['reg_serial'][$join_paket]);
+                        $this->session->set_flashdata('input_reg_pin[$join_paket]',$_POST['reg_pin'][$join_paket]);
+                    }
+                }
 
 
                 redirect($this->input->post('uri_string'));

@@ -13,6 +13,7 @@
         color:#dd0000;
     }
 </style>
+
 <?php
 if (isset($_SESSION['input_message']) && is_serialized($_SESSION['input_message'])) {
     $arr_message = unserialize($_SESSION['input_message']);
@@ -366,3 +367,40 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
         }
     }
 </script>
+
+<?php if(isset($this->arr_flashdata['input_reg_serial'])) {
+    ?>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+    var selected_paket = $("input[type='radio'][name='reg_paket']:checked").val();
+
+    $('#row-serial .items').remove();
+    var i = 1;
+    var reg_serial = <?php echo json_encode($this->arr_flashdata['input_reg_serial']) ;?>;
+    console.log(reg_serial[1]);
+    var newRow = $("<div class='row-serial' id='row-serial'>");
+
+    for (i = 1; i <= selected_paket; i++) {
+        var cols = "";
+        cols += '<div class="items">';
+        cols += '<div class="col-md-6" style = "padding-left:0px;">';
+        cols += '<label for="serial' + i + '">Nomor Serial ' + i + ' <span class="required">*</span></label>';
+        cols += '<input type="text" class="form-control" id="serial' + i + '" name ="reg_serial[' + i + ']" placeholder="nomor serial ..." value="'+reg_serial[i]+'" >';
+        cols += '</div>';
+
+        cols += '<div class="col-md-6" style = "padding-left:0px;">';
+        cols += '<label for="pin' + i + '">PIN ' + i + ' <span class="required">*</span></label>';
+        cols += '<input type="text" class="form-control" id="pin' + i + '" name ="reg_pin[' + i + ']" placeholder="pin ..." >';
+        cols += '</div>';
+        cols += '</div>';
+
+        newRow.append(cols);
+        $("#row-serial").append(newRow);
+    }
+    ;
+});
+</script>
+<?php
+}
+?>
