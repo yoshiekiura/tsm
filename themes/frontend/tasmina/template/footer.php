@@ -50,6 +50,7 @@
 <script type="text/javascript" src="<?php echo $themes_url; ?>/js/jquery.bxslider.min.js"></script>
 <script type="text/javascript" src="<?php echo $themes_url; ?>/js/jquery-events-frame.js"></script>
 <script type="text/javascript" src="<?php echo $themes_url; ?>/js/jparallax.js"></script>
+<script type="text/javascript" src="<?php echo $themes_url; ?>/js/jquery.slimscroll.min.js"></script>
 
 <script type="text/javascript" src="<?php echo $themes_url; ?>/js/application.js"></script>  
 

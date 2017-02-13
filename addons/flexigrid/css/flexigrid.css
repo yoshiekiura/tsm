@@ -182,7 +182,9 @@
     clear: both;
     padding: 5px;
     padding-left: 5px;
-    width: 1024px;
+/*    width: 1024px;
+*/
+width: auto;
 }
 
 .flexigrid div.sDiv2 input, .flexigrid div.sDiv2 select {
@@ -661,7 +663,10 @@ div.colCopy {
     margin: 3px;
     margin-left: -2px;
     float: left;
+    /*
     width: 1024px;
+    */
+    width: auto;
 }
 
 div.pGroup {
@@ -677,7 +682,10 @@ div.pGroup input[type=text], div.pGroup select {
     font-size:8pt;
     color:#444;
     background:#f5f5f5;
+    width : auto;
 }
+
+
 
 .flexigrid div.pDiv .pPageStat,.flexigrid div.pDiv .pcontrol {
     position: relative;
@@ -755,4 +763,16 @@ div.pGroup input[type=text], div.pGroup select {
 .flexigrid.ie div.hDiv th div,.flexigrid.ie  div.bDiv td  div,div.colCopy.ie div
 /* common inner cell properties*/ {
     overflow: hidden;
+}
+
+@media (min-width: 176px) and (max-width: 800px) {
+    #current_page{
+        width:auto !important;
+    }
+}
+
+@media  (max-width: 320px) {
+    #current_page{
+        width:auto !important;
+    }
 }

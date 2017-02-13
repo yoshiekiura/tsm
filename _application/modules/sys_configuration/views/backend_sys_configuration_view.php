@@ -7,7 +7,7 @@ if ($query->num_rows() > 0) {
             <div class="caption"><i class="icon-reorder"></i>Form Konfigurasi Sistem</div>
         </div>
         <div class="box-body form">
-            <?php echo form_open_multipart($form_action, array('class' => 'form-horizontal form-bordered')); ?>
+            <?php echo form_open_multipart($form_action, array('class' => 'form-horizontal form-bordered','onsubmit'=>"return confirm('Apakah anda yakin?')")); ?>
             <?php echo form_hidden('uri_string', uri_string()); ?>
             <div class="form-body">
 

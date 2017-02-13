@@ -19,6 +19,8 @@ function template($user = 'frontend', $views = '', $data = array()) {
             $themes = $CI->site_configuration['backend_themes'];
             if ($views == 'login') {
                 $template_file = 'template_login';
+            } elseif ($views == 'confirm_otp') {
+                $template_file = 'template_confirm_otp';
             } else {
                 if($CI->session->userdata('administrator_group_type') == 'superuser') {
                     $query_menu = $CI->function_lib->get_superuser_menu();
