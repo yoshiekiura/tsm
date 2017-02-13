@@ -247,16 +247,34 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
         });
 
         $("#reg_no_rekening_bank").keyup(function() {
-            toggle_submit('disabled');
+            if ($(this).val() != '') {
+                toggle_submit('disabled');
 
-            $(this).parent().removeClass('has-error').removeClass('has-success');
-            $('#info_change_sponsor').remove();
-            $(".help-block.no_rek_msg").remove();    
-            $(this).after('<span class="help-block no_rek_msg">Sedang mencari nomor rekening yang sama..</span>');
-            
-            delay(function(){
-                check_no_rekening('reg_no_rekening_bank', $("#reg_no_rekening_bank").val());
-            }, 2000);
+                $(this).parent().removeClass('has-error').removeClass('has-success');
+                $('#info_change_sponsor').remove();
+                $(".help-block.no_rek_msg").remove();    
+                $(this).after('<span class="help-block no_rek_msg">Sedang mencari nomor rekening yang sama..</span>');
+                
+                delay(function(){
+                    check_no_rekening('reg_no_rekening_bank', $("#reg_no_rekening_bank").val());
+                }, 2000);
+            }
+        });
+
+        $("#reg_no_rekening_bank, #reg_handphone").keydown(function (e) {
+            // Allow: backspace, delete, tab, escape, enter and .
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                 // Allow: Ctrl+A, Command+A
+                (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+                 // Allow: home, end, left, right, down, up
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                     // let it happen, don't do anything
+                     return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
         });
 
         // $("#reg_nama").blur(function() {
