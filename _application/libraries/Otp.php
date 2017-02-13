@@ -214,7 +214,7 @@ class Otp {
 						'expired'=>'expired_time');
 		foreach ($arr_replace as $_key => $_val) {
 			if ($_key == 'start' OR $_key == 'expired') {
-				$_val = date_converter($this->$_val, 'l, d F Y H:i:s');
+				$_newval = date_converter($this->$_val, 'l, d F Y H:i:s');
 			} else {
 				$_newval = $this->$_val;
 			}
