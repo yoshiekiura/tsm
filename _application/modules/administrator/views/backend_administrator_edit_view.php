@@ -64,6 +64,15 @@ if ($query->num_rows() > 0) {
                 </div>
 
                 <div class="form-group">
+                    <label class="control-label col-md-2">No. Hp</label>
+                    <div class="col-md-10">
+                        <div class="input-group" id="defaultrange">
+                            <?php echo form_input('mobilephone', (isset($this->arr_flashdata['input_mobilephone'])) ? $this->arr_flashdata['input_mobilephone'] : $row->administrator_mobilephone, 'size="50" class="form-control"'); ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label class="control-label col-md-2">Gambar Profil</label>
                     <div class="col-md-10">
                         <div class="input-group" id="defaultrange">

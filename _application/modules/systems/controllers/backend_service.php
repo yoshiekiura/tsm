@@ -30,6 +30,7 @@ class Backend_service extends Backend_Service_Controller {
         $this->load->library('image_lib');
         $this->form_validation->set_rules('username', '<b>Username</b>', 'required|min_length[5]|max_length[15]|callback_username_check[' . $this->session->userdata('administrator_id') . ']');
         $this->form_validation->set_rules('name', '<b>Nama</b>', 'required');
+        $this->form_validation->set_rules('mobilephone', '<b>No. Hp</b>', 'required|min_length[5]|max_length[15]|callback_validate_phone');
 
         if ($this->form_validation->run($this) == FALSE) {
             $this->session->set_flashdata('confirmation', '<div class="error alert alert-danger">' . validation_errors() . '</div>');
@@ -39,12 +40,14 @@ class Backend_service extends Backend_Service_Controller {
             $administrator_username = $this->input->post('username');
             $administrator_name = $this->input->post('name');
             $administrator_email = $this->input->post('email');
+            $administrator_mobilephone = $this->input->post('mobilephone');
             $administrator_old_image = $this->input->post('old_image');
 
             $data = array();
             $data['administrator_username'] = $administrator_username;
             $data['administrator_name'] = $administrator_name;
             $data['administrator_email'] = $administrator_email;
+            $data['administrator_mobilephone'] = $administrator_mobilephone;
 
             if ($this->upload->fileUpload('image', _dir_administrator, 'gif|jpg|png')) {
                 $upload = $this->upload->data();
@@ -117,6 +120,33 @@ class Backend_service extends Backend_Service_Controller {
         } else {
             $this->form_validation->set_message('password_check', '%s belum benar');
             return FALSE;
+        }
+    }
+
+    public function validate_phone($num) {
+        $is_error = false;
+        // validasi karakter (hanya angka)
+        if ( ! ctype_digit($num)) {
+            $is_error = true;
+            $msg = '<b>Nomor Handphone</b> hanya boleh mengandung karakter angka.';
+        }
+
+        // blacklist phone_number
+        $black_list = array('12345678', '01234567');
+        $max_length = 8;
+        for ($i=0; $i <= $max_length; $i++) { 
+            $black_list[] = str_repeat($i, $max_length);
+        }
+        if ($is_error == false && in_array(substr($num, 0, $max_length), $black_list)) {
+            $is_error = true;
+            $msg = '<b>Nomor Handphone</b> tidak valid.';
+        }
+
+        if (!$is_error) {
+            return true;
+        } else {
+            $this->form_validation->set_message('validate_phone', $msg);
+            return false;
         }
     }
 

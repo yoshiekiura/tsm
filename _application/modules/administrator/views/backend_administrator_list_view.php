@@ -9,6 +9,7 @@
             { display: 'Username', name: 'administrator_username', width: 200, sortable: true, align: 'left' },
             { display: 'Nama', name: 'administrator_name', width: 250, sortable: true, align: 'left' },
             { display: 'E-Mail', name: 'administrator_email', width: 150, sortable: true, align: 'left', hide: true },
+            { display: 'No. Hp', name: 'administrator_mobilephone', width: 150, sortable: true, align: 'left', hide: true },
             { display: 'Grup', name: 'administrator_group_title', width: 150, sortable: true, align: 'left' },
             { display: 'Login Terakhir', name: 'administrator_last_login', width: 180, sortable: true, align: 'center' },
             { display: 'Aktif', name: 'administrator_is_active', width: 40, sortable: true, align: 'center' },

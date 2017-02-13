@@ -72,6 +72,7 @@ class Backend_Service extends Backend_Service_Controller {
                     'administrator_username' => $row->administrator_username,
                     'administrator_name' => $row->administrator_name,
                     'administrator_email' => $row->administrator_email,
+                    'administrator_mobilephone' => $row->administrator_mobilephone,
                     'administrator_last_login' => convert_datetime($row->administrator_last_login, 'id'),
                     'administrator_image' => $image,
                     'administrator_is_active' => $is_active,
@@ -167,6 +168,7 @@ class Backend_Service extends Backend_Service_Controller {
         $this->form_validation->set_rules('password', '<b>Password Baru</b>', 'required|matches[password_conf]');
         $this->form_validation->set_rules('password_conf', '<b>Ulangi Password Baru</b>', 'required');
         $this->form_validation->set_rules('name', '<b>Nama</b>', 'required');
+        $this->form_validation->set_rules('mobilephone', '<b>No. Hp</b>', 'required|min_length[5]|max_length[15]|callback_validate_phone');
 
         if ($this->form_validation->run($this) == FALSE) {
             $this->session->set_flashdata('confirmation', '<div class="error alert alert-danger">' . validation_errors() . '</div>');
@@ -175,6 +177,7 @@ class Backend_Service extends Backend_Service_Controller {
             $this->session->set_flashdata('input_password', $this->input->post('password'));
             $this->session->set_flashdata('input_name', $this->input->post('name'));
             $this->session->set_flashdata('input_email', $this->input->post('email'));
+            $this->session->set_flashdata('input_mobilephone', $this->input->post('mobilephone'));
             redirect($this->input->post('uri_string'));
         } else {
             $administrator_group_id = $this->input->post('administrator_group_id');
@@ -182,6 +185,7 @@ class Backend_Service extends Backend_Service_Controller {
             $administrator_password = $this->input->post('password');
             $administrator_name = $this->input->post('name');
             $administrator_email = $this->input->post('email');
+            $administrator_mobilephone = $this->input->post('mobilephone');
 
             $data = array();
             $data['administrator_administrator_group_id'] = $administrator_group_id;
@@ -189,6 +193,7 @@ class Backend_Service extends Backend_Service_Controller {
             $data['administrator_password'] = $this->encrypt->encode($administrator_password, $this->config->item('key_administrator'));
             $data['administrator_name'] = $administrator_name;
             $data['administrator_email'] = $administrator_email;
+            $data['administrator_mobilephone'] = $administrator_mobilephone;
             $data['administrator_is_active'] = 1;
 
             if ($this->upload->fileUpload('image', $this->file_dir, $this->allowed_file_type)) {
@@ -229,6 +234,7 @@ class Backend_Service extends Backend_Service_Controller {
             $this->session->set_flashdata('input_username', $this->input->post('username'));
             $this->session->set_flashdata('input_name', $this->input->post('name'));
             $this->session->set_flashdata('input_email', $this->input->post('email'));
+            $this->session->set_flashdata('input_mobilephone', $this->input->post('mobilephone'));
             redirect($this->input->post('uri_string'));
         } else {
             $administrator_id = $this->input->post('id');
@@ -236,6 +242,7 @@ class Backend_Service extends Backend_Service_Controller {
             $administrator_username = $this->input->post('username');
             $administrator_name = $this->input->post('name');
             $administrator_email = $this->input->post('email');
+            $administrator_mobilephone = $this->input->post('mobilephone');
             $administrator_old_image = $this->input->post('old_image');
 
             $data = array();
@@ -243,6 +250,7 @@ class Backend_Service extends Backend_Service_Controller {
             $data['administrator_username'] = $administrator_username;
             $data['administrator_name'] = $administrator_name;
             $data['administrator_email'] = $administrator_email;
+            $data['administrator_mobilephone'] = $administrator_mobilephone;
 
             if ($this->upload->fileUpload('image', $this->file_dir, $this->allowed_file_type)) {
                 $upload = $this->upload->data();
@@ -304,6 +312,33 @@ class Backend_Service extends Backend_Service_Controller {
         } else {
             $this->form_validation->set_message('password_check', '%s salah');
             return FALSE;
+        }
+    }
+
+    public function validate_phone($num) {
+        $is_error = false;
+        // validasi karakter (hanya angka)
+        if ( ! ctype_digit($num)) {
+            $is_error = true;
+            $msg = '<b>Nomor Handphone</b> hanya boleh mengandung karakter angka.';
+        }
+
+        // blacklist phone_number
+        $black_list = array('12345678', '01234567');
+        $max_length = 8;
+        for ($i=0; $i <= $max_length; $i++) { 
+            $black_list[] = str_repeat($i, $max_length);
+        }
+        if ($is_error == false && in_array(substr($num, 0, $max_length), $black_list)) {
+            $is_error = true;
+            $msg = '<b>Nomor Handphone</b> tidak valid.';
+        }
+
+        if (!$is_error) {
+            return true;
+        } else {
+            $this->form_validation->set_message('validate_phone', $msg);
+            return false;
         }
     }
 

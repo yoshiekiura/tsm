@@ -206,6 +206,8 @@ class Otp {
 	 * @return void
 	 */
 	private function compile_message() {
+		defined('LD') OR define('LD', '{');
+		defined('RD') OR define('RD', '}');
 		$arr_replace = array(
 						'code'=>'otp_code',
 						'start'=>'start_time',
