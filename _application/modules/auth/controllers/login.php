@@ -247,11 +247,13 @@ class Login extends MY_Controller {
             
             $is_active_otp = $this->otp->get_active_otp($admin_data->administrator_id);
             if ($is_active_otp == TRUE) {
+                $last_otp = $this->otp->get_last_otp();
                 $this->otp->save_data = FALSE;
+                $this->otp->set_otp_code($last_otp['otp_code']);
+                $this->otp->set_otp_expired($last_otp['otp_expired_datetime']);
+            } else {
+                $otp_code = $this->otp->generate(5);
             }
-
-            // Sending OTP to email [or|and] phone_number
-            $otp_code = $this->otp->generate(5);
 
             if ($this->otp->send_sms == TRUE) {
                 $this->otp->sms_to = $admin_data->administrator_mobilephone;
@@ -271,6 +273,7 @@ class Login extends MY_Controller {
                                 AKTIF s/d : {expired} </p>';
             }
 
+            // Sending OTP to email [or|and] phone_number
             $this->otp->send($admin_data->administrator_id);
 
             $redirect = _backend_login_uri . '/confirm_otp';

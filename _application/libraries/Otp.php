@@ -86,13 +86,30 @@ class Otp {
 	}
 
 	/**
+	 * set otp code manualy
+	 * @param string $code
+	 */
+	function set_otp_code($code) {
+		$this->otp_code = $code;
+	}
+
+	/**
+	 * set otp expired_datetime manualy
+	 * @param string $expired_datetime
+	 */
+	function set_otp_expired($expired_datetime) {
+		$this->expired_time = $expired_datetime;
+	}
+
+	/**
 	 * The OTP code generator
 	 * @param  integer $length length of the generated code
 	 * @return string 
 	 */
 	function generate($length=5) {
 		// generate otp code
-		$this->otp_code = $this->CI->function_lib->generate_alpha_number($length);
+		$otp_code = $this->CI->function_lib->generate_alpha_number($length);
+		$this->set_otp_code($otp_code);
 
 		// generate expired time from $active_time
 		$this->expired_time = date('Y-m-d H:i:s', strtotime($this->start_time) + $this->active_time);
