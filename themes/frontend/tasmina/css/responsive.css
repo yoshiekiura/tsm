@@ -183,6 +183,7 @@
       padding-right: 0;
     }
     #stats_weekly h4.title {font-size: 16px;}
+    #stats_weekly ul li {position: relative;}
     #stats_weekly ul li .member_img {
       height: 45px;
       width: 45px;
@@ -659,6 +660,7 @@
       width: 100%;
       top: 0px;
       background: #020F09;
+      overflow-y: scroll;
     }
     
     .main-nav .navbar-nav > li {
@@ -1435,7 +1437,7 @@
     }
   }
 
-  @media (max-width: 320px) {
+  @media (max-width: 380px) {
     #widget_intro ul li {
       width: 100%;
       margin-bottom: 10px;
@@ -1448,4 +1450,52 @@
     #widget_jumbotron .panel .panel-body h5 {
       font-size: 12px;
     }
+
+
+    .widget_list.list_article .col-md-5 .list_headline .list_img {
+      width: 100%;
+      height: 150px;
+    }
+    .widget_list.list_article .col-md-5 .list_headline .list_text, 
+    .widget_list.list_product .item .list_text {
+      width: 100%;
+      position: relative;
+    }
+    .widget_list.list_article .col-md-5 .list_headline {height: auto;}
+    .widget_list.list_article .list_headline .list_title {height: auto;}
+    .widget_list.list_article .list_headline .list_excerpt {
+      left: 0;
+      width: 100%;
+      position: relative;
+    }
+    #widget_info_list .tab-content, #widget_info_list .tab-pane {
+      height: 1100px;
+    }
+    #widget_guide ul li {
+      width: 100%;
+    }
+    #widget_fullpromo .promo_link {padding: 30px 10px;}
+    footer .footer-menu ul.half-menu:first-child,
+    footer .footer-menu ul.half-menu:last-child {
+      width: 100%;
+      padding-right: 0;
+      padding-left: 0;
+    }
+    footer .footer-menu ul.half-menu li {text-align: center!important;}
+    #widget-login .panel-body, #widget-register .panel-body {
+      padding: 15px;
+    }
+    .nav-tabs > li {width: 100%;}
+    #widget-login .form-group label,
+    #widget-register .form-group > .col-sm-7,
+    #widget-login .form-group label,
+    #widget-register .form-group > .col-sm-7 {
+      display: block;
+      padding: 0;
+    }
+    #widget-login .form-group .btn-block,
+    #widget-register .form-group .btn-block {
+      font-size: 14px;
+    }
+
   }

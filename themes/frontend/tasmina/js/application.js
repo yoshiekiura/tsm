@@ -105,6 +105,11 @@ $(document).ready(function() {
 	}
 
 	if (window.matchMedia('(max-width: 480px)').matches) {
+		var getHW = $(window).height();
+		$('.main-nav .navbar-nav').slimScroll({
+			height: getHW + 'px'
+		});
+
 		$("#widget-submenu").insertAfter("#main-side > .panel");
 		$('.stats .scroll-text ul').bxSlider({
 			minSlides: 2,
