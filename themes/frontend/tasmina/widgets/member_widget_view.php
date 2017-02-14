@@ -110,7 +110,7 @@
             <?php
                 }
             } else {
-                echo 'Belum ada Pendaftaran.';
+                echo 'Belum ada Member Qualified.';
             }
             ?>
         </ul>
