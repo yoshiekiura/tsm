@@ -172,6 +172,32 @@ class widget_model extends CI_Model {
         $this->db->cache_off();
     }
 
+    function get_member_reward($startDate = '', $endDate = '', $limit=100) {
+        $this->db->cache_on();
+
+        if ($startDate != '' && $endDate != '') {
+            $additionalWhere = "AND reward_qualified_status_datetime BETWEEN '" . $startDate . "' AND '" . $endDate . "'";
+        } else {
+            $additionalWhere = "";
+        }
+        $sql = "
+            SELECT network_id, member_name, network_code, reward_qualified_reward_bonus, reward_qualified_status_datetime
+                FROM sys_reward_qualified_status
+                INNER JOIN sys_reward_qualified ON reward_qualified_status_reward_qualified_id = reward_qualified_id
+                INNER JOIN sys_network ON network_id = reward_qualified_network_id
+                INNER JOIN sys_member ON member_network_id = network_id
+                WHERE reward_qualified_status = 'approved'
+                    AND reward_qualified_status_status = 'approved'
+                    {$additionalWhere}
+                ORDER BY reward_qualified_status_datetime DESC
+                LIMIT {$limit}
+            ";
+
+        $query = $this->db->query($sql);
+        return $query;
+        $this->db->cache_off();
+    }
+
     public function get_last_gallery($limit=6) {
         $this->db->from('site_gallery');
         $this->db->where(array('gallery_is_active' => '1'));

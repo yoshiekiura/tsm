@@ -15,6 +15,7 @@ class frontend_member_widget extends Widget{
         $data['query'] = $this->widget_model->get_new_member();
         $data['top_income'] = $this->widget_model->get_top_income('','',10);
         $data['top_sponsor'] = $this->widget_model->get_top_sponsor('','', 10);
+        $data['reward'] = $this->widget_model->get_member_reward('','', 10);
 
         $this->render($widget_themes . 'member_widget_view',$data);
     }
