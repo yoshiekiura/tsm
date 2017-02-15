@@ -18,8 +18,9 @@ class MY_Exceptions extends CI_Exceptions {
         if (!empty($route['404_override'])) {
             //$CI->load->view('my_view');
             //echo $CI->output->get_output();
-            redirect($route['404_override']);
-            exit;
+            echo modules::run($route['404_override']);
+            // redirect($route['404_override']);
+            // exit;
         } else {
             $heading = "404 Page Not Found";
             $message = "The page you requested was not found.";

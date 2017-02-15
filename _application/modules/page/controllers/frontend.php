@@ -52,4 +52,10 @@ class Frontend extends Frontend_Controller {
         template('frontend', 'page/frontend_page_view', $data);
     }
 
+    function error() {
+        set_status_header(404);
+        $data['title'] = '404 Not Found';
+        template('frontend', 'error_page', $data);
+    }
+
 }

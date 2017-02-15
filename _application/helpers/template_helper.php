@@ -60,6 +60,8 @@ function template($user = 'frontend', $views = '', $data = array()) {
                 $template_file = 'template_home';
             } elseif ($views == 'login') {
                 $template_file = 'login';
+            } elseif ($views == 'error_page') {
+                $template_file = 'template_error';
             } else {
                 $template_file = 'template';
             }

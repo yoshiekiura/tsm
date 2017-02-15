@@ -4,7 +4,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 $route['default_controller'] = "page/frontend";
 //$route['default_controller'] = "auth/login";
-//$route['404_override'] = 'page/frontend';
+$route['404_override'] = 'page/frontend/error';
 
 $route[_backend_login_uri] = "auth/login";
 $route[_backend_logout_uri] = "auth/logout";
