@@ -65,6 +65,9 @@ class Systems extends Member_Controller {
         $this->form_validation->set_rules('detail_sex', '<b>Jenis Kelamin</b>', 'required');
         // $this->form_validation->set_rules('detail_birth_date', '<b>Tanggal Lahir</b>', 'required');
         // $this->form_validation->set_rules('mobilephone', '<b>No. Handphone</b>', 'required');
+        
+        // VALIDASI PIN SERIAL
+        $this->form_validation->set_rules('validate_pin', '<b>PIN Serial</b>', 'required|callback_validate_pin');
 
         if ($this->form_validation->run($this) == FALSE) {
             // $this->session->set_flashdata('confirmation', '<div class="error alert alert-danger">' . validation_errors() . '</div>');
@@ -259,6 +262,9 @@ class Systems extends Member_Controller {
         $this->form_validation->set_rules('old_password', '<b>Password Lama</b>', 'required|callback_password_check[' . $this->session->userdata('network_id') . ']');
         $this->form_validation->set_rules('password', '<b>Password Baru</b>', 'required|matches[password_conf]');
         $this->form_validation->set_rules('password_conf', '<b>Ulangi Password Baru</b>', 'required');
+
+        // VALIDASI PIN SERIAL
+        $this->form_validation->set_rules('validate_pin', '<b>PIN Serial</b>', 'required|callback_validate_pin');
 
         if ($this->form_validation->run($this) == FALSE) {
             $this->session->set_flashdata('confirmation', '<div class="error alert alert-danger">' . validation_errors() . '</div>');
@@ -591,6 +597,16 @@ class Systems extends Member_Controller {
             return true;
         } else {
             $this->form_validation->set_message('validate_name', $msg);
+            return false;
+        }
+    }
+
+    public function validate_pin($pin) {
+        $is_valid = $this->systems_model->check_pin($this->session->userdata('network_id'), $pin);
+        if ($is_valid) {
+            return true;
+        } else {
+            $this->form_validation->set_message('validate_pin', '<b>PIN Serial</b> salah.');
             return false;
         }
     }

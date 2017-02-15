@@ -101,7 +101,10 @@ class Testimony extends Member_Controller {
 
     function act_add() {
         $this->load->library('form_validation');
+        $this->form_validation->CI =& $this;
         $this->form_validation->set_rules('content', '<b>Isi Testimoni</b>', 'required');
+        // VALIDASI PIN SERIAL
+        $this->form_validation->set_rules('validate_pin', '<b>PIN Serial</b>', 'required|callback_validate_pin');
 
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('confirmation', '<div class="error alert alert-danger">' . validation_errors() . '</div>');
@@ -141,7 +144,10 @@ class Testimony extends Member_Controller {
 
     function act_edit() {
         $this->load->library('form_validation');
+        $this->form_validation->CI =& $this;
         $this->form_validation->set_rules('content', '<b>Isi Testimoni</b>', 'required');
+        // VALIDASI PIN SERIAL
+        $this->form_validation->set_rules('validate_pin', '<b>PIN Serial</b>', 'required|callback_validate_pin');
 
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('confirmation', '<div class="error alert alert-danger">' . validation_errors() . '</div>');
@@ -157,6 +163,17 @@ class Testimony extends Member_Controller {
             
             $this->session->set_flashdata('confirmation', '<div class="confirmation alert alert-success">Data berhasil disimpan.</div>');
             redirect($this->input->post('uri_string'));
+        }
+    }
+
+    public function validate_pin($pin) {
+        $this->load->model('voffice/systems_model');
+        $is_valid = $this->systems_model->check_pin($this->session->userdata('network_id'), $pin);
+        if ($is_valid) {
+            return true;
+        } else {
+            $this->form_validation->set_message('validate_pin', '<b>PIN Serial</b> salah.');
+            return false;
         }
     }
 

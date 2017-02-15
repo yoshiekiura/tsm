@@ -2671,7 +2671,7 @@
       display: none;
     }
     #block-gallery .item .col-md-4 {margin-bottom: 20px;}
-    ul.gallery_cover{ margin:0; padding:0; list-style:none;display: inline-block; }
+    ul.gallery_cover{ margin:0; padding:0; list-style:none;display: inline-block; width: 100%; }
     .gallery_cover li{ position:relative;margin-bottom: 20px;}
     .gallery_cover li .cover{ 
       position:relative; 

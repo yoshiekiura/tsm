@@ -126,6 +126,7 @@ class Message extends Member_Controller {
     }
     
     function detail($message_id = ''){
+        $data['page_title'] = 'Data Detail Pesan';
         $data['arr_breadcrumbs'] = array(
             'Data Pesan' => 'voffice/message/show',
             'Detail Pesan' => 'voffice/message/detail',
@@ -201,6 +202,8 @@ class Message extends Member_Controller {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('network_code', '<b>Kode Member</b>', 'required|callback_check_network');
         $this->form_validation->set_rules('content', '<b>Isi Pesan</b>', 'required');
+        // VALIDASI PIN SERIAL
+        $this->form_validation->set_rules('validate_pin', '<b>PIN Serial</b>', 'required|callback_validate_pin');
 
         if ($this->form_validation->run($this) == FALSE) {
             $this->session->set_flashdata('confirmation', '<div class="error alert alert-danger">' . validation_errors() . '</div>');
@@ -235,12 +238,17 @@ class Message extends Member_Controller {
         }
         else{
             $cek_id = $this->mlm_function->get_network_id($value);
-            if(empty($cek_id))
-            {
+            if(empty($cek_id)) {
                 $this->form_validation->set_message('check_network','Member tidak terdaftar');
                 return false;
+            } else {
+                if ($cek_id == $this->session->userdata('network_id')) {
+                    $this->form_validation->set_message('check_network','Tidak bisa mengirim pesan ke anda sendiri');
+                    return false;
+                } else {
+                    return true;
+                }
             }
-            else return true;
         }
     }
     
@@ -251,6 +259,15 @@ class Message extends Member_Controller {
         $arr_output['count'] = $this->message_model->get_message_unread_count($network_id);
         echo json_encode($arr_output);
     }
-}
 
-?>
+    public function validate_pin($pin) {
+        $this->load->model('voffice/systems_model');
+        $is_valid = $this->systems_model->check_pin($this->session->userdata('network_id'), $pin);
+        if ($is_valid) {
+            return true;
+        } else {
+            $this->form_validation->set_message('validate_pin', '<b>PIN Serial</b> salah.');
+            return false;
+        }
+    }
+}

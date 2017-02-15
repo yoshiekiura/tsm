@@ -51,7 +51,7 @@ class Reward extends Member_Controller {
             
             // is_qualified
             if (($total_node_member['left'] >= $row->reward_cond_node_left) && ($total_node_member['right'] >= $row->reward_cond_node_right)) {
-                $is_qualified = '<a href="'.base_url('voffice/reward/act_claim/'.$row->reward_id).'" class="btn btn-success btn-xs" onclick="return confirm(\'Apakah anda yakin akan claim reward tersebut?\')"><span class="fa fa-check"></span> Claim Reward</a>';
+                $is_qualified = '<a href="'.base_url('voffice/reward/act_claim/'.$row->reward_id).'" class="btn btn-success btn-xs btn-claim"><span class="fa fa-check"></span> Claim Reward</a>';
             } else {
                 $is_qualified = '-';
             }
@@ -76,6 +76,15 @@ class Reward extends Member_Controller {
         $reward_url = 'voffice/reward/show';
         $date = date('Y-m-d');
         $datetime = date('Y-m-d H:i:s');
+        
+        // check pin serial
+        $this->load->model('voffice/systems_model');
+        $is_valid = $this->systems_model->check_pin($this->session->userdata('network_id'), $this->input->post('validate_pin'));
+        if ($is_valid == FALSE) {
+            $this->session->set_flashdata('confirmation', '<div class="error alert alert-danger"><strong>Claim Gagal : </strong>PIN Serial salah</div>');
+            redirect($reward_url);
+        }
+
         // check reward is exist
         $query = $this->function_lib->get_detail_data('sys_reward', array('reward_id'=>$reward_id, 'reward_is_active'=>'1'), NULL);
         if ($query->num_rows() == 0) {

@@ -13,13 +13,30 @@ if ($query->num_rows() > 0) {
                     <?php echo form_open($form_action, array('class' => 'form-horizontal form-bordered')); ?>
                     <?php echo form_hidden('uri_string', uri_string()); ?>
                     <?php echo form_hidden('id', $this->uri->segment(4)); ?>
-                    <div class="box-body"
+                    <div class="box-body">
 
                         <div class="form-group">
                             <label class="control-label col-md-2">Isi Testimoni</label>
                             <div class="col-md-10">
                                 <div class="input-group" id="defaultrange">
                                     <?php echo form_textarea('content', (isset($this->arr_flashdata['input_content'])) ? $this->arr_flashdata['input_content'] : $row->testimony_content, 'cols="60" rows="10" class="form-control"'); ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="border-bottom:1px solid #eee;">
+                            <div class="col-md-9">
+                                <div class="input-group" id="defaultrange">
+                                    <h4>Konfirmasi PIN</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">PIN Serial</label>
+                            <div class="col-md-10">
+                                <div class="input-group" id="defaultrange">
+                                    <?php echo form_input('validate_pin', (isset($this->arr_flashdata['input_validate_pin'])) ? $this->arr_flashdata['input_validate_pin'] : '', 'size="30" class="form-control"'); ?>
                                 </div>
                             </div>
                         </div>

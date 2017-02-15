@@ -101,15 +101,6 @@ if ($query->num_rows() > 0) {
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-md-3">PIN</label>
-                        <div class="col-md-9">
-                            <div class="input-group" id="defaultrange">
-                                <?php echo $row->serial_pin; ?>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="form-group" style="border-bottom:1px solid #eee;">
                         <div class="col-md-9">
                             <div class="input-group" id="defaultrange">
@@ -290,7 +281,7 @@ if ($query->num_rows() > 0) {
                         <label class="control-label col-md-3">Bank</label>
                         <div class="col-md-9">
                             <div class="input-group" id="defaultrange">
-                                <?php echo form_dropdown('bank_bank_id', $bank_options, (isset($this->arr_flashdata['input_bank_bank_id'])) ? $this->arr_flashdata['input_bank_bank_id'] : $row->member_bank_bank_id, 'class="form-control"'); ?>
+                                <?php echo form_dropdown('bank_bank_id', $bank_options, (isset($this->arr_flashdata['input_bank_bank_id'])) ? $this->arr_flashdata['input_bank_bank_id'] : $row->member_bank_bank_id, 'class="form-control"' . ((!empty($row->member_bank_bank_id) OR $row->member_bank_bank_id) != 0 ? '  disabled="disabled"' : '')); ?>
                             </div>
                         </div>
                     </div>
@@ -299,7 +290,7 @@ if ($query->num_rows() > 0) {
                         <label class="control-label col-md-3">Kota Bank</label>
                         <div class="col-md-9">
                             <div class="input-group" id="defaultrange">
-                                <?php echo form_input('bank_city', (isset($this->arr_flashdata['input_bank_city'])) ? $this->arr_flashdata['input_bank_city'] : $row->member_bank_city, 'size="30" class="form-control"'); ?>
+                                <?php echo form_input('bank_city', (isset($this->arr_flashdata['input_bank_city'])) ? $this->arr_flashdata['input_bank_city'] : $row->member_bank_city, 'size="30" class="form-control"' . (!empty($row->member_bank_city) ? ' disabled="disabled"' : '')); ?>
                             </div>
                         </div>
                     </div>
@@ -308,7 +299,7 @@ if ($query->num_rows() > 0) {
                         <label class="control-label col-md-3">Cabang Bank</label>
                         <div class="col-md-9">
                             <div class="input-group" id="defaultrange">
-                                <?php echo form_input('bank_branch', (isset($this->arr_flashdata['input_bank_branch'])) ? $this->arr_flashdata['input_bank_branch'] : $row->member_bank_branch, 'size="30" class="form-control"'); ?>
+                                <?php echo form_input('bank_branch', (isset($this->arr_flashdata['input_bank_branch'])) ? $this->arr_flashdata['input_bank_branch'] : $row->member_bank_branch, 'size="30" class="form-control"' . (!empty($row->member_bank_branch) ? ' disabled="disabled"' : '')); ?>
                             </div>
                         </div>
                     </div>
@@ -317,7 +308,7 @@ if ($query->num_rows() > 0) {
                         <label class="control-label col-md-3">Nama Rekening</label>
                         <div class="col-md-9">
                             <div class="input-group" id="defaultrange">
-                                <?php echo form_input('bank_account_name', (isset($this->arr_flashdata['input_bank_account_name'])) ? $this->arr_flashdata['input_bank_account_name'] : $row->member_bank_account_name, 'size="30" class="form-control"'); ?>
+                                <?php echo form_input('bank_account_name', (isset($this->arr_flashdata['input_bank_account_name'])) ? $this->arr_flashdata['input_bank_account_name'] : $row->member_bank_account_name, 'size="30" class="form-control"' . (!empty($row->member_bank_account_name) ? ' disabled="disabled"' : '')); ?>
                             </div>
                         </div>
                     </div>
@@ -370,6 +361,23 @@ if ($query->num_rows() > 0) {
                         <div class="col-md-9">
                             <div class="input-group" id="defaultrange">
                                 <?php echo form_input('devisor_phone', (isset($this->arr_flashdata['input_devisor_phone'])) ? $this->arr_flashdata['input_devisor_phone'] : $row->member_devisor_phone, 'size="30" class="form-control"'); ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="border-bottom:1px solid #eee;">
+                        <div class="col-md-9">
+                            <div class="input-group" id="defaultrange">
+                                <h4>Konfirmasi PIN</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">PIN Serial</label>
+                        <div class="col-md-9">
+                            <div class="input-group" id="defaultrange">
+                                <?php echo form_input('validate_pin', (isset($this->arr_flashdata['input_validate_pin'])) ? $this->arr_flashdata['input_validate_pin'] : '', 'size="30" class="form-control"'); ?>
                             </div>
                         </div>
                     </div>

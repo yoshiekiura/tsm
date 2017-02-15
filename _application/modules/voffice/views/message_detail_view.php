@@ -1,5 +1,3 @@
-<h2>Detail Pesan Member</h2>
-<br />
 <?php
 if(!empty($message_detail)) {
     $no = $offset + 1;
@@ -12,13 +10,13 @@ if(!empty($message_detail)) {
             $information = $responder_code . ' / ' . $responder_name;
         }
         
-        echo '<div class="box-title" style="font-size:11pt; color:#0D638F;">';
+        echo '<div class="box-header box-title with-border" style="font-size:11pt; color:#0D638F;">';
         echo '<div style="float:left;">#' . $no . '&nbsp;&nbsp;~&nbsp;&nbsp;' . $information . '</div>';
         echo '<div style="float:right;"><small><i>' . convert_datetime($row->message_input_datetime, 'id') . '</i></small></div>';
         echo '<div style="clear:both;"></div>';
         echo '</div>';
         
-        echo '<div class="box-body form">';
+        echo '<div class="box-body form mailbox-controls with-border">';
         echo '<div class="form-body">';
         echo '<div class="form-group">';
         echo '<div class="col-md-12">';
@@ -38,10 +36,10 @@ if(!empty($message_detail)) {
 }
 ?>
 <div class="box">
-    <div class="box-title">
+    <div class="box-header box-title with-border">
         <div class="caption"><i class="icon-reorder"></i>Form Balas Pesan</div>
     </div>
-    <div class="box-body form">
+    <div class="box-body form mailbox-controls with-border">
         <?php echo form_open($form_action, array('class' => 'form-horizontal form-bordered')); ?>
         <?php echo form_hidden('uri_string', uri_string()); ?>
         <?php echo form_hidden('network_code', $responder_code); ?>
@@ -62,6 +60,23 @@ if(!empty($message_detail)) {
                 <div class="col-md-10">
                     <div class="input-group" id="defaultrange">
                         <?php echo form_textarea('content', (isset($this->arr_flashdata['input_content'])) ? $this->arr_flashdata['input_content'] : '', 'cols="60" rows="10" class="form-control"'); ?>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" style="border-bottom:1px solid #eee;">
+                <div class="col-md-9">
+                    <div class="input-group" id="defaultrange">
+                        <h4>Konfirmasi PIN</h4>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="control-label col-md-2">PIN Serial</label>
+                <div class="col-md-10">
+                    <div class="input-group" id="defaultrange">
+                        <?php echo form_input('validate_pin', (isset($this->arr_flashdata['input_validate_pin'])) ? $this->arr_flashdata['input_validate_pin'] : '', 'size="30" class="form-control"'); ?>
                     </div>
                 </div>
             </div>

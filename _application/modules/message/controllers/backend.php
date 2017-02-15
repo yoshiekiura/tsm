@@ -80,7 +80,7 @@ class Backend extends Backend_Controller {
             'Detail Pesan Admin' => 'backend/message/detail_admin',
         );
         
-        $data['form_action'] = 'backend/message/act_add';
+        $data['form_action'] = 'backend_service/message/act_add';
         $data['message_id'] = $message_id;
         
         $parent_message = $this->backend_message_model->get_parent_message($message_id)->row();

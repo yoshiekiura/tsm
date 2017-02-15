@@ -40,6 +40,23 @@ if ($query->num_rows() > 0) {
                         </div>
                     </div>
                     
+                    <div class="form-group" style="border-bottom:1px solid #eee;">
+                        <div class="col-md-9">
+                            <div class="input-group" id="defaultrange">
+                                <h4>Konfirmasi PIN</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">PIN Serial</label>
+                        <div class="col-md-10">
+                            <div class="input-group" id="defaultrange">
+                                <?php echo form_input('validate_pin', (isset($this->arr_flashdata['input_validate_pin'])) ? $this->arr_flashdata['input_validate_pin'] : '', 'size="30" class="form-control"'); ?>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="box-footer">
                     <div class="col-md-offset-2 col-md-10">

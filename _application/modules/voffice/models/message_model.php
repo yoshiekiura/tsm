@@ -48,7 +48,7 @@ class Message_model extends CI_Model {
         $this->db->from('site_message');
         $this->db->where('message_id', $message_id);
         $this->db->or_where('message_par_id', $message_id);
-        $this->db->order_by('message_input_datetime', 'desc');
+        $this->db->order_by('message_input_datetime', 'asc');
         $this->db->limit($limit, $offset);
 
         return $this->db->get();
