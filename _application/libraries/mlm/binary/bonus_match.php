@@ -77,7 +77,8 @@ class Bonus_match {
                         $sql_update = "
                             UPDATE sys_bonus 
                             SET bonus_match_acc = bonus_match_acc + " . $bonus_amount . " ,
-                            bonus_total_saldo = bonus_total_saldo + " . $bonus_amount . " 
+                            bonus_total_saldo = bonus_total_saldo + " . $bonus_amount . " ,
+                            bonus_match_saldo = bonus_match_saldo + " . $bonus_amount . " 
                             WHERE bonus_network_id = '" . $network_id . "' 
                         ";
                         $this->CI->db->query($sql_update);
@@ -86,6 +87,7 @@ class Bonus_match {
                             INSERT INTO sys_bonus 
                             SET bonus_network_id = '" . $network_id . "', 
                             bonus_match_acc = " . $bonus_amount . ",
+                            bonus_match_saldo = " . $bonus_amount . ",
                             bonus_total_saldo = " . $bonus_amount . "
                         ";
                         $this->CI->db->query($sql_insert);

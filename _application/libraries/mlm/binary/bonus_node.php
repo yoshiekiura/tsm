@@ -83,7 +83,8 @@ class Bonus_node {
                         $sql_update = "
                             UPDATE sys_bonus 
                             SET bonus_node_acc = bonus_node_acc + " . $bonus_amount . " ,
-                            bonus_total_saldo = bonus_total_saldo + " . $bonus_amount . " 
+                            bonus_total_saldo = bonus_total_saldo + " . $bonus_amount . " ,
+                            bonus_node_saldo = bonus_node_saldo + " . $bonus_amount . " 
                             WHERE bonus_network_id = '" . $network_id . "' 
                         ";
                         $this->CI->db->query($sql_update);
@@ -92,6 +93,7 @@ class Bonus_node {
                             INSERT INTO sys_bonus 
                             SET bonus_network_id = '" . $network_id . "', 
                             bonus_node_acc = " . $bonus_amount . ",
+                            bonus_node_saldo = " . $bonus_amount . ",
                             bonus_total_saldo = " . $bonus_amount . "
                         ";
                         $this->CI->db->query($sql_insert);

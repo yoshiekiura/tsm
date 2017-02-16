@@ -109,7 +109,12 @@ class Rekap_model extends CI_Model {
         if ($query->num_rows() > 0) {
             foreach ($query->result_array() as $bonus_log) {
                 /* UPDATE bonus_[daily|weekly|monthly]_saldo */
-                $this->db->set('bonus_' . $periode . '_saldo', $bonus_log[$periode . '_bonus'], FALSE);
+                // $sql = "UPDATE sys_bonus SET 
+                //     bonus_" . $periode . "_saldo = bonus_" . $periode . "_saldo + " . $bonus_log[$periode . '_bonus'] . " 
+                //     WHERE bonus_network_id = " . $bonus_log['bonus_log_network_id'];
+                // $this->db->query($sql);
+
+                $this->db->set('bonus_' . $periode . '_saldo', 'bonus_' . $periode . '_saldo + ' . $bonus_log[$periode . '_bonus'], FALSE);
                 $this->db->where('bonus_network_id', $bonus_log['bonus_log_network_id']);
                 $this->db->update('sys_bonus');
             }
