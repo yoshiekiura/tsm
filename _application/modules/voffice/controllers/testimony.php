@@ -177,4 +177,16 @@ class Testimony extends Member_Controller {
         }
     }
 
+    function pin_validation() {
+        $this->load->model('voffice/systems_model');
+        $pin = $this->input->post('pin');
+        $pin_status = '';
+        $is_valid = $this->systems_model->check_pin($this->session->userdata('network_id'), $pin);
+        if ($is_valid) {
+            $pin_status = 'valid';
+        } 
+
+        echo json_encode($pin_status);
+    }
+
 }
