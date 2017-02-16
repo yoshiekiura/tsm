@@ -14,6 +14,7 @@ class Downloads extends Member_Controller {
     
     function __construct() {
         parent::__construct();
+        $this->load->model('voffice/downloads_model');
     }
     
     public function index() {
