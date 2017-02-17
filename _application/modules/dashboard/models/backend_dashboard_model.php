@@ -112,6 +112,30 @@ class backend_dashboard_model extends CI_Model {
         }
     }
 
+    function get_total_bonus_monthly($month=FALSE, $year=FALSE) {
+        $arr_bonus = $this->mlm_function->get_arr_active_bonus();
+        $arr_total_bonus = array();
+        foreach ($arr_bonus as $bonus_item) {
+            $str_select = 'SUM(bonus_log_' . $bonus_item['name'] . ') as total';
+            if ($month) {
+                $this->db->where('MONTH(bonus_log_date)', $month);
+            }
+            if ($year) {
+                $this->db->where('YEAR(bonus_log_date)', $year);
+            }
+            $this->db->select($str_select);
+            $query = $this->db->get('sys_bonus_log');
+            if ($query->num_rows() > 0) {
+                $sum = $query->row('total');
+            } else {
+                $sum = 0;
+            }
+            $bonus_item['total_bonus'] = $sum;
+            $arr_total_bonus[] = $bonus_item;
+        }
+        return $arr_total_bonus;
+    }
+
     function get_total_sponsoring($date=FALSE){
         $sql = "
             SELECT COUNT(netgrow_sponsor_downline_network_id) AS total_sponsoring

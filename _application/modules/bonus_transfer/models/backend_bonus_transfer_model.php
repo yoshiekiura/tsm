@@ -339,5 +339,12 @@ class Backend_bonus_transfer_model extends CI_Model {
             }
         }
     }
-    
+
+    function update_report_summary_bonus_pending($arr_bonus, $data, $operator="+") {
+        foreach ($arr_bonus as $bonus_name) {
+            $this->db->set('report_bonus_pending', 'report_bonus_pending ' . $operator . ' ' . $data[$bonus_name], FALSE);
+            $this->db->where('report_bonus_item_name', $bonus_name);
+            $this->db->update('report_summary_bonus');
+        }
+    }
 }

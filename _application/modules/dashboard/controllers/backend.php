@@ -20,6 +20,8 @@ class Backend extends Backend_Controller {
         $this->load->model('backend_dashboard_model');
         $this->backend_service = new backend_service();
         $this->date = date('Y-m-d');
+        $this->month = date('m');
+        $this->year = date('Y');
     }
 
     public function index() {
@@ -49,6 +51,7 @@ class Backend extends Backend_Controller {
 
         // summary bonus
         $data['arr_total_bonus'] = $this->backend_dashboard_model->get_total_bonus();
+        $data['arr_total_payout_monthly'] = $this->backend_dashboard_model->get_total_bonus_monthly($this->month, $this->year);
         
         // kalkulasi bonus hari ini
         $daily_bonus = $this->mlm_function->get_arr_active_bonus('daily');

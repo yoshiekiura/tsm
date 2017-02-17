@@ -43,7 +43,7 @@
             <table class="table table-striped">
                 <tbody>
                     <tr>
-                        <td width="30%"><strong>Jumlah Serial</strong></td>
+                        <td width="35%"><strong>Jumlah Serial</strong></td>
                         <td width="1%">:</td>
                         <td><?php echo $this->function_lib->set_number_format($count_serial) ?></td>
                     </tr>
@@ -70,7 +70,7 @@
             <table class="table table-striped">
                 <tbody>
                     <tr>
-                        <td width="45%"><strong>Jumlah Seluruh Member</strong></td>
+                        <td width="50%"><strong>Jumlah Seluruh Member</strong></td>
                         <td width="1%">:</td>
                         <td><?php echo $this->function_lib->set_number_format($count_member_all) ?></td>
                     </tr>
@@ -89,37 +89,6 @@
                         <td>:</td>
                         <td><?php echo $this->function_lib->set_number_format($count_member_daily) ?></td>
                     </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <h3 class="panel-title">Summary Bonus</h3>
-            </div>
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th width="40%">Bonus Item</th>
-                        <th class="text-right" width="30%">Bonus Terjadi</th>
-                        <th class="text-right" width="30%">Bonus Dibayar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (count($arr_total_bonus) == 0): ?>
-                        <tr>
-                            <td colspan="3" class="text-center">Data belum ada.</td>
-                        </tr>
-                    <?php endif ?>
-                    <?php foreach ($arr_total_bonus as $bonus): ?>
-                    <tr>
-                        <td><strong><?php echo $bonus->report_bonus_item_label; ?></strong></td>
-                        <td class="text-right">Rp. <?php echo $this->function_lib->set_number_format($bonus->report_bonus_acc); ?></td>
-                        <td class="text-right">Rp. <?php echo $this->function_lib->set_number_format($bonus->report_bonus_paid); ?></td>
-                    </tr>
-                    <?php endforeach ?>
                 </tbody>
             </table>
         </div>
@@ -142,6 +111,78 @@
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Summary Bonus</h3>
+            </div>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th rowspan="2" width="28%">Bonus Item</th>
+                        <th colspan="3" class="text-center" width="72%">Bonus</th>
+                    </tr>
+                    <tr>
+                        <th class="text-right" width="24%">Terjadi</th>
+                        <th class="text-right" width="24%">Pending</th>
+                        <th class="text-right" width="24%">Dibayar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (count($arr_total_bonus) == 0): ?>
+                        <tr>
+                            <td colspan="4" class="text-center">Data belum ada.</td>
+                        </tr>
+                    <?php endif ?>
+                    <?php foreach ($arr_total_bonus as $bonus): ?>
+                    <tr>
+                        <td><strong><?php echo $bonus->report_bonus_item_label; ?></strong></td>
+                        <td class="text-right">Rp. <?php echo $this->function_lib->set_number_format($bonus->report_bonus_acc); ?></td>
+                        <td class="text-right">Rp. <?php echo $this->function_lib->set_number_format($bonus->report_bonus_pending); ?></td>
+                        <td class="text-right">Rp. <?php echo $this->function_lib->set_number_format($bonus->report_bonus_paid); ?></td>
+                    </tr>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Payout Bonus Periode : <b><?php echo date_converter($today, 'F Y') ?></b></h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hovered" style="margin-bottom: 0;">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">BONUS</th>
+                            <th class="text-right">Jumlah (Rp.)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $grand_total_payout = 0; ?>
+                        <?php foreach ($arr_total_payout_monthly as $bonus_item): ?>
+                            <tr>
+                                <td><?php echo ucfirst($bonus_item['label']) ?></td>
+                                <td class="text-right"><?php echo $this->function_lib->set_number_format($bonus_item['total_bonus']) ?></td>
+                            </tr>
+                        <?php $grand_total_payout += $bonus_item['total_bonus'] ?>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer" style="background-color: #49D2CB">
+                <div class="row" style="font-size: 16px; font-weight: bold;">
+                    <div class="col-md-6 text-center"><strong>TOTAL PAYOUT BONUS</strong></div>
+                    <div class="col-md-6 text-right"><?php echo $this->function_lib->set_number_format($grand_total_payout); ?></div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
     </div>
 </div>
 

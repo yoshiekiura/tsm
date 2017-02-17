@@ -87,6 +87,14 @@ class Backend_service extends Backend_Service_Controller {
             if($query->num_rows() > 0) {
                 
                 $this->db->trans_begin();
+
+                // report summary bonus (pending)
+                $data_report = array();
+                if(is_array($arr_bonus)) {
+                    foreach($arr_bonus as $bonus_item) {
+                        $data_report[$bonus_item] = 0;
+                    }
+                }
                 
                 foreach($query->result() as $row) {
                     $bonus_transfer_code = $this->mlm_function->generate_bonus_transfer_code($date);
@@ -121,6 +129,9 @@ class Backend_service extends Backend_Service_Controller {
                                     $field = 'bonus_' . $bonus_item;
                                     $field_transfer = 'bonus_transfer_detail_' . $bonus_item;
                                     $data[$field_transfer] = $row_saldo->$field;
+
+                                    // report summary bonus (pending)
+                                    $data_report[$bonus_item] = $data_report[$bonus_item] + $row_saldo->$field;
                                 }
                             }
                             $this->function_lib->insert_data('sys_bonus_transfer_detail', $data);
@@ -166,7 +177,10 @@ class Backend_service extends Backend_Service_Controller {
                     $data['bonus_transfer_active_str_bonus'] = $str_bonus;
                     $this->function_lib->insert_data('sys_bonus_transfer_active', $data);
                 }
-                
+
+                // report summary bonus (pending)
+                $this->backend_bonus_transfer_model->update_report_summary_bonus_pending($arr_bonus, $data_report, "+");
+
                 if ($this->db->trans_status() === FALSE || $is_error) {
                     $this->db->trans_rollback();
                     $arr_output['message'] = 'Data gagal disimpan.';
@@ -338,6 +352,30 @@ class Backend_service extends Backend_Service_Controller {
                                 } elseif ($bonus_transfer_status == 'success') {
                                     $count_success_status++;
                                 }
+
+                                /* begin report summary bonus (pending) */
+                                if ($bonus_transfer_status == 'failed' OR $bonus_transfer_status == 'success') {
+                                    $data_report = array();
+                                    if(is_array($arr_bonus)) {
+                                        foreach($arr_bonus as $bonus_item) {
+                                            $data_report[$bonus_item] = 0;
+                                        }
+                                    }
+
+                                    $query = $this->backend_bonus_transfer_model->get_transfer_detail_data($row->bonus_transfer_id);
+                                    if ($query->num_rows() > 0) {
+                                        foreach ($query->result() as $value) {
+                                            foreach($arr_bonus as $bonus_item) {
+                                                $bonus_value = $this->function_lib->get_one('sys_bonus_transfer_detail', 'bonus_transfer_detail_' . $bonus_item, array('bonus_transfer_detail_bonus_log_id'=>$value->bonus_transfer_detail_bonus_log_id));
+                                                $data_report[$bonus_item] = $data_report[$bonus_item] + $bonus_value;
+                                            }
+                                        }
+                                    }
+                                    
+                                    // report summary bonus (pending)
+                                    $this->backend_bonus_transfer_model->update_report_summary_bonus_pending($arr_bonus, $data_report, "-");
+                                }
+                                /* end report summary bonus (pending) */
 
                                 $count_data_success++;
                             } else {
