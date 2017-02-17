@@ -310,5 +310,34 @@ class Backend_bonus_transfer_model extends CI_Model {
         $query = $this->db->query($sql);
         return $query;
     }
+
+    /* Duplicated From Cron Model */
+    function update_report_summary_bonus($arr_bonus) {
+        
+        foreach ($arr_bonus as $row) {
+            $this->db->select_sum('bonus_' . $row['name'] . '_acc', $row['name'] . '_acc');
+            $this->db->select_sum('bonus_' . $row['name'] . '_paid', $row['name'] . '_paid');
+        }
+        $query = $this->db->get('sys_bonus');
+        if ($query->num_rows() > 0) {
+            foreach ($arr_bonus as $bonus) {
+                // check if it exist in report
+                $old_bonus_name = $this->function_lib->get_one('report_summary_bonus', 'report_bonus_item_name', array('report_bonus_item_name'=>$bonus['name']));
+                if (empty($old_bonus_name) OR $old_bonus_name == '') {
+                    // then, insert
+                    $ins['report_bonus_item_name'] = $bonus['name'];
+                    $ins['report_bonus_item_label'] = $bonus['label'];
+                    $ins['report_bonus_acc'] = $query->row($bonus['name'] . '_acc');
+                    $ins['report_bonus_paid'] = $query->row($bonus['name'] . '_paid');
+                    $this->db->insert('report_summary_bonus', $ins);
+                } else {
+                    // then, update
+                    $upd['report_bonus_acc'] = $query->row($bonus['name'] . '_acc');
+                    $upd['report_bonus_paid'] = $query->row($bonus['name'] . '_paid');
+                    $this->db->update('report_summary_bonus', $upd, array('report_bonus_item_name'=>$bonus['name']));
+                }
+            }
+        }
+    }
     
 }

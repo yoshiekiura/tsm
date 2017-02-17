@@ -263,6 +263,7 @@ class Backend_service extends Backend_Service_Controller {
                     $count_data_success = 0;
                     $count_data_failed = 0;
                     $count_data_unupdated = 0;
+                    $count_success_status = 0;
                     for($cell_row = 5; $cell_row <= ($highestRow - 1); ++$cell_row) {
                         $data = array();
                         $bonus_transfer_code = $objWorksheet->getCellByColumnAndRow(0, $cell_row)->getValue();
@@ -333,6 +334,9 @@ class Backend_service extends Backend_Service_Controller {
                                         $update_summary_bonus['bonus_total_saldo'] = 'bonus_total_saldo + '. $total_bonus_transfer;
                                     }
                                     $this->backend_bonus_transfer_model->update_bonus_saldo($update_summary_bonus, $row->bonus_transfer_network_id);
+                                
+                                } elseif ($bonus_transfer_status == 'success') {
+                                    $count_success_status++;
                                 }
 
                                 $count_data_success++;
@@ -345,6 +349,12 @@ class Backend_service extends Backend_Service_Controller {
                         $count_data++;
                     }
                     //php excel end here
+
+                    if ($count_success_status > 0) {
+                        /* UPDATE THE REPORT SUMMARY BONUS */
+                        $arr_all_bonus = $this->mlm_function->get_arr_active_bonus();
+                        $this->backend_bonus_transfer_model->update_report_summary_bonus($arr_all_bonus);
+                    }
 
                     //hapus file upload
                     if ($filename != '' && file_exists(_dir_import . $filename)) {
