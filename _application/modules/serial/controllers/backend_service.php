@@ -168,6 +168,10 @@ class Backend_service extends Backend_Service_Controller {
     }
     
     function act_add() {
+        // restrict non superuser group
+        if ($this->session->userdata('administrator_group_type') != 'superuser') {
+            redirect('backend/serial/show');
+        }
         $this->load->library('form_validation');
         $this->form_validation->set_rules('count', '<b>Jumlah</b>', 'required');
 
@@ -195,20 +199,20 @@ class Backend_service extends Backend_Service_Controller {
             
             $serial_network_code = '';
             for($i = 1; $i <= $count; $i++) {
-                $serial_id = number_format(++$last_serial_id, 0, '', '');
-                $serial_id = 'ID'.$serial_id;
+                $serial_id_num = number_format(++$last_serial_id, 0, '', '');
+                $serial_id = 'ID'.$serial_id_num;
                 if($this->sys_configuration['auto_network_code'] == 0) {
                     /* Left Trim ID from ID100000001 to 100000001 */
                     $last_serial_member_code = ltrim($last_serial_member_code, 'ID');
-                    $serial_network_code = ++$last_serial_member_code;
+                    $serial_network_code = 'ID' . (++$last_serial_member_code);
                     $last_serial_member_code = $last_serial_member_code;
                 }
                 $serial_pin = $this->function_lib->generate_number(6);
                 
                 $data = array();
-                $data['serial_id'] = 'ID'.$serial_id;
+                $data['serial_id'] = $serial_id;
                 $data['serial_pin'] = $serial_pin;
-                $data['serial_network_code'] = 'ID'.$serial_network_code;
+                $data['serial_network_code'] = $serial_network_code;
                 $data['serial_serial_type_id'] = $serial_type_id;
                 $data['serial_create_administrator_id'] = $administrator_id;
                 $data['serial_create_datetime'] = $datetime;
@@ -218,7 +222,7 @@ class Backend_service extends Backend_Service_Controller {
                 $this->function_lib->insert_data('sys_serial', $data);
             }
             
-            $this->session->set_flashdata('confirmation', '<div class="confirmation alert alert-success">Data berhasil disimpan. Silakan <a href="' . base_url() . 'backend/serial/export_generate/' . strtotime($datetime) . '" target="_blank">klik disini</a> untuk download excel.</div>');
+            $this->session->set_flashdata('confirmation', '<div class="confirmation alert alert-success">Data berhasil disimpan. Silakan <a href="' . base_url() . 'backend_service/serial/export_generate/' . strtotime($datetime) . '" target="_blank">klik disini</a> untuk download excel.</div>');
             redirect($this->input->post('uri_string'));
         }
     }
