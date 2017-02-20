@@ -7,11 +7,22 @@ Based on http://getbootstrap.com/css/#responsive-utilities-classes
 Form Medium Devices Up To Large Devices
 ***/
 
+.loginWarp .btn {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 16px!important;
+    background: #30599f!important;
+    border-color: #30599f!important;
+}
+.loginWarp .btn:hover, .loginWarp .btn:focus {
+    background: #26477f!important;
+}
+
 @media (min-width: 992px) and (max-width: 1200px) {  
 
     .page-boxed .header .dropdown .username {
         display: none;
-    }	
+    }   
 
 }
 
@@ -47,8 +58,8 @@ From Medium Devices Up To Larger Devices
     }
 
     .page-sidebar-fixed.page-sidebar-hover-on .page-sidebar {
-        z-index: 10000;		
-        width: 35px;		
+        z-index: 10000;     
+        width: 35px;        
     }
 
     .page-sidebar-fixed.page-sidebar-hover-on .page-sidebar .selected {
@@ -76,7 +87,7 @@ From Medium Devices Up To Larger Devices
 
     .page-sidebar-hovering .sub-menu,
     .page-sidebar-hovering span.title,
-    .page-sidebar-hovering span.arrow {		  
+    .page-sidebar-hovering span.arrow {       
         display: none !important;
     }
 
@@ -153,7 +164,7 @@ From Medium Devices Up To Larger Devices
     }
 
     /* boxed layout */
-    .page-boxed	.header .navbar-brand {
+    .page-boxed .header .navbar-brand {
         margin-left: 0px !important;
         width: 226px;
     }
@@ -178,6 +189,26 @@ From Medium Devices Up To Larger Devices
     .page-boxed.page-sidebar-fixed .page-container {
         border-radius: 0;
     }
+
+    .loginWarp {
+        width: 50%;
+        padding: 25px;
+    }
+
+    #captcha_image {
+        width: 100%;
+        display: inline-block;
+        margin: 5px auto;
+    }
+
+    .loginWarp table tr td:first-child {
+        font-weight: bold!important;
+        font-size: 14px;
+        text-transform: uppercase;
+        padding-left: 10px!important;
+    }
+
+    #login-form {margin-top: 15%;}
 
 }
 
@@ -208,15 +239,11 @@ Up To Medium Devices
         display: block;
     }
 
-    .page-sidebar.navbar-collapse {
-        max-height: 340px;
-    }
-
     .page-sidebar.navbar-collapse.collapse {
         display: none !important;
     }
 
-    .page-sidebar.navbar-collapse.in {	 	
+    .page-sidebar.navbar-collapse.in {      
         overflow: hidden !important;
         overflow-y: auto !important;
     }
@@ -231,10 +258,6 @@ Up To Medium Devices
     .header .navbar-nav {
         display: block;
         margin-bottom: 0px !important;
-    }
-
-    .header .navbar-nav .open .dropdown-menu  {
-        position: absolute;
     }
 
     .header .navbar-nav {
@@ -269,7 +292,7 @@ Up To Medium Devices
     ***/
     .page-content {
         margin: 0px !important;
-        padding: 20px 20px 20px 20px !important;  		
+        padding: 20px 20px 20px 20px !important;        
         min-height: 280px; 
     }
 
@@ -344,7 +367,7 @@ From Small Devices Up To Medium Devices
     ***/
     .page-sidebar .btn-navbar.collapsed .arrow { 
         display: none;
-    }	
+    }   
 
     .page-sidebar .btn-navbar .arrow {
         position: absolute;
@@ -355,6 +378,43 @@ From Small Devices Up To Medium Devices
         border-bottom: 15px solid #5f646b;
         border-left: 15px solid transparent; 
         border-right: 15px solid transparent; 
+    }
+
+    .loginWarp {
+        width: 50%;
+        padding: 25px;
+    }
+
+    #captcha_image {
+        width: 100%;
+        display: inline-block;
+        margin: 5px auto;
+    }
+
+    .loginWarp .btn {
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 16px!important;
+        background: #30599f!important;
+        border-color: #30599f!important;
+    }
+    .loginWarp .btn:hover, .loginWarp .btn:focus {
+        background: #26477f!important;
+    }
+
+    .loginWarp table tr td:first-child {
+        font-weight: bold!important;
+        font-size: 14px;
+        text-transform: uppercase;
+        padding-left: 10px!important;
+    }
+
+    .navbar-toggle img {height: 25px;}
+    .header .navbar-toggle {
+        margin-top: 4px;
+        margin-left: 15px;
+        padding: 14px;
+        border-radius: 0;
     }
 
 } 
@@ -369,13 +429,37 @@ Extra Small Devices Only
     Page header
     ***/
 
-    .header {
-        padding: 0 10px 0 10px;
+    .header, .header.navbar-fixed-top {
+        padding: 0px!important;
+        background: #30599f;
+    }
+
+    .header .navbar-nav li.dropdown.user img {
+        margin-right: 0;
+        height: 70px;
     }
 
     .header .top-nav .nav{  
         margin-top: 0px;
         margin-right: 5px;
+    }
+
+    .header .navbar-nav .dropdown-menu {
+        position: relative;
+        margin-bottom: 10px;
+        text-align: left;
+    }
+
+    .header .nav > li > .dropdown-menu:after, .header .nav > li > .dropdown-menu:before {
+        right: 50%;
+    }
+
+    .header .navbar-nav > li.dropdown.user .dropdown-toggle {
+        padding: 8px 4px 15px 9px;
+    }
+
+    .page-sidebar.navbar-collapse {
+        max-height: none!important;
     }
 
     .header .nav > li > .dropdown-menu.notification:after, 
@@ -403,6 +487,15 @@ Extra Small Devices Only
 
     .header .nav > li > .dropdown-menu.tasks {
         margin-right: -70px;
+    }
+
+    .navbar-toggle img {height: 25px;}
+    .header .navbar-brand img {
+        padding-left: 10px;
+        padding-top: 0px;
+        height: 45px;
+        width: auto;
+        max-width: none;
     }
 
     /* Header logo */
@@ -438,7 +531,7 @@ Extra Small Devices Only
     .styler-panel {
         top:58px;
         right:12px;
-    }	
+    }   
 
     /***
     Page breadcrumb
@@ -452,7 +545,7 @@ Extra Small Devices Only
     Portlet form action
     ***/
     .portlet-body.form .form-actions{
-        padding-left: 15px;	
+        padding-left: 15px; 
     } 
 
 
@@ -465,7 +558,7 @@ Extra Small Devices Only
         top:-27px;
         float: right;
         right:10px !important;
-    }	
+    }   
 
     /***
     Advance tables
@@ -475,12 +568,12 @@ Extra Small Devices Only
     }
 
     /***
-    Footer	
-    ***/	
+    Footer  
+    ***/    
     .footer {
         padding-left: 10px;
-        padding-right: 10px;		
-    }	
+        padding-right: 10px;        
+    }   
 
     .footer .go-top {  
         float: right;
@@ -499,11 +592,80 @@ Extra Small Devices Only
     Form controls
     ***/
     .form-horizontal .form-actions {
-        /*padding-left: 180px; 	*/
+        /*padding-left: 180px;  */
     }
 
     .portlet .form-horizontal .form-actions {
-        /*padding-left: 190px; 	*/
+        /*padding-left: 190px;  */
+    }
+
+    #login-form {margin-top: 5%;}
+    
+
+    .loginWarp label, .loginWarp input {font-size: 12px!important; border-radius: 0!important;}
+    .loginWarp .form-group {
+        margin-bottom: 6px;
+    }
+    /*.loginWarp h3 {font-size: 16px;font-weight: bolder!important;}*/
+    .loginWarp hr {margin: 15px 0;}
+
+    /* The node */
+    #chart .jOrgChart {
+        margin: 10px 0px!important;
+        padding: 0px!important;
+        overflow: auto!important;
+    }
+    #chart .jOrgChart .node {
+        text-align: center!important;
+        padding:5px!important;
+        font-size:5pt!important;
+    }
+    #chart .jOrgChart .node .node-image img {
+        display: inline-block;
+        height: auto!important;
+    }
+    #chart .jOrgChart .node a {
+        font-size: 7pt!important;
+        font-weight: bold!important;
+    }
+    #chart .jOrgChart .node .node-expand {
+        margin: 10px auto!important;   
+    }
+
+    .table th h4, .table th h5, .table th h3, .table th h2, .table th h1 {font-size: 13px!important; font-weight: bold!important;}
+
+    .loginWarp {
+        width: 60%;
+        padding: 25px;
+    }
+    .loginWarp table tr td {
+        width: 100%!important;
+        display: inline-block!important;
+        padding-left: 10px;
+    }
+
+    #captcha_image {
+        width: 100%;
+        display: inline-block;
+        margin: -30px auto;
+    }
+
+    .loginWarp .btn {
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 16px!important;
+        background: #30599f!important;
+        border-color: #30599f!important;
+    }
+    .loginWarp .btn:hover, .loginWarp .btn:focus {
+        background: #26477f!important;
+    }
+
+    .loginWarp table tr td:first-child {
+        font-weight: bold;
+        font-size: 13px;
+        text-transform: uppercase;
+        padding-left: 10px!important;
     }
 }
 
@@ -516,6 +678,28 @@ The Most Extra Small Devices Landscape Mode Only
     /***
     Header navbar
     ***/
+
+    .loginWarp table tr td {
+        width: 100%!important;
+        display: inline-block!important;
+        padding-left: 10px;
+    }
+    .loginWarp table tr td:first-child {
+        font-weight: bold;
+        font-size: 13px;
+        text-transform: uppercase;
+        padding-left: 10px;
+        display: none!important;
+    }
+    .loginWarp {
+        width: 80%;
+        padding: 25px;
+        margin-top: 40px;
+    }
+
+    .loginWarp #captcha_image {
+        margin: 5px 0 15px;
+    }
 
     .header .navbar-nav {
         display: block !important;
@@ -542,7 +726,7 @@ The Most Extra Small Devices Landscape Mode Only
     Forms
     ***/
     .portlet .form-horizontal .form-actions {
-        padding-left: 10px; 	
+        padding-left: 10px;     
     }
 
     /***
@@ -554,7 +738,7 @@ The Most Extra Small Devices Landscape Mode Only
 
     .page-content .breadcrumb .dashboard-date-range span {
         display: none;
-    }	
+    }   
 
     .page-content .breadcrumb > .btn-group span {
         display: none;
@@ -580,6 +764,34 @@ The Most Extra Small Devices Landscape Mode Only
     .hidden-480 {
         display: none !important;
     }
+
+    /* The node */
+    #chart .jOrgChart {
+        margin: 10px 0px!important;
+        padding: 0px!important;
+        overflow: auto!important;
+    }
+    #chart .jOrgChart .node {
+        text-align: center!important;
+        padding:5px!important;
+        font-size:5pt!important;
+    }
+    #chart .jOrgChart .node .node-image img {
+        display: inline-block;
+        height: auto!important;
+    }
+    #chart .jOrgChart .node a {
+        font-size: 7pt!important;
+        font-weight: bold!important;
+    }
+    #chart .jOrgChart .node .node-expand {
+        margin: 10px auto!important;   
+    }
+    .form-control {border-radius: 0!important;}
+    .form-group {padding-right: 0; padding-top: 15px;padding-bottom: 20px;}
+    .input-group-btn, .input-group-btn .btn {width: 100%!important;float: left;}
+
+    .table th h4, .table th h5, .table th h3, .table th h2, .table th h1 {font-size: 12px!important; font-weight: bold!important;}
 }
 
 /***
@@ -608,7 +820,12 @@ The Most Extra Small Devices Portrait Mode Only
         width: 50%;
         margin: 0!important;
     }
-}	
+    .my-dialog-modal {
+        padding-top: 100px;
+        width:90%;
+        height:800px;
+    }
+}   
 
 @media (min-width: 176px) and (max-width: 800px) {
     .header .navbar-nav {
@@ -616,11 +833,8 @@ The Most Extra Small Devices Portrait Mode Only
         display: block;
         height: auto;
     }
-    .header .navbar-brand img {
-        height: auto;
-        width: 100%;
-    }
-    .header .info-brand {left: 0;}	
+
+    .header .info-brand {left: 0;}  
     .header .navbar-nav > li {float: right;}
     .header .navbar-nav > li.devider {display: none;}
     .header .navbar-nav > li:first-child {padding: 0 5px!important; width: 100%; text-align: center; height: auto; background: rgba(0,0,0,0.2); border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; -o-border-radius: 4px 4px 0 0;}
@@ -638,7 +852,7 @@ The Most Extra Small Devices Portrait Mode Only
     }
     .header .navbar-toggle {margin-top: 4px; margin-left: 15px; padding: 14px; border-radius: 0;}
     .header .navbar-toggle:hover {background: rgba(0,0,0,0.2);}
-    .btn-group > .btn {border-radius: 10px !important; -moz-border-radius: 10px !important; -webkit-border-radius: 10px !important; -o-border-radius: 10px !important;}	
+    .btn-group > .btn {border-radius: 10px !important; -moz-border-radius: 10px !important; -webkit-border-radius: 10px !important; -o-border-radius: 10px !important;} 
 
     input, textarea, select, .input-group {width: 100%!important; display: inline-block; border-radius: 10px !important; -moz-border-radius: 0!important; -webkit-border-radius: 10px !important; -o-border-radius: 10px !important; margin-bottom: 5px !important;}
     .form-group { width: 100%;}

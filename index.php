@@ -37,7 +37,7 @@ define('_dir_catalog', 'assets/images/catalog/');
 define('_dir_catalog_item', 'assets/images/catalog_item/');
 define('_dir_catalog_item_detail', 'assets/images/catalog_item_detail/');
 define('_dir_themes', 'assets/images/themes/');
-define('_backend_login_uri', 'bukapintu');
+define('_backend_login_uri', 'login_admin');
 define('_backend_logout_uri', 'tutuppintu');
 
 // ADDITIONAL

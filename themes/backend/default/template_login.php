@@ -85,8 +85,8 @@ Email: designer@esoftdream.net
                         <table width="100%" border="0" cellspacing="5px" cellpadding="5px">
                             <tbody>
                                 <tr>
-                                    <td width="35%" style="padding-left:20px">Username</td>
-                                    <td style="padding-left:10px">
+                                    <td width="35%">Username</td>
+                                    <td>
                                         <div style="position: relative;">
                                             <input placeholder="Username..." class="qwerty ui-keyboard-input ui-widget-content ui-corner-all" type="text" name="username" value="<?php echo (isset($this->arr_flashdata['username'])) ? $this->arr_flashdata['username'] : ''; ?>" id="loginUsername" autocomplete="off" aria-haspopup="true" role="textbox">
                                             <img id="icoUsername" class="tooltip" title="Klik untuk membuka Virtual Keyboard" src="<?php echo $themes_url; ?>/images/keyboard.png" style="position: absolute; right:10px; cursor:pointer;" />
@@ -94,8 +94,8 @@ Email: designer@esoftdream.net
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="padding-left:20px">Password</td>
-                                    <td style="padding-left:10px">
+                                    <td>Password</td>
+                                    <td>
                                         <div style="position: relative;">
                                             <input placeholder="Password..." class="qwerty ui-keyboard-input ui-widget-content ui-corner-all" type="password" name="password" id="loginPassword" autocomplete="off" aria-haspopup="true" role="textbox">
                                             <img id="icoPassword" class="tooltip" title="Klik untuk membuka Virtual Keyboard" src="<?php echo $themes_url; ?>/images/keyboard.png" style="position: absolute; right:10px; cursor:pointer;" />
@@ -103,8 +103,8 @@ Email: designer@esoftdream.net
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="padding-left:20px">Kode Unik</td>
-                                    <td style="padding-left:10px">
+                                    <td>Kode Unik</td>
+                                    <td>
                                         <div style="position: relative;">
                                             <input placeholder="Kode Unik..." class="qwerty ui-keyboard-input ui-widget-content ui-corner-all" type="text" name="kode_unik" id="kodeunik" autocomplete="off" aria-haspopup="true" role="textbox">
                                             <a id="captcha_reload" tabindex="-1" title="Ganti Kode Unik">
@@ -114,12 +114,12 @@ Email: designer@esoftdream.net
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="padding-left:20px">&nbsp;</td>
-                                    <td style="padding-left:10px"><img id="captcha_image" src="<?php echo site_url(_backend_login_uri . '/captcha'); ?>" alt="" style="border:0;" /></td>
+                                    <td>&nbsp;</td>
+                                    <td><img id="captcha_image" src="<?php echo site_url(_backend_login_uri . '/captcha'); ?>" alt="" style="border:0;" /></td>
                                 </tr>
                                 <tr>
-                                    <td style="padding-left:20px">&nbsp;</td>
-                                    <td style="padding-left:10px" align="left"><input type="submit" value="Login" name="submit" id="submit" class="btn btn-lg btn-block btn-primary"></td>
+                                    <td>&nbsp;</td>
+                                    <td align="left"><input type="submit" value="Login" name="submit" id="submit" class="btn btn-lg btn-block btn-primary"></td>
                                 </tr>
                             </tbody>
                         </table>

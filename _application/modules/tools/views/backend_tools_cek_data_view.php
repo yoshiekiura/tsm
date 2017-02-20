@@ -1,21 +1,18 @@
-<?php
-error_reporting(1);
-?>
-
 <h2>Cek Data</h2>
 <div class="box">
     <div class="box-title">
-        <div class="caption"><i class="icon-reorder"></i>Form Cek Data</div>
+        <div class="caption"><i class="icon-reorder"></i> Form Cek Data</div>
     </div>
     <div class="box-body form">
 
-        <form method="POST" action="" > 
+        <form method="POST" action="<?php echo $form_action ?>" > 
+            <?php echo form_hidden('uri_string', uri_string()); ?>
             <div class="form-body">
                 <div class="form-group">
-                    <label class="control-label col-md-2">Input ID Member</label>
+                    <label class="control-label col-md-2">Input Kode Member</label>
                     <div class="col-md-10">
                         <div class="input-group" id="defaultrange">
-                            <input name="member" size="40" class="form-control" type="text">
+                            <?php echo form_input('member_code', (isset($this->arr_flashdata['input_member_code'])) ? $this->arr_flashdata['input_member_code'] : '', 'size="40" class="form-control"'); ?>
                         </div>
                     </div>
                 </div>
@@ -32,76 +29,45 @@ error_reporting(1);
             </div>
         </form>
     </div>
-
 </div>
 
-
-
-<?php
-if ($_POST['member'] != '') {
-    $network_code = $_POST['member'];
-    $network_id = $this->function_lib->get_one('sys_network', 'network_id', 'network_code =' . "'$network_code'");
-
-    if (empty($network_id)) {
-        echo "Data Member tidak ada";
-    } else {
-
-        $sponsor_network_id = $this->function_lib->get_one('sys_network', 'network_sponsor_network_id', 'network_id =' . $network_id);
-        $sponsor_network_code = $this->function_lib->get_one('sys_network', 'network_code', 'network_id =' . $sponsor_network_id);
-        $upline_network_id = $this->function_lib->get_one('sys_network', 'network_upline_network_id', 'network_id =' . $network_id);
-        $upline_network_code = $this->function_lib->get_one('sys_network', 'network_code', 'network_id =' . $upline_network_id);
-
-
-
-
-        echo "Data Member  : " . $network_code;
-        echo "<br>";
-        echo "Data Sponsor : " . $sponsor_network_code;
-        echo "<br>";
-        echo "Data Upline  : " . $upline_network_code;
-        echo "<br>";
-        echo "<br>";
-        echo "<br>";
-        echo " 
-         <table class='items' border='2' ; >
-            <tr>
-                <th width='200' style='font-size:15px'>
-                    Bonus Sponsor
-                </th>
-                <th width='300' style='font-size:15px'>
-                   Bonus Gen Sponsor
-                </th>
-                <th width='300' style='font-size:15px'>
-                    Bonus Profit Sharing
-                </th>
-                <th width='300' style='font-size:15px'>
-                    Bonus Royalti Payment
-                </th>
-                
-
-            </tr>";
-
-        $sql = "SELECT * FROM sys_bonus where bonus_network_id = " . $network_id . "";
-        $query = $this->db->query($sql);
-        if ($query->num_rows() > 0) {
-            foreach ($query->result() as $row) {
-                $bonus_sponsor = $row->bonus_sponsor_acc - $row->bonus_sponsor_paid;
-                $bonus_gen_sponsor = $row->bonus_gen_sponsor_acc - $row->bonus_gen_sponsor_paid;
-                $bonus_profit_sharing = $row->bonus_profit_sharing_acc - $row->bonus_profit_sharing_paid;
-                $bonus_royalti_payment = $row->bonus_royalty_payment_acc - $row->bonus_royalty_payment_paid;
-
-                echo "<tr>";
-                echo '<td align="center" style="padding-top:10px;font-size:20px">' . number_format($bonus_sponsor) . '</td>';
-                echo '<td align="center" style="padding-top:10px;font-size:20px">' . number_format($bonus_gen_sponsor) . '</td>';
-                echo '<td align="center" style="padding-top:10px;font-size:20px">' . number_format($bonus_profit_sharing) . '</td>';
-                echo '<td align="center" style="padding-top:10px;font-size:20px">' . number_format($bonus_royalti_payment) . '</td>';
-
-                echo "</tr>";
-            }
-            echo "</table>";
-        }
-    }
-} else {
-    echo "";
-}
-?>
+<?php if ($this->session->flashdata('data_send')): ?>
+<?php $data_send = $this->session->flashdata('data_send'); ?>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Hasil Pencarian</h3>
+        </div>
+        <table class="table table-bordered">
+            <tbody>
+                <tr> <th width="28%">Network ID</th> <td><?php echo $data_send['network_id'] ?></td> </tr>
+                <tr> <th width="28%">Member</th> <td><?php echo $data_send['network_code'] ?></td> </tr>
+                <tr> <th width="28%">Sponsor</th> <td><?php echo empty($data_send['sponsor_network_code']) ? '-' : $data_send['sponsor_network_code']; ?></td> </tr>
+                <tr> <th width="28%">Upline</th> <td><?php echo empty($data_send['upline_network_code']) ? '-' : $data_send['upline_network_code']; ?></td> </tr>
+            </tbody>
+        </table>
+        <hr style="margin: 0; height: 3px; background: #eee; ">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th rowspan="2" width="28%">Bonus Item</th>
+                    <th colspan="3" class="text-center" width="72%">Bonus</th>
+                </tr>
+                <tr>
+                    <th class="text-right" width="24%">Terjadi</th>
+                    <th class="text-right" width="24%">Dibayar</th>
+                    <th class="text-right" width="24%">Saldo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($data_send['arr_bonus_active'] as $bonus): ?>
+                <tr>
+                    <td><strong><?php echo $bonus['label']; ?></strong></td>
+                    <td class="text-right">Rp. <?php echo $this->function_lib->set_number_format($data_send['data_bonus']->{'bonus_' . $bonus['name'] . '_acc'}); ?></td>
+                    <td class="text-right">Rp. <?php echo $this->function_lib->set_number_format($data_send['data_bonus']->{'bonus_' . $bonus['name'] . '_paid'}); ?></td>
+                    <td class="text-right">Rp. <?php echo $this->function_lib->set_number_format($data_send['data_bonus']->{'bonus_' . $bonus['name'] . '_saldo'}); ?></td>
+                </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+<?php endif ?>

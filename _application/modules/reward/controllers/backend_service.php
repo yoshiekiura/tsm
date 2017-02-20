@@ -310,10 +310,10 @@ class Backend_service extends Backend_Service_Controller {
             $entry = array('id' => $row->reward_id,
                 'cell' => array(
                     'reward_id' => $row->reward_id,
-                    'reward_cond_node_left' => $row->reward_cond_node_left,
-                    'reward_cond_node_right' => $row->reward_cond_node_right,
+                    'reward_cond_node_left' => $this->function_lib->set_number_format($row->reward_cond_node_left),
+                    'reward_cond_node_right' => $this->function_lib->set_number_format($row->reward_cond_node_right),
                     'reward_bonus' => $row->reward_bonus,
-                    'reward_bonus_value' => $row->reward_bonus_value,
+                    'reward_bonus_value' => $this->function_lib->set_number_format($row->reward_bonus_value),
                     'reward_image' => $image,
                     'reward_is_active' => $is_active,
                     'edit' => $edit
@@ -411,7 +411,7 @@ class Backend_service extends Backend_Service_Controller {
                     'reward_qualified_reward_bonus' => $row->reward_qualified_reward_bonus,
                     'member_mobilephone' => $row->member_mobilephone,
                     'reward_qualified_date' => convert_date($row->reward_qualified_date, 'id'),
-                    'reward_qualified_reward_value' => number_format($row->reward_qualified_reward_value),
+                    'reward_qualified_reward_value' => $this->function_lib->set_number_format($row->reward_qualified_reward_value),
                 ),
             );
 

@@ -237,7 +237,9 @@ class Backend_service extends Backend_Service_Controller {
             $data_member_detail['member_detail_address'] = $member_detail_address;
             $data_member_detail['member_detail_zipcode'] = $member_detail_zipcode;
             $data_member_detail['member_detail_birth_place'] = $member_detail_birth_place;
-            $data_member_detail['member_detail_birth_date'] = $member_detail_birth_date;
+            if ($member_detail_birth_date) {
+                $data_member_detail['member_detail_birth_date'] = $member_detail_birth_date;
+            }
             $data_member_detail['member_detail_identity_type'] = $member_detail_identity_type;
             $data_member_detail['member_detail_identity_no'] = $member_detail_identity_no;
             
