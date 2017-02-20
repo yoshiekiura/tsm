@@ -31,6 +31,8 @@
                         </li>';
                         // <span class="price1">Harga : <strong>Rp '.$this->function_lib->set_number_format($row_products->product_price_member).',-</strong></span>
                     }
+                } else {
+                    echo '<li style="margin: 0; height: auto;"><div class="alert alert-danger">Maaf, Paket belum dimuat.</div></li>';
                 }
                 ?>
             </ul>

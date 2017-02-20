@@ -178,6 +178,8 @@ function get_data() {
         $this->load->library('upload');
         $this->load->library('image_lib');
         $this->form_validation->set_rules('name', '<b>Nama Produk</b>', 'required');
+        $this->form_validation->set_rules('member_price', '<b>Harga Member</b>', 'required|numeric');
+        $this->form_validation->set_rules('nonmember_price', '<b>Harga Non Member</b>', 'required|numeric');
 
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('confirmation', '<div class="error alert alert-danger">' . validation_errors() . '</div>');
@@ -229,6 +231,8 @@ function get_data() {
         $this->load->library('upload');
         $this->load->library('image_lib');
         $this->form_validation->set_rules('name', '<b>Nama Produk</b>', 'required');
+        $this->form_validation->set_rules('member_price', '<b>Harga Member</b>', 'required|numeric');
+        $this->form_validation->set_rules('nonmember_price', '<b>Harga Non Member</b>', 'required|numeric');
 
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('confirmation', '<div class="error alert alert-danger">' . validation_errors() . '</div>');

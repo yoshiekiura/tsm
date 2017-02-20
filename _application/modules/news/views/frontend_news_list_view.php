@@ -49,7 +49,7 @@
                     
                 }
             } else {
-                echo 'Maaf, berita belum dimuat.';
+                echo '<li style="margin: 0; height: auto;"><div class="alert alert-danger">Maaf, Berita belum dimuat.</div></li>';
             }
             ?>
         </ul>

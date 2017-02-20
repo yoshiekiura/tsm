@@ -42,7 +42,7 @@
                 }
 
             } else {
-                echo 'Maaf, Agenda belum dimuat.';
+                echo '<li style="margin: 0; height: auto;"><div class="alert alert-danger">Maaf, Agenda belum dimuat.</div></li>';
             }
             ?>
         </ul>

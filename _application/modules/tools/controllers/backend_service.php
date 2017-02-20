@@ -50,7 +50,7 @@ class Backend_service extends Backend_Service_Controller {
             $this->session->set_flashdata('confirmation', '<div class="error alert alert-danger">' . validation_errors() . '</div>');
         } else {
             $send['network_code'] = $this->input->post('member_code');
-            $send['network_id'] = $this->function_lib->get_one('sys_network', 'network_id', "network_code = '" . $send['network_code'] ."'");
+            $send['network_id'] = $this->function_lib->get_one('sys_network', 'network_id', array('network_code'=>$send['network_code']));
 
             if (empty($send['network_id']) OR $send['network_id'] == '') {
                 $this->session->set_flashdata('confirmation', '<div class="error alert alert-danger"><strong>Member</strong> tidak ditemukan.</div>');
@@ -63,7 +63,7 @@ class Backend_service extends Backend_Service_Controller {
             $send['upline_network_id'] = $this->function_lib->get_one('sys_network', 'network_upline_network_id', 'network_id =' . $send['network_id']);
             $send['upline_network_code'] = $this->function_lib->get_one('sys_network', 'network_code', 'network_id =' . $send['upline_network_id']);
 
-            $send['data_bonus'] = $this->function_lib->get_detail_data('sys_bonus', 'bonus_network_id =' . $send['network_id'])->row();
+            $send['data_bonus'] = $this->function_lib->get_detail_data('sys_bonus', 'bonus_network_id', $send['network_id'])->row();
             $send['arr_bonus_active'] = $this->mlm_function->get_arr_active_bonus();
             
             $this->session->set_flashdata('data_send', $send);
