@@ -195,6 +195,8 @@ class Backend_service extends Backend_Service_Controller {
             if ($menu_type == 'page') {
                 $arr_menu_link = explode('/', $menu_link);
                 $data['menu_page_id'] = $arr_menu_link[2];
+            } else {
+                $data['menu_page_id'] = 0;
             }
 
             if ($menu_par_id == 0) {
