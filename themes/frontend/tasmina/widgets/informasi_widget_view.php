@@ -7,7 +7,7 @@
         <div class="panel-body">
             <div class="list-group">
                 <?php foreach ($sidebar_menu[0] as $key => $menu): ?>
-                <a href="<?php echo $menu->menu_link ?>" class="list-group-item"><i class="fa fa-chevron-circle-right"></i><?php echo $menu->menu_title ?> </a>
+                <a href="<?php echo base_url().$menu->menu_link ?>" class="list-group-item"><i class="fa fa-chevron-circle-right"></i><?php echo $menu->menu_title ?> </a>
                 <?php endforeach ?>
             </div>
         </div>
