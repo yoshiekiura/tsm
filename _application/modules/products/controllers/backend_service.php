@@ -178,8 +178,8 @@ function get_data() {
         $this->load->library('upload');
         $this->load->library('image_lib');
         $this->form_validation->set_rules('name', '<b>Nama Produk</b>', 'required');
-        $this->form_validation->set_rules('member_price', '<b>Harga Member</b>', 'required|numeric');
-        $this->form_validation->set_rules('nonmember_price', '<b>Harga Non Member</b>', 'required|numeric');
+        // $this->form_validation->set_rules('member_price', '<b>Harga Member</b>', 'required|numeric');
+        // $this->form_validation->set_rules('nonmember_price', '<b>Harga Non Member</b>', 'required|numeric');
 
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('confirmation', '<div class="error alert alert-danger">' . validation_errors() . '</div>');
@@ -197,8 +197,8 @@ function get_data() {
             $data = array();
             $data['product_name'] = $products_name;
             $data['product_description'] = $products_description;
-            $data['product_price_member'] = $products_member_price;
-            $data['product_price_non'] = $products_nonmember_price;
+            $data['product_price_member'] = 0; // $products_member_price;
+            $data['product_price_non'] = 0; // $products_nonmember_price;
             $data['product_create_datetime'] = date('Y-m-d H:i:s');
 
             if ($this->upload->fileUpload('image', $this->file_dir, $this->allowed_file_type)) {
@@ -231,8 +231,8 @@ function get_data() {
         $this->load->library('upload');
         $this->load->library('image_lib');
         $this->form_validation->set_rules('name', '<b>Nama Produk</b>', 'required');
-        $this->form_validation->set_rules('member_price', '<b>Harga Member</b>', 'required|numeric');
-        $this->form_validation->set_rules('nonmember_price', '<b>Harga Non Member</b>', 'required|numeric');
+        // $this->form_validation->set_rules('member_price', '<b>Harga Member</b>', 'required|numeric');
+        // $this->form_validation->set_rules('nonmember_price', '<b>Harga Non Member</b>', 'required|numeric');
 
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('confirmation', '<div class="error alert alert-danger">' . validation_errors() . '</div>');
@@ -253,8 +253,8 @@ function get_data() {
             $data = array();
             $data['product_name'] = $products_name;
             $data['product_description'] = $products_description;
-            $data['product_price_member'] = $products_member_price;
-            $data['product_price_non'] = $products_nonmember_price;
+            $data['product_price_member'] = 0; // $products_member_price;
+            $data['product_price_non'] = 0; // $products_nonmember_price;
 
             if ($this->upload->fileUpload('image', $this->file_dir, $this->allowed_file_type)) {
                 $upload = $this->upload->data();

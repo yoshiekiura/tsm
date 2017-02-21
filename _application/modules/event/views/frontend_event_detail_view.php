@@ -27,7 +27,7 @@ if ($query->num_rows() > 0) {
                         <div class="event">
                             <div class="img-event">
                                 <div class="img-thumbnail">
-                                    <a class="img-effect img-thumbnail takezoom" href="<?php echo $image_url ?>" rel="prettyPhoto[gallery01]" title="<?php echo $row->event_description; ?> ">
+                                    <a class="img-effect img-thumbnail takezoom" href="<?php echo $image_url ?>" rel="prettyPhoto[gallery01]" title="<?php echo $row->event_title; ?> ">
                                         <img src="<?php echo $image_url; ?> " alt="<?php echo $row->event_title; ?> ">
                                         <span class="link-detail">
                                             <i class="fa fa-search-plus"></i>
@@ -85,8 +85,6 @@ if ($query->num_rows() > 0) {
         <?php 
         $var = new widget();
         $var->run('widget/frontend_event_random_widget');
-        //Widget::run('widget/frontend_event_random_widget'); 
-
         ?>
     </div>
 </div>

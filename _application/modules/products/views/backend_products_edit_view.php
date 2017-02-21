@@ -44,7 +44,7 @@ if ($query->num_rows() > 0) {
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group hide">
                     <label class="control-label col-md-2">Harga Member</label>
                     <div class="col-md-10">
                         <div class="input-group" id="defaultrange">
@@ -52,7 +52,7 @@ if ($query->num_rows() > 0) {
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group hide">
                     <label class="control-label col-md-2">Harga Non-Member</label>
                     <div class="col-md-10">
                         <div class="input-group" id="defaultrange">

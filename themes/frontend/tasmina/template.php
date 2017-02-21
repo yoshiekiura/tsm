@@ -7,7 +7,7 @@
         <div id="breadcrumbs">
             <div class="container">
                 <ol class="breadcrumb">
-                <li><a href="<?php echo base_url(); ?>">Home</a></li>
+                <li><a href="<?php echo base_url(); ?>">Beranda</a></li>
                     <?php
                     if (isset($arr_breadcrumbs)) {
                         if (is_array($arr_breadcrumbs)) {

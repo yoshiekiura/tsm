@@ -11,15 +11,19 @@ if (array_key_exists('0', $arr_menu)) {
     // ekstrak root menu
     foreach ($arr_menu[0] as $menu_sort => $menu_value) {
 
+        $target = '';
         if ($menu_value->menu_link == '#') {
             $menu_link = '#';
+        } elseif ($menu_value->menu_type == 'url') {
+            $menu_link = $menu_value->menu_link;
+            $target = 'target="_blank"';
         } else {
             $menu_link = base_url() . $menu_value->menu_link;
         }
         $first_word = strtok($menu_value->menu_title, ' ');
         $first_word_else = substr($menu_value->menu_title, strpos($menu_value->menu_title, ' '));
         echo '<li>
-                <a class="img-effect" title="' . $menu_value->menu_title . '" href="' . $menu_link . '">
+                <a class="img-effect" title="' . $menu_value->menu_title . '" href="' . $menu_link . '" ' . $target . '>
                     <span>' . $first_word . '</span>' . $first_word_else . '
                 </a>
             </li>';

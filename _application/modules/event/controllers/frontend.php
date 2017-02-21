@@ -19,8 +19,8 @@ class Frontend extends Frontend_Controller {
 
     public function index() {
         $data['arr_breadcrumbs'] = array(
-            'Event' => '#',
-            'Data Event' => '',
+            'Agenda' => '#',
+            'Data Agenda' => '',
         );
         $this->load->library('pagination');
 
@@ -42,10 +42,10 @@ class Frontend extends Frontend_Controller {
 
     function detail() {
         $data['arr_breadcrumbs'] = array(
-            'Event' => '#',
-            'Detail Event' => '',
+            'Agenda' => '#',
+            'Detail Agenda' => '',
         );
-        $data['title'] = 'Event Detail';
+        $data['title'] = 'Agenda Detail';
         $data['query'] = $this->frontend_event_model->get_event_detail($this->uri->segment(3));
 
         template('frontend', 'event/frontend_event_detail_view', $data);

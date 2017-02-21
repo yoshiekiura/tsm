@@ -12,14 +12,17 @@ if (array_key_exists('0', $arr_menu)) {
     // ekstrak root menu
     $i=1;
     foreach ($arr_menu[0] as $menu_sort => $menu_value) {
-
+        $target = '';
         if ($menu_value->menu_link == '#') {
             $menu_link = '#';
+        } elseif ($menu_value->menu_type == 'url') {
+            $menu_link = $menu_value->menu_link;
+            $target = 'target="_blank"';
         } else {
             $menu_link = base_url() . $menu_value->menu_link;
         }
         echo '<li>
-                <a title="' . $menu_value->menu_title . '" href="' . $menu_link . '">
+                <a title="' . $menu_value->menu_title . '" href="' . $menu_link . '" ' . $target . '>
                    ' . $menu_value->menu_title . '
                 </a>
             </li>';

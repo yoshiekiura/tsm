@@ -12,12 +12,16 @@ if (array_key_exists('0', $arr_menu)) {
     // ekstrak root menu
     foreach ($arr_menu[0] as $menu_sort => $menu_value) {
 
+        $target = '';
         if (array_key_exists($menu_value->menu_id, $arr_menu)) {
             $menu_link = '#';
             $menu_class = 'dropdown';
         } else {
             if ($menu_value->menu_link == '#') {
                 $menu_link = '#';
+            } elseif ($menu_value->menu_type == 'url') {
+                $menu_link = $menu_value->menu_link;
+                $target = 'target="_blank"';
             } else {
                 $menu_link = base_url() . $menu_value->menu_link;
             }
@@ -25,7 +29,7 @@ if (array_key_exists('0', $arr_menu)) {
         }
         $generate_menu .= '
                     <li class="' . $menu_class . '" title="' . $menu_value->menu_description . '">
-                        <a href="' . $menu_link . '">
+                        <a href="' . $menu_link . '" ' . $target . '>
                             <span class="title">' . $menu_value->menu_title . '</span>
                             <span class="arrow"></span>
                         </a>
@@ -39,13 +43,17 @@ if (array_key_exists('0', $arr_menu)) {
 
             // ekstrak submenu 1 yang par_id adalah menu_id dari root menu
             foreach ($arr_menu[$menu_value->menu_id] as $submenu_1_sort => $submenu_1_value) {
+                $submenu_target = '';
                 if ($submenu_1_value->menu_link == '#') {
                     $submenu_1_link = '#';
+                } elseif ($submenu_1_value->menu_type == 'url') {
+                    $submenu_1_link = $submenu_1_value->menu_link;
+                    $submenu_target = 'target="_blank"';
                 } else {
                     $submenu_1_link = base_url() . $submenu_1_value->menu_link;
                 }
 
-                $generate_menu .= '<li title="' . $submenu_1_value->menu_description . '"><a href="' . $submenu_1_link . '">' . $submenu_1_value->menu_title . '</a></li>';
+                $generate_menu .= '<li title="' . $submenu_1_value->menu_description . '"><a href="' . $submenu_1_link . '" ' . $submenu_target . '>' . $submenu_1_value->menu_title . '</a></li>';
             }
             $generate_menu .= '</ul>';
         }

@@ -22,7 +22,7 @@
                     <tbody>
                         <tr>
                             <td>
-                                <input name="username" size="50" value="" maxlength="50" type="text" placeholder="Member Name" style="margin-bottom: 0;" class="form-control">
+                                <input name="username" size="50" value="" maxlength="50" type="text" placeholder="Kode Member" style="margin-bottom: 0;" class="form-control">
                             </td>
                         </tr>
                         <tr class="even">
@@ -37,7 +37,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <input name="kode_unik" size="20" value="" maxlength="20" type="text" placeholder="Kode Unik" style="width:50%; margin-bottom: 0;" class="form-control">
+                                <input name="kode_unik" size="20" value="" maxlength="20" type="text" placeholder="Kode Unik" style="width:50%; margin-bottom: 0;" class="form-control" autocomplete="off">
                             </td>
                         </tr>
                         <tr class="even">

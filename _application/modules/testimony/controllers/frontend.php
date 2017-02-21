@@ -14,7 +14,7 @@ class frontend extends Frontend_Controller {
 
     function index() {
          $data['arr_breadcrumbs'] = array(
-            'Data Testimoni Member' => '#',
+            'Testimoni' => '#',
             'Testimoni Member' => '',
         );
         $this->load->library('pagination');

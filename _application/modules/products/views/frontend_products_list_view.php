@@ -13,6 +13,10 @@
                         } else {
                             $image = 'no-image.jpg';
                         }
+
+                        $desc_no_html = strip_tags($row_products->product_description);
+                        $pos = (strlen($desc_no_html) > 200) ? strpos($desc_no_html, ' ', 200) : 200;
+                        $preview_text = (strlen($desc_no_html) > 200) ? substr($desc_no_html, 0, $pos) . '...' : $desc_no_html;
                         
                         $image_src = '<img src="'. base_url() . 'media/' . _dir_products . '150/150/' . $image .'" alt="'. $row_products->product_name .'" title="'. $row_products->product_name .'" height=80%" width="42">';
                         echo '<li>
@@ -22,7 +26,7 @@
                                     <span class="item-name">'.$row_products->product_name.'</span>
                                 </div>
                                 <div class="item-price">
-                                    <span>' . substr(strip_tags($row_products->product_description), 0, strpos(strip_tags($row_products->product_description), ' ', 200)) . '...</span>
+                                    <span>' . $preview_text . '</span>
                                 </div>
                                 <div class="item-link">
                                     <a href="'.base_url().'products/view/'.$row_products->product_id.'/'.url_title($row_products->product_name).'" class="btn btn-default btn-sm"><i class="fa fa-ellipsis-v"></i>&nbsp; Lihat Paket</a>

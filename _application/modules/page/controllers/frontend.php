@@ -19,7 +19,7 @@ class Frontend extends Frontend_Controller {
 
     function index() {
         $data['arr_breadcrumbs'] = array(
-            'Page' => '#',
+            'Halaman' => '#',
         );
         $query = $this->frontend_page_model->get_homepage();
         if ($query->num_rows() > 0) {
@@ -36,8 +36,8 @@ class Frontend extends Frontend_Controller {
 
     function view() {
         $data['arr_breadcrumbs'] = array(
-            'Page' => '#',
-            'Detail Page' => '',
+            'Halaman' => '#',
+            'Detail Halaman' => '',
         );
         $query = $this->frontend_page_model->get_page($this->uri->segment(3));
         if ($query->num_rows() > 0) {

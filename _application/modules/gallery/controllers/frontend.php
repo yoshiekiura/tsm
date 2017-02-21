@@ -14,8 +14,8 @@ class frontend extends Frontend_Controller {
 
     public function index() {
          $data['arr_breadcrumbs'] = array(
-            'Gallery' => '#',
-            'Data Gallery' => '',
+            'Galeri' => '#',
+            'Data Galeri' => '',
         );
         
          $this->load->library('pagination');
@@ -40,8 +40,8 @@ class frontend extends Frontend_Controller {
     
     public function detail_gallery(){
         $data['arr_breadcrumbs'] = array(
-            'Gallery' => '#',
-            'Gallery Detail' => '',
+            'Galeri' => '#',
+            'Detail Galeri' => '',
         );
         $this->load->library('pagination');
 
@@ -55,7 +55,7 @@ class frontend extends Frontend_Controller {
         $this->pagination->initialize($config);
         $data['pagination'] = $this->pagination->create_links();
 
-        $data['title'] = 'Detail Gallery Foto';
+        $data['title'] = 'Detail Galeri Foto';
         $data['gallery'] = $this->frontend_gallery_model->get_gallery_date($this->uri->segment(3));
         $data['query'] = $this->frontend_gallery_model->get_gallery_detail_list($this->uri->segment(3), $offset, $limit)->result();
 

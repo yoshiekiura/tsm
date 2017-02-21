@@ -42,9 +42,7 @@
     <div id="section-3">
         <div class="container">
             <div class="row-fluid">
-                <div class="col-md-2">
-                    <?php // $frontend_widget->run('widget/frontend_testimonial_widget') ?>
-                </div>
+                <div class="col-md-1"><?php // $frontend_widget->run('widget/frontend_testimonial_widget') ?></div>
 
                 <div class="col-md-10" id="stats_weekly">
                     <?php $frontend_widget->run('widget/frontend_member_widget') ?>

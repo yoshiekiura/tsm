@@ -27,7 +27,7 @@
                         <form action="<?php echo base_url(); ?>voffice/login/verify" method="post" role="form" class="login-form">
                             <?php echo form_hidden('uri_string', uri_string()); ?>      
                             <div class="form-group">
-                                <label for="memberid">Member ID</label>
+                                <label for="memberid">Kode Member</label>
                                 <input name="username" size="50" value="" maxlength="50" type="text" placeholder="Kode Member" style="margin-bottom: 0;" class="form-control">
                             </div>
                             <div class="form-group">
@@ -37,7 +37,7 @@
                             <div class="form-group">
                                 <label for="securecode">Kode Unik</label><br>
                                 <img src="<?php echo site_url('voffice/login/captcha/widget'); ?>" style="margin-right: 8px; border: 1px solid #DDD;"><br>
-                                <input name="kode_unik" size="20" value="" maxlength="20" type="text" placeholder="Kode Unik" style="width:50%; margin-bottom: 0;" class="form-control">
+                                <input name="kode_unik" size="20" value="" maxlength="20" type="text" placeholder="Kode Unik" style="width:50%; margin-bottom: 0;" class="form-control" autocomplete="off">
                             </div>
                             <hr>
                             <button type="submit" class="btn btn-primary btn-lg btn-block" name="submit" value="Login">Login Member&nbsp;&crarr;</button>

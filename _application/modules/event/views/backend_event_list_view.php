@@ -6,7 +6,9 @@
         url: '<?php echo $this->service_module_url; ?>/get_data',
         dataType: 'json',
         colModel: [
-            { display: 'Judul', name: 'event_title', width: 300, sortable: true, align: 'left' },
+            { display: 'Tanggal Event', name: 'event_date', width: 150, sortable: true, align: 'center' },
+            { display: 'Nama Event', name: 'event_title', width: 300, sortable: true, align: 'left' },
+            { display: 'Kota', name: 'event_city', width: 180, sortable: true, align: 'left' },
             { display: 'Tanggal Input', name: 'event_input_datetime', width: 180, sortable: true, align: 'center' },
             { display: 'Aktif', name: 'event_is_active', width: 40, sortable: true, align: 'center' },
             { display: 'Ubah', name: 'edit', width: 40, sortable: false, align: 'center', datasource: false },
@@ -25,7 +27,8 @@
             { display: 'Hapus', name: 'delete', bclass: 'delete', onpress: act_show, urlaction: '<?php echo $this->service_module_url; ?>/act_show' },
         ],
         searchitems: [
-            { display: 'Judul', name: 'event_title', type: 'text', isdefault: true },
+            { display: 'Nama Event', name: 'event_title', type: 'text', isdefault: true },
+            { display: 'Tanggal Event', name: 'event_date', type: 'date' },
             { display: 'Tanggal Input', name: 'event_input_datetime', type: 'date' },
             { display: 'Status Aktif', name: 'event_is_active', type: 'select', option: '1:Aktif|0:Tidak Aktif' },
         ],

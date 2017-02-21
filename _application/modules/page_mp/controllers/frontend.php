@@ -18,7 +18,7 @@ class frontend extends Frontend_Controller {
 
     function index() {
          $data['arr_breadcrumbs'] = array(
-            'Data Marketing Plan' => '#',
+            'Halaman' => '#',
             'Marketing Plan' => '',
         );
         //$data['query'] = $this->function_lib->get_detail_data('site_page_mp', 'page_mp_is_active', '1')->result();

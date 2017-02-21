@@ -33,7 +33,8 @@
                                     </ul>
                                 </div>
                                 <div class="col-md-8">
-                                    <?php if ($row->product_price_member != 0 && $row->product_price_non != 0): ?>
+                                    <?php /*if ($row->product_price_member != 0 && $row->product_price_non != 0):*/ ?>
+                                    <?php if (false): ?>
                                         <h5 class="subtitle"><span>Harga :</span></h5>
                                         <table class="table table-striped table-hovered table-bordered text-center table-harga">
                                             <tbody><tr class="warning">

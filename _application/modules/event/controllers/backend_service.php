@@ -131,6 +131,7 @@ class Backend_service extends Backend_Service_Controller {
                     'event_title' => $row->event_title,
                     'event_city' => $row->event_city,
                     'event_description' => $row->event_description,
+                    'event_date' => date_converter($row->event_date, 'd F Y'),
                     'event_input_datetime' => convert_datetime($row->event_input_datetime, 'id'),
                     'event_image' => $image,
                     'event_is_active' => $is_active,
@@ -210,6 +211,8 @@ class Backend_service extends Backend_Service_Controller {
                 }
 
                 $data['event_image'] = $image_filename;
+            } else {
+                $data['event_image'] = '';
             }
             $this->function_lib->insert_data('site_event', $data);
             

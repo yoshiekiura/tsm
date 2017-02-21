@@ -27,8 +27,8 @@ class Frontend extends Frontend_Controller {
         $this->load->library('pagination');
         
         $data['arr_breadcrumbs'] = array(
-            'Data Berita' => '#',
-            'Berita' => '',
+            'Berita' => '#',
+            'Data Berita' => '',
         );
         //pagination
         $offset = (int) $this->uri->segment(3, 0);
@@ -67,7 +67,7 @@ class Frontend extends Frontend_Controller {
 
     function detail() {
          $data['arr_breadcrumbs'] = array(
-            'Data Berita' => '#',
+            'Berita' => '#',
             'Detail Berita' => '',
         );
         $data['title'] = 'Detail Berita';

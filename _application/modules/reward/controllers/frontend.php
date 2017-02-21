@@ -24,8 +24,8 @@ class frontend extends Frontend_Controller{
     public function show() {
         $data['title'] = 'Data Reward';
         $data['arr_breadcrumbs'] = array(
-            'Data Reward' => '#',
-            'Reward' => '',
+            'Reward' => '#',
+            'Data Reward' => '',
         );
         $data['themes_url'] = 'themes/frontend/' . $this->site_configuration['frontend_themes'];
         $data['data_reward'] = $this->frontend_reward_model->get_reward_active();
@@ -35,7 +35,7 @@ class frontend extends Frontend_Controller{
     public function member($reward_id){        
         $data['title'] = 'Data Penerima Reward';
         $data['arr_breadcrumbs'] = array(
-            'Data Reward' => 'reward',
+            'Reward' => 'reward',
             'Member Qualified' => '',
         );
         $data['themes_url'] = 'themes/frontend/' . $this->site_configuration['frontend_themes'];
