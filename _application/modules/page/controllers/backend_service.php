@@ -159,6 +159,7 @@ class Backend_service extends Backend_Service_Controller {
                 $data['menu_type'] = 'page';
                 $data['menu_order_by'] = $menu_order_by;
                 $data['menu_is_active'] = '1';
+                $data['menu_description'] = '';
                 $this->function_lib->insert_data('site_menu', $data);
             }
 
