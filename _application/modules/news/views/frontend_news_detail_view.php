@@ -8,7 +8,7 @@
             $row = $query->row();
 
             if ($row->news_image != '' && file_exists(_dir_news . $row->news_image)) {
-                $news_image = '<div class="text-center"><a href="' . base_url() . _dir_news . $row->news_image . '" target="_blank"><img src="' . base_url() . 'media/' . _dir_news . '520/520/' . $row->news_image . '" alt="' . $row->news_image . '" title="' . $row->news_title . '" /></a></div><br>';
+                $news_image = '<div class="text-center"><a href="' . base_url() . _dir_news . $row->news_image . '" rel="prettyPhoto[gallery01]"><img src="' . base_url() . 'media/' . _dir_news . '520/520/' . $row->news_image . '" alt="' . $row->news_title . '" title="' . $row->news_title . '" /></a></div><br>';
             } else {
                 $news_image = '';
             }

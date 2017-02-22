@@ -12,6 +12,10 @@
                     } else {
                         $image = '';
                     }
+
+                    $desc_no_html = strip_tags($row_product->product_description);
+                    $pos = (strlen($desc_no_html) > 275) ? strpos($desc_no_html, ' ', 275) : 275;
+                    $preview_text = (strlen($desc_no_html) > 275) ? substr($desc_no_html, 0, $pos) . '...' : $desc_no_html;
                     ?>
                     <div class="col-md-4">
                         <div class="item">
@@ -20,7 +24,7 @@
                                 <?php echo $image ?>
                             </div>
                             <div class="list_text">
-                                <span class="list_excerpt"><?php echo substr(strip_tags($row_product->product_description), 0, strpos(strip_tags($row_product->product_description), ' ', 275)) ?>...</span>
+                                <span class="list_excerpt"><?php echo $preview_text ?></span>
                                 <a href="<?php echo base_url() . 'products/view/' . $row_product->product_id . '/' . url_title($row_product->product_name); ?>" class="btn btn-default btn-sm"><i class="fa fa-ellipsis-v"></i>&nbsp; selengkapnya</a>
                             </div>
                         </div>

@@ -188,6 +188,11 @@ class Backend_service extends Backend_Service_Controller {
                 $height = $size[1];
 
                 if ($width > $this->image_width || $height > $this->image_height) {
+                    if ($width > $height) {
+                        $this->image_height = ($height*$this->image_width)/$width;
+                    } else if ($height > $width) {
+                        $this->image_width = ($width*$this->image_height)/$height;
+                    }
                     $this->image_lib->resizeImage($upload['full_path'], $this->image_width, $this->image_height);
                 }
 
@@ -246,6 +251,11 @@ class Backend_service extends Backend_Service_Controller {
                 $height = $size[1];
 
                 if ($width > $this->image_width || $height > $this->image_height) {
+                    if ($width > $height) {
+                        $this->image_height = ($height*$this->image_width)/$width;
+                    } else if ($height > $width) {
+                        $this->image_width = ($width*$this->image_height)/$height;
+                    }
                     $this->image_lib->resizeImage($upload['full_path'], $this->image_width, $this->image_height);
                     $this->image_lib->cropCenterImage($upload['full_path'], $this->image_width, $this->image_height);
                 }

@@ -30,7 +30,7 @@ class widget_model extends CI_Model {
         $this->db->from('site_news');
         $this->db->join('site_news_category', 'news_category_id=news_news_category_id');
         if ($category_id !== false) {
-            $this->db->where('news_is_active', $category_id);
+            $this->db->where('news_news_category_id', $category_id);
         }
         $this->db->where(array('news_is_active' => '1'));
         $this->db->order_by('news_input_datetime', 'desc');

@@ -6,8 +6,8 @@ if ($query->num_rows() > 0) {
         $image_url = base_url() . _dir_event . $row->event_image;
         $event_image = '<a href="' . base_url() . _dir_event . $row->event_image . '" rel="prettyPhoto[gallery01]"  ><img src="' . base_url() . _dir_event . $row->event_image . '" alt="' . $row->event_image . '" title="' . $row->event_title . '" /></a>';
     } else {
-        $image_url = base_url() . _dir_event . 'no_image.png';
-        $event_image = '<img src="' . base_url() . _dir_event . 'no_image.png' . '"  class="thumbnail">';
+        $image_url = $themes_url . '/uploads/news/mekkah.jpg';
+        $event_image = '<img src="' . $image_url . '"  class="thumbnail">';
     }
 ?>
 <div class="panel panel-default" id="block-event">

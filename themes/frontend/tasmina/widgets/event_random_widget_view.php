@@ -11,8 +11,8 @@
                 $image_url = base_url() . 'media/' . _dir_event . '250/250/' . $row->event_image;
                 $event_image = '<img src="' . base_url() . 'media/' . _dir_event . '250/250/' . $row->event_image . '" alt="' . $row->event_image . '" title="' . $row->event_title . '">';
             } else {
-                $image_url = base_url() . _dir_event . 'no_image.png';
-                $event_image = '<img src="' . base_url() . _dir_event . 'no_image.png' . '" class="thumbnail">';
+                $image_url = base_url() . $themes_url . '/uploads/news/mekkah.jpg';
+                $event_image = '<img src="' . $image_url . '" class="thumbnail">';
             }
             ?>
             <li>
