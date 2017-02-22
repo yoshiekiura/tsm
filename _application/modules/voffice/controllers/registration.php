@@ -210,7 +210,7 @@ class Registration extends Member_Controller {
 
                 //data member detail
                 $arr_member_detail = array();
-                $arr_member_detail['member_detail_email'] = isset($_POST['reg_email']) ? $_POST['reg_email'] : '';
+                // $arr_member_detail['member_detail_email'] = isset($_POST['reg_email']) ? $_POST['reg_email'] : '';
 
                 //data member account
                 $arr_member_account = array();
