@@ -143,14 +143,6 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-md-2">Email</label>
-                        <div class="col-md-10">
-                            <div class="input-group" id="defaultrange">
-                                <input placeholder="Email..." type="text" name="reg_email" id="reg_email" value="<?php echo (isset($this->arr_flashdata['input_reg_email'])) ? $this->arr_flashdata['input_reg_email'] : $reg_email; ?>" maxlength="50" size="40" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label class="control-label col-md-2">No. Handphone <span class="required">*</span></label>
                         <div class="col-md-10">
                             <div class="input-group" id="defaultrange">
