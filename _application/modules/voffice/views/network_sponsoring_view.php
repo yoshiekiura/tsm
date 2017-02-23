@@ -40,7 +40,7 @@
             { display: 'Tanggal', name: 'netgrow_sponsor_date', width: 120, sortable: true, align: 'center' },
         ],
         buttons_right: [
-            { display: 'Export Excel', name: 'excel', bclass: 'excel', onpress: export_data ,url_action:'export_sponsoring_data'},
+            { display: 'Export Excel', name: 'excel', bclass: 'excel', onpress: export_data ,urlaction:'export_sponsoring_data'},
         ],
         searchitems: [
             { display: 'Level', name: 'netgrow_sponsor_level', type: 'text', isdefault: true },
