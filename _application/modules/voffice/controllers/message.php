@@ -112,7 +112,7 @@ class Message extends Member_Controller {
                 'cell' => array(
                     'message_id' => $row->message_id,
                     'network_code' => ($last_message->message_is_read == '0' && $last_message->message_sender_network_id != $this->session->userdata('network_id')) ? '<strong>' . $network_code . '</strong>' : $network_code,
-                    'member_name' => ($last_message->message_is_read == '0' && $last_message->message_sender_network_id != $this->session->userdata('network_id')) ? '<strong>' . $member_name . '</strong>' : $member_name,
+                    'member_name' => ($last_message->message_is_read == '0' && $last_message->message_sender_network_id != $this->session->userdata('network_id')) ? '<strong>' . stripslashes($member_name) . '</strong>' : stripslashes($member_name),
                     'message_subject' => ($last_message->message_is_read == '0' && $last_message->message_sender_network_id != $this->session->userdata('network_id')) ? '<strong>' . $row->message_title . '</strong>' : $row->message_title,
                     'message_input_datetime' => ($last_message->message_is_read == '0' && $last_message->message_sender_network_id != $this->session->userdata('network_id')) ? '<strong>' . convert_datetime($row->message_input_datetime, 'id') . '</strong>' : convert_datetime($row->message_input_datetime, 'id'),
                     'message_is_read' => $is_read,

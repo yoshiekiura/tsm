@@ -30,7 +30,7 @@
         if ($arr_data) {
             extract($arr_data);
             ?>
-            <h4 style="padding:0; margin:0 0 10px 0;"><?php echo $network_code; ?> (<?php echo $member_name; ?>)</h4>
+            <h4 style="padding:0; margin:0 0 10px 0;"><?php echo $network_code; ?> (<?php echo stripslashes($member_name); ?>)</h4>
             <table width="100%" class="table-id">
                 <tr>
                     <td width="110">No. Kontak</td>

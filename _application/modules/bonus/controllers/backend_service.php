@@ -44,7 +44,7 @@ class Backend_service extends Backend_Service_Controller {
                 'cell' => array(
                     'network_id' => $row->network_id,
                     'network_code' => $row->network_code,
-                    'member_name' => $row->member_name,
+                    'member_name' => stripslashes($row->member_name),
                     'member_nickname' => $row->member_nickname,
                     'member_phone' => $row->member_phone,
                     'member_mobilephone' => $row->member_mobilephone,

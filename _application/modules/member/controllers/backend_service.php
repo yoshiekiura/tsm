@@ -110,7 +110,7 @@ class Backend_service extends Backend_Service_Controller {
                     'network_position_text' => $row->network_position_text,
                     'network_total_downline_left' => $this->function_lib->set_number_format($row->network_total_downline_left),
                     'network_total_downline_right' => $this->function_lib->set_number_format($row->network_total_downline_right),
-                    'member_name' => $row->member_name,
+                    'member_name' => stripslashes($row->member_name),
                     'member_nickname' => $row->member_nickname,
                     'member_phone' => $row->member_phone,
                     'member_mobilephone' => $row->member_mobilephone,
@@ -152,13 +152,14 @@ class Backend_service extends Backend_Service_Controller {
         $this->load->library('upload');
         $this->load->library('image_lib');
         $this->form_validation->set_rules('account_username', '<b>Username</b>', 'required|min_length[5]|max_length[15]|callback_username_check[' . $this->input->post('id') . ']');
-        $this->form_validation->set_rules('name', '<b>Nama Lengkap</b>', 'required|callback_validate_name[Nama Lengkap]');
+        $this->form_validation->set_rules('name', '<b>Nama Lengkap</b>', 'required|callback_validate_name');
         // $this->form_validation->set_rules('nickname', '<b>Nama Alias</b>', 'required');
         // $this->form_validation->set_rules('detail_address', '<b>Alamat</b>', 'required');
         $this->form_validation->set_rules('city_id', '<b>Kota / Kabupaten</b>', 'required');
         $this->form_validation->set_rules('detail_sex', '<b>Jenis Kelamin</b>', 'required');
         // $this->form_validation->set_rules('detail_birth_date', '<b>Tanggal Lahir</b>', 'required');
         $this->form_validation->set_rules('mobilephone', '<b>No. Handphone</b>', 'required|callback_validate_phone');
+        $this->form_validation->set_rules('bank_account_name', '<b>Nama Rekening</b>', 'min_length[3]|callback_validate_bank_account_name');
 
         if ($this->form_validation->run($this) == FALSE) {
             $this->session->set_flashdata('confirmation', '<div class="error alert alert-danger">' . validation_errors() . '</div>');
@@ -224,7 +225,7 @@ class Backend_service extends Backend_Service_Controller {
             $member_account_username = $this->input->post('account_username');
             
             $data_member = array();
-            $data_member['member_name'] = $member_name;
+            $data_member['member_name'] = addslashes($member_name);
             $data_member['member_nickname'] = $member_nickname;
             $data_member['member_city_id'] = $member_city_id;
             $data_member['member_country_id'] = $member_country_id;
@@ -247,7 +248,7 @@ class Backend_service extends Backend_Service_Controller {
             $data_member_bank['member_bank_bank_id'] = $member_bank_bank_id;
             $data_member_bank['member_bank_city'] = $member_bank_city;
             $data_member_bank['member_bank_branch'] = $member_bank_branch;
-            $data_member_bank['member_bank_account_name'] = $member_bank_account_name;
+            $data_member_bank['member_bank_account_name'] = addslashes($member_bank_account_name);
             $data_member_bank['member_bank_account_no'] = $member_bank_account_no;
             
             $data_member_devisor = array();
@@ -443,15 +444,36 @@ class Backend_service extends Backend_Service_Controller {
     function validate_name($name, $label='Nama') {
         $is_error = false;
         // validasi karakter (hanya angka dan spasi)
-        if ( ! preg_match("/^[a-zA-Z ]+$/", $name)) {
+        if ( ! preg_match("/^[a-zA-Z .,']+$/", $name)) {
             $is_error = true;
-            $msg = '<b>' . $label . '</b> hanya boleh mengandung karakter huruf dan spasi.';
+            $msg = '<b>Nama Lengkap</b> hanya boleh mengandung karakter huruf, spasi, petik satu, titik dan koma.';
         }
 
         if (!$is_error) {
             return true;
         } else {
             $this->form_validation->set_message('validate_name', $msg);
+            return false;
+        }
+    }
+
+    public function validate_bank_account_name($name) {
+        $is_error = false;
+        // jika kosong
+        if (empty($name) OR $name == '') {
+            return true;
+        }
+
+        // validasi karakter (hanya angka dan spasi)
+        if ( ! preg_match("/^[a-zA-Z .,']+$/", $name)) {
+            $is_error = true;
+            $msg = '<b>Nama Nasabah</b> hanya boleh mengandung karakter huruf, spasi, petik satu, titik dan koma.';
+        }
+
+        if (!$is_error) {
+            return true;
+        } else {
+            $this->form_validation->set_message('validate_bank_account_name', $msg);
             return false;
         }
     }

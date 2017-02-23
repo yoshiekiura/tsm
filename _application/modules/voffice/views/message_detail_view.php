@@ -7,7 +7,7 @@ if(!empty($message_detail)) {
             $information = 'Saya &nbsp;&nbsp;<i class="icon-comment"></i>';
         }
         else {
-            $information = $responder_code . ' / ' . $responder_name;
+            $information = $responder_code . ' / ' . stripslashes($responder_name);
         }
         
         echo '<div class="box-header box-title with-border" style="font-size:11pt; color:#0D638F;">';

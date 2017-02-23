@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+<div class="panel panel-default" id="panel-article">
     <?php if (!empty($title)): ?>
     <div class="panel-heading"><h3><?php echo $title ?></h3></div>
     <?php endif ?>

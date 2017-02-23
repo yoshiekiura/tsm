@@ -191,12 +191,12 @@
                                 echo '<div class="row">';
                                 echo '<div class="col-md-3">';
                                 echo '<div align="center">';
-                                echo '<img class="img-circle img-thumbnail" src="' . base_url() . 'media/' . _dir_member . '75/75/' . $downline_image . '" alt="' . strtoupper($row_downline->member_name) . '" />';
+                                echo '<img class="img-circle img-thumbnail" src="' . base_url() . 'media/' . _dir_member . '75/75/' . $downline_image . '" alt="' . strtoupper(stripslashes($row_downline->member_name)) . '" />';
                                 echo '<span class="badge">' . $i . '</span>';
                                 echo '</div>';
                                 echo '</div>';
                                 echo '<div class="col-md-9">';
-                                echo '<span><strong>(' . $row_downline->network_code . ') ' . strtoupper($row_downline->member_name) . '</strong></span>';
+                                echo '<span><strong>(' . $row_downline->network_code . ') ' . strtoupper(stripslashes($row_downline->member_name)) . '</strong></span>';
                                 echo '<span><strong>Tanggal</strong>: ' . convert_date($row_downline->member_join_datetime) . '</span>';
                                 echo '<span><strong>Sponsor</strong>: (' . $row_downline->sponsor_network_code . ') ' . strtoupper($row_downline->sponsor_member_name) . '</span>';
                                 echo '</div>';

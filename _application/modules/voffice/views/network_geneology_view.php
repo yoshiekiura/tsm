@@ -29,7 +29,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                 echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                 echo '<div class="node-code"><a href="' . base_url() . 'voffice/network/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                 echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                 echo '<div class="node-name">'. $arr_data[$sort]['total_node_left'] . ' | ' . $arr_data[$sort]['total_node_right'] .'</div>';
                 echo '<div class="node-expand"></div>';
             } elseif ($arr_data[$sort]['geneology_status'] == 'empty') {
@@ -51,7 +51,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                     echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                     echo '<div class="node-code"><a href="' . base_url() . 'voffice/network/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                     echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                    echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                    echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                     
                     echo '<div class="node-name">'. $arr_data[$sort]['total_node_left'] . ' | ' . $arr_data[$sort]['total_node_right'] .'</div>';
                     echo '<div class="node-expand"></div>';
@@ -74,7 +74,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                         echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                         echo '<div class="node-code"><a href="' . base_url() . 'voffice/network/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                         echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                        echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                        echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                         
                         echo '<div class="node-name">'. $arr_data[$sort]['total_node_left'] . ' | ' . $arr_data[$sort]['total_node_right'] .'</div>';
                         echo '<div class="node-expand"></div>';
@@ -97,7 +97,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                             echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                             echo '<div class="node-code"><a href="' . base_url() . 'voffice/network/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                             echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                            echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                            echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                             
                             echo '<div class="node-name">'. $arr_data[$sort]['total_node_left'] . ' | ' . $arr_data[$sort]['total_node_right'] .'</div>';
                             echo '<div class="node-expand"></div>';
@@ -120,7 +120,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                             echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                             echo '<div class="node-code"><a href="' . base_url() . 'voffice/network/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                             echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                            echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                            echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                             
                             echo '<div class="node-name">'. $arr_data[$sort]['total_node_left'] . ' | ' . $arr_data[$sort]['total_node_right'] .'</div>';
                             echo '<div class="node-expand"></div>';
@@ -145,7 +145,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                         echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                         echo '<div class="node-code"><a href="' . base_url() . 'voffice/network/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                         echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                        echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                        echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                         
                         echo '<div class="node-name">'. $arr_data[$sort]['total_node_left'] . ' | ' . $arr_data[$sort]['total_node_right'] .'</div>';
                         echo '<div class="node-expand"></div>';
@@ -168,7 +168,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                             echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                             echo '<div class="node-code"><a href="' . base_url() . 'voffice/network/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                             echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                            echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                            echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                             
                             echo '<div class="node-name">'. $arr_data[$sort]['total_node_left'] . ' | ' . $arr_data[$sort]['total_node_right'] .'</div>';
                             echo '<div class="node-expand"></div>';
@@ -191,7 +191,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                             echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                             echo '<div class="node-code"><a href="' . base_url() . 'voffice/network/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                             echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                            echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                            echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                             
                             echo '<div class="node-name">'. $arr_data[$sort]['total_node_left'] . ' | ' . $arr_data[$sort]['total_node_right'] .'</div>';
                             echo '<div class="node-expand"></div>';
@@ -218,7 +218,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                     echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                     echo '<div class="node-code"><a href="' . base_url() . 'voffice/network/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                     echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                    echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                    echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                     
                     echo '<div class="node-name">'. $arr_data[$sort]['total_node_left'] . ' | ' . $arr_data[$sort]['total_node_right'] .'</div>';
                     echo '<div class="node-expand"></div>';
@@ -241,7 +241,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                         echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                         echo '<div class="node-code"><a href="' . base_url() . 'voffice/network/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                         echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                        echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                        echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                         
                         echo '<div class="node-name">'. $arr_data[$sort]['total_node_left'] . ' | ' . $arr_data[$sort]['total_node_right'] .'</div>';
                         echo '<div class="node-expand"></div>';
@@ -264,7 +264,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                             echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                             echo '<div class="node-code"><a href="' . base_url() . 'voffice/network/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                             echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                            echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                            echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                             
                             echo '<div class="node-name">'. $arr_data[$sort]['total_node_left'] . ' | ' . $arr_data[$sort]['total_node_right'] .'</div>';
                             echo '<div class="node-expand"></div>';
@@ -287,7 +287,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                             echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                             echo '<div class="node-code"><a href="' . base_url() . 'voffice/network/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                             echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                            echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                            echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                             
                             echo '<div class="node-name">'. $arr_data[$sort]['total_node_left'] . ' | ' . $arr_data[$sort]['total_node_right'] .'</div>';
                             echo '<div class="node-expand"></div>';
@@ -312,7 +312,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                         echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                         echo '<div class="node-code"><a href="' . base_url() . 'voffice/network/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                         echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                        echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                        echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                         
                         echo '<div class="node-name">'. $arr_data[$sort]['total_node_left'] . ' | ' . $arr_data[$sort]['total_node_right'] .'</div>';
                         echo '<div class="node-expand"></div>';
@@ -335,7 +335,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                             echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                             echo '<div class="node-code"><a href="' . base_url() . 'voffice/network/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                             echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                            echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                            echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                             
                             echo '<div class="node-name">'. $arr_data[$sort]['total_node_left'] . ' | ' . $arr_data[$sort]['total_node_right'] .'</div>';
                             echo '<div class="node-expand"></div>';
@@ -358,7 +358,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                             echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                             echo '<div class="node-code"><a href="' . base_url() . 'voffice/network/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                             echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                            echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                            echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                             
                             echo '<div class="node-name">'. $arr_data[$sort]['total_node_left'] . ' | ' . $arr_data[$sort]['total_node_right'] .'</div>';
                             echo '<div class="node-expand"></div>';

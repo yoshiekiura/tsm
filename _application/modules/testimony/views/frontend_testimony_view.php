@@ -18,7 +18,7 @@
                                         <?php echo $image; ?>
                                     </div>
                                     <p>
-                                        <strong><?php echo $row->testimony_name; ?></strong>
+                                        <strong><?php echo stripslashes($row->testimony_name); ?></strong>
                                     </p>
                                 </div>
                                 <div class="box-right">

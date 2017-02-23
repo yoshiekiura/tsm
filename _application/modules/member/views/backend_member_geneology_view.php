@@ -24,7 +24,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                 echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                 echo '<div class="node-code"><a href="' . base_url() . 'backend/member/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                 echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                 echo '<div class="node-expand"></div>';
             } else {
                 echo '<li class="node-empty node-available">';
@@ -39,7 +39,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                         echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                         echo '<div class="node-code"><a href="' . base_url() . 'backend/member/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                         echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                        echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                        echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                         echo '<div class="node-expand"></div>';
                     } else {
                         echo '<li class="node-empty node-available">';
@@ -54,7 +54,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                                 echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                                 echo '<div class="node-code"><a href="' . base_url() . 'backend/member/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                                 echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                                echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                                echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                                 echo '<div class="node-expand"></div>';
                             } else {
                                 echo '<li class="node-empty node-available">';
@@ -69,7 +69,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                                         echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                                         echo '<div class="node-code"><a href="' . base_url() . 'backend/member/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                                         echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                                        echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                                        echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                                         echo '<div class="node-expand"></div>';
                                     } else {
                                         echo '<li class="node-empty node-available">';
@@ -84,7 +84,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                                         echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                                         echo '<div class="node-code"><a href="' . base_url() . 'backend/member/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                                         echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                                        echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                                        echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                                         echo '<div class="node-expand"></div>';
                                     } else {
                                         echo '<li class="node-empty node-available">';
@@ -101,7 +101,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                                 echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                                 echo '<div class="node-code"><a href="' . base_url() . 'backend/member/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                                 echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                                echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                                echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                                 echo '<div class="node-expand"></div>';
                             } else {
                                 echo '<li class="node-empty node-available">';
@@ -116,7 +116,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                                         echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                                         echo '<div class="node-code"><a href="' . base_url() . 'backend/member/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                                         echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                                        echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                                        echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                                         echo '<div class="node-expand"></div>';
                                     } else {
                                         echo '<li class="node-empty node-available">';
@@ -131,7 +131,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                                         echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                                         echo '<div class="node-code"><a href="' . base_url() . 'backend/member/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                                         echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                                        echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                                        echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                                         echo '<div class="node-expand"></div>';
                                     } else {
                                         echo '<li class="node-empty node-available">';
@@ -150,7 +150,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                         echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                         echo '<div class="node-code"><a href="' . base_url() . 'backend/member/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                         echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                        echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                        echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                         echo '<div class="node-expand"></div>';
                     } else {
                         echo '<li class="node-empty node-available">';
@@ -165,7 +165,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                                 echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                                 echo '<div class="node-code"><a href="' . base_url() . 'backend/member/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                                 echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                                echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                                echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                                 echo '<div class="node-expand"></div>';
                             } else {
                                 echo '<li class="node-empty node-available">';
@@ -180,7 +180,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                                         echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                                         echo '<div class="node-code"><a href="' . base_url() . 'backend/member/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                                         echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                                        echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                                        echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                                         echo '<div class="node-expand"></div>';
                                     } else {
                                         echo '<li class="node-empty node-available">';
@@ -195,7 +195,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                                         echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                                         echo '<div class="node-code"><a href="' . base_url() . 'backend/member/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                                         echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                                        echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                                        echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                                         echo '<div class="node-expand"></div>';
                                     } else {
                                         echo '<li class="node-empty node-available">';
@@ -212,7 +212,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                                 echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                                 echo '<div class="node-code"><a href="' . base_url() . 'backend/member/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                                 echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                                echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                                echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                                 echo '<div class="node-expand"></div>';
                             } else {
                                 echo '<li class="node-empty node-available">';
@@ -227,7 +227,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                                         echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                                         echo '<div class="node-code"><a href="' . base_url() . 'backend/member/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                                         echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                                        echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                                        echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                                         echo '<div class="node-expand"></div>';
                                     } else {
                                         echo '<li class="node-empty node-available">';
@@ -242,7 +242,7 @@ if (!isset($this->arr_flashdata['notfound'])) {
                                         echo '<li class="node-filled" abbr="' . $arr_data[$sort]['network_code'] . '">';
                                         echo '<div class="node-code"><a href="' . base_url() . 'backend/member/geneology/' . $arr_data[$sort]['network_code'] . '">' . $arr_data[$sort]['network_code'] . '</a></div>';
                                         echo '<div class="node-image"><img src="' . $arr_data[$sort]['geneology_image_src'] . '" width="48" height="48" alt="Photo"/></div>';
-                                        echo '<div class="node-name">' . $arr_data[$sort]['member_name'] . '</div>';
+                                        echo '<div class="node-name">' . stripslashes($arr_data[$sort]['member_name']) . '</div>';
                                         echo '<div class="node-expand"></div>';
                                     } else {
                                         echo '<li class="node-empty node-available">';

@@ -69,7 +69,7 @@ if ($query->num_rows() > 0) {
                         <label class="control-label col-md-3">Sponsor</label>
                         <div class="col-md-9">
                             <div class="input-group" id="defaultrange">
-                                <?php echo $row->sponsor_network_code; ?> (<?php echo $row->sponsor_member_name; ?>)
+                                <?php echo $row->sponsor_network_code; ?> (<?php echo stripslashes($row->sponsor_member_name); ?>)
                             </div>
                         </div>
                     </div>
@@ -78,7 +78,7 @@ if ($query->num_rows() > 0) {
                         <label class="control-label col-md-3">Kode Upline</label>
                         <div class="col-md-9">
                             <div class="input-group" id="defaultrange">
-                                <?php echo $row->upline_network_code; ?> (<?php echo $row->upline_member_name; ?>)
+                                <?php echo $row->upline_network_code; ?> (<?php echo stripslashes($row->upline_member_name); ?>)
                             </div>
                         </div>
                     </div>
@@ -123,7 +123,7 @@ if ($query->num_rows() > 0) {
                         <label class="control-label col-md-3">Nama Lengkap</label>
                         <div class="col-md-9">
                             <div class="input-group" id="defaultrange">
-                                <?php echo form_input('name', (isset($this->arr_flashdata['input_name'])) ? $this->arr_flashdata['input_name'] : $row->member_name, 'size="40" class="form-control"'); ?>
+                                <input type="text" name="name" class="form-control" size="40" value="<?php echo (isset($this->arr_flashdata['input_name'])) ? $this->arr_flashdata['input_name'] : stripslashes($row->member_name); ?>">
                             </div>
                         </div>
                     </div>
@@ -308,7 +308,7 @@ if ($query->num_rows() > 0) {
                         <label class="control-label col-md-3">Nama Rekening</label>
                         <div class="col-md-9">
                             <div class="input-group" id="defaultrange">
-                                <?php echo form_input('bank_account_name', (isset($this->arr_flashdata['input_bank_account_name'])) ? $this->arr_flashdata['input_bank_account_name'] : $row->member_bank_account_name, 'size="30" class="form-control"' . (!empty($row->member_bank_account_name) ? ' disabled="disabled"' : '')); ?>
+                                <input type="text" name="bank_account_name" class="form-control" size="40" value="<?php echo (isset($this->arr_flashdata['input_bank_account_name'])) ? $this->arr_flashdata['input_bank_account_name'] : stripslashes($row->member_bank_account_name); ?>" <?php echo (!empty($row->member_bank_account_name) ? ' disabled="disabled"' : '') ?>>
                             </div>
                         </div>
                     </div>
@@ -377,7 +377,7 @@ if ($query->num_rows() > 0) {
                         <label class="control-label col-md-3">PIN Serial</label>
                         <div class="col-md-9">
                             <div class="input-group" id="defaultrange">
-                                <?php echo form_input('validate_pin', (isset($this->arr_flashdata['input_validate_pin'])) ? $this->arr_flashdata['input_validate_pin'] : '', 'size="30" class="form-control"'); ?>
+                                <?php echo form_input('validate_pin', (isset($this->arr_flashdata['input_validate_pin'])) ? $this->arr_flashdata['input_validate_pin'] : '', 'size="30" class="form-control" required="required"'); ?>
                             </div>
                         </div>
                     </div>

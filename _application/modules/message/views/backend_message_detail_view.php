@@ -7,11 +7,11 @@ if(!empty($message_detail)) {
     foreach($message_detail as $row) {
         if($row->message_sender_network_id == $parent_sender_network_id){
             $style = 'style="text-align:right !important;"';
-            $information = $parent_sender_network_code . ' / ' . $parent_sender_member_name;
+            $information = $parent_sender_network_code . ' / ' . stripslashes($parent_sender_member_name);
         }
         else {
             $style = 'style="text-align:left !important;"';
-            $information = $parent_receiver_network_code . ' / ' . $parent_receiver_member_name;
+            $information = $parent_receiver_network_code . ' / ' . stripslashes($parent_receiver_member_name);
         }
         
         echo '<div class="box-title" style="font-size:11pt; color:#0D638F;">';

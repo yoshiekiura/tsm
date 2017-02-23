@@ -366,7 +366,7 @@ class Backend_service extends Backend_Service_Controller {
                 'cell' => array(
                     'no' => $page++,
                     'network_code' => $row->network_code,
-                    'member_name' => $row->member_name,
+                    'member_name' => stripslashes($row->member_name),
                     'reward_cond_node_left' => $this->function_lib->set_number_format($row->reward_cond_node_left),
                     'reward_cond_node_right' => $this->function_lib->set_number_format($row->reward_cond_node_right),
                     'reward_qualified_condition_node_left' => $this->function_lib->set_number_format($row->reward_qualified_condition_node_left),
@@ -407,7 +407,7 @@ class Backend_service extends Backend_Service_Controller {
                 'cell' => array(
                     'reward_qualified_id' => $row->reward_qualified_id,
                     'network_code' => $row->network_code,
-                    'member_name' => $row->member_name,
+                    'member_name' => stripslashes($row->member_name),
                     'reward_qualified_reward_bonus' => $row->reward_qualified_reward_bonus,
                     'member_mobilephone' => $row->member_mobilephone,
                     'reward_qualified_date' => convert_date($row->reward_qualified_date, 'id'),
@@ -509,7 +509,7 @@ class Backend_service extends Backend_Service_Controller {
                         if (!isset($row->$value)) {
                             $data = '';
                         } else {
-                            $data = $row->$value;
+                            $data = stripslashes($row->$value);
                         }
                         $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->getAlignment()->setHorizontal($arr_column_align[$id]);
                         $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->applyFromArray($arr_style_content);

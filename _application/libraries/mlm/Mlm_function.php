@@ -464,7 +464,7 @@ class mlm_function {
                     $network_level = 0;
                 }
                 $tree .= '<li>';
-                $tree .= '<span>&nbsp;Lv ' . $network_level . $separator_1 . $row_top_network->network_code . $separator_1 . $row_top_network->member_name . '</span>';
+                $tree .= '<span>&nbsp;Lv ' . $network_level . $separator_1 . $row_top_network->network_code . $separator_1 . stripslashes($row_top_network->member_name) . '</span>';
                 $tree .= $this->generate_geneology_tree($root_network_id, $row_top_network->network_id, $level_depth, $year, $month, 1);
                 $tree .= '</li>';
             }
@@ -486,7 +486,7 @@ class mlm_function {
                     }
                     $downline_check = $this->CI->function_lib->get_one('sys_network', 'network_id', array('network_upline_network_id' => $row->network_id));
                     
-                    $row_data = '&nbsp;Lv ' . $network_level . $separator_1 . $row->network_position . $separator_1 . $row->network_code . $separator_1 . $row->member_name . '';
+                    $row_data = '&nbsp;Lv ' . $network_level . $separator_1 . $row->network_position . $separator_1 . $row->network_code . $separator_1 . stripslashes($row->member_name) . '';
                     
                     $has_downline = 0;
                     if($network_level == $level_depth) {

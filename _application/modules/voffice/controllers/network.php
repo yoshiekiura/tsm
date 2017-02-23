@@ -171,7 +171,7 @@ class Network extends Member_Controller {
                     'downline_network_code' => $row->downline_network_code,
                     'downline_frontline_left_network_code' => $row->downline_frontline_left_network_code,
                     'downline_frontline_right_network_code' => $row->downline_frontline_right_network_code,
-                    'downline_member_name' => $row->downline_member_name,
+                    'downline_member_name' => stripslashes($row->downline_member_name),
                     'downline_member_nickname' => $row->downline_member_nickname,
                     'downline_member_phone' => $row->downline_member_phone,
                     'downline_member_mobilephone' => $row->downline_member_mobilephone,
@@ -248,7 +248,7 @@ class Network extends Member_Controller {
                     'downline_network_code' => $row->downline_network_code,
                     'downline_frontline_left_network_code' => $row->downline_frontline_left_network_code,
                     'downline_frontline_right_network_code' => $row->downline_frontline_right_network_code,
-                    'downline_member_name' => $row->downline_member_name,
+                    'downline_member_name' => stripslashes($row->downline_member_name),
                     'downline_member_nickname' => $row->downline_member_nickname,
                     'downline_member_phone' => $row->downline_member_phone,
                     'downline_member_mobilephone' => $row->downline_member_mobilephone,
@@ -763,7 +763,7 @@ class Network extends Member_Controller {
         $data['root_network_id'] = $root_network_id;
         $data['top_network_id'] = $top_network_id;
         $data['top_network_code'] = $top_network_code;
-        $data['top_member_name'] = $this->mlm_function->get_member_name($top_network_id);
+        $data['top_member_name'] = stripslashes($this->mlm_function->get_member_name($top_network_id));
         $data['search_top_network_code'] = $search_top_network_code;
         $data['omzet_year'] = $omzet_year;
         $data['omzet_month'] = $omzet_month;
@@ -818,7 +818,7 @@ class Network extends Member_Controller {
                 }
                 $downline_check = $this->function_lib->get_one('sys_network', 'network_id', array('network_upline_network_id' => $row->network_id));
 
-                $row_data = '&nbsp;Lv ' . $network_level . $separator_1 . $row->network_position . $separator_1 . $row->network_code . $separator_1 . $row->member_name . '';
+                $row_data = '&nbsp;Lv ' . $network_level . $separator_1 . $row->network_position . $separator_1 . $row->network_code . $separator_1 . stripslashes($row->member_name) . '';
                 $has_downline = $this->mlm_function->check_has_downline($row->network_id);
                 $has_downline_label = ($has_downline > 0) ? '<a href="javascript:void(0)" onclick="get_downline($(this), ' . $root_network_id . ', ' . $row->network_id . ', ' . $year . ', ' . $month . '); return false;" title="Expand">[+]</a> ' : '';
 

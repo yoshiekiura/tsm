@@ -268,17 +268,17 @@
                             <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="<?php echo base_url() . 'media/' . _dir_member . '160/160/' . $profile_image; ?>" class="user-image" alt="<?php echo $this->session->userdata('member_name'); ?>">
-                                    <span class="hidden-xs"><?php echo $this->session->userdata('network_code'); ?> &middot; <?php echo $this->session->userdata('member_name'); ?></span>
+                                    <img src="<?php echo base_url() . 'media/' . _dir_member . '160/160/' . $profile_image; ?>" class="user-image" alt="<?php echo stripslashes($this->session->userdata('member_name')); ?>">
+                                    <span class="hidden-xs"><?php echo $this->session->userdata('network_code'); ?> &middot; <?php echo stripslashes($this->session->userdata('member_name')); ?></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
                                     <li class="user-header">
-                                        <img src="<?php echo base_url() . 'media/' . _dir_member . '160/160/' . $profile_image; ?>" class="img-circle" alt="<?php echo $this->session->userdata('member_name'); ?>">
+                                        <img src="<?php echo base_url() . 'media/' . _dir_member . '160/160/' . $profile_image; ?>" class="img-circle" alt="<?php echo stripslashes($this->session->userdata('member_name')); ?>">
 
                                         <p>
                                             <?php echo $this->session->userdata('network_code'); ?>
-                                            <small><?php echo $this->session->userdata('member_name'); ?></small>
+                                            <small><?php echo stripslashes($this->session->userdata('member_name')); ?></small>
                                         </p>
                                     </li>
                                     <!-- Menu Footer-->
@@ -303,11 +303,11 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <img src="<?php echo base_url() . 'media/' . _dir_member . '160/160/' . $profile_image; ?>" class="img-circle" alt="<?php echo $this->session->userdata('member_name'); ?>">
+                            <img src="<?php echo base_url() . 'media/' . _dir_member . '160/160/' . $profile_image; ?>" class="img-circle" alt="<?php echo stripslashes($this->session->userdata('member_name')); ?>">
                         </div>
                         <div class="pull-left info">
                             <p><?php echo $this->session->userdata('network_code'); ?></p>
-                            <?php echo $this->session->userdata('member_name'); ?>
+                            <?php echo stripslashes($this->session->userdata('member_name')); ?>
                         </div>
                     </div>
                     

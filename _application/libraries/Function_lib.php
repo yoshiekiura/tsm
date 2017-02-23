@@ -657,7 +657,7 @@ class Function_lib {
                             if(!isset($row->$value)) {
                                 $data = '';
                             } else {
-                                $data = $row->$value;
+                                $data = stripslashes($row->$value);
                             }
                             $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->getAlignment()->setHorizontal($arr_column_align[$id]);
                             $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->applyFromArray($arr_style_content);

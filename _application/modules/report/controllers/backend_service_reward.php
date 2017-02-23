@@ -54,7 +54,7 @@ class Backend_service_reward extends Backend_Controller {
                 'cell' => array(
                     'no' => $num++,
                     'network_code' => $row->network_code,
-                    'member_name' => $row->member_name,
+                    'member_name' => stripslashes($row->member_name),
                     'reward_cond_node_left' => $this->function_lib->set_number_format($row->reward_cond_node_left),
                     'reward_cond_node_right' => $this->function_lib->set_number_format($row->reward_cond_node_right),
                     'reward_qualified_condition_node_left' => $this->function_lib->set_number_format($row->reward_qualified_condition_node_left),

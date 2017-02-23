@@ -60,7 +60,7 @@
                     echo '
                         <tr>
                         <td>'.$nomer.'</td>
-                        <td>'.$list_member->member_name.'</td>
+                        <td>'.stripslashes($list_member->member_name).'</td>
                         <td>'.convert_date($list_member->tanggal_claim, 'id').'</td>
                     </tr>';
                     $no++;

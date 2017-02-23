@@ -136,7 +136,7 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
                         <label class="control-label col-md-2">Nama Lengkap <span class="required">*</span></label>
                         <div class="col-md-10">
                             <div class="input-group" id="defaultrange">
-                                <input placeholder="Nama Lengkap..." type="text" disabled="disabled" name="reg_nama" id="reg_nama" value="<?php echo (isset($this->arr_flashdata['input_reg_nama'])) ? $this->arr_flashdata['input_reg_nama'] : $reg_nama; ?>" class="form-control" size="60" /><br><small>sesuaikan dengan rekening anda</small>
+                                <input placeholder="Nama Lengkap..." type="text" disabled="disabled" name="reg_nama" id="reg_nama" value="<?php echo stripslashes($reg_nama); ?>" class="form-control" size="60" /><br><small>sesuaikan dengan rekening anda</small>
                                 <input type="hidden" name="reg_nama" value="<?php echo $reg_nama; ?>"/>
                             </div>
                         </div>
@@ -177,7 +177,7 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
                         <label class="control-label col-md-2">Nama Nasabah</label>
                         <div class="col-md-10">
                             <div class="input-group" id="defaultrange">
-                                <input placeholder="Nama Nasabah..." type="text" disabled="disabled" name="reg_nasabah_bank" id="reg_nasabah_bank" value="<?php echo (isset($this->arr_flashdata['input_reg_nasabah_bank'])) ? $this->arr_flashdata['input_reg_nasabah_bank'] : $reg_nasabah_bank; ?>" size="60" class="form-control" />
+                                <input placeholder="Nama Nasabah..." type="text" disabled="disabled" name="reg_nasabah_bank" id="reg_nasabah_bank" value="<?php echo stripslashes($reg_nasabah_bank); ?>" size="60" class="form-control" />
                                 <input type="hidden" name="reg_nasabah_bank" value="<?php echo $reg_nasabah_bank; ?>" />
                             </div>
                         </div>

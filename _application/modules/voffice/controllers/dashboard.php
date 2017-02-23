@@ -29,15 +29,15 @@ class Dashboard extends Member_Controller {
         // status jaringan
         $network_id = $this->session->userdata('network_id');
         $data['network_code'] = $this->session->userdata('network_code');
-        $data['member_name'] = $this->session->userdata('member_name');
+        $data['member_name'] = stripslashes($this->session->userdata('member_name'));
         $data['member_nickname'] = $this->session->userdata('member_nickname');
         $data['member_last_login'] = $this->session->userdata('member_last_login');
         $sponsor_id = $this->mlm_function->get_sponsor_network_id($network_id);
         $data['sponsor_code'] = $this->mlm_function->get_network_code($sponsor_id);
-        $data['sponsor_name'] = $this->mlm_function->get_member_name($sponsor_id);
+        $data['sponsor_name'] = stripslashes($this->mlm_function->get_member_name($sponsor_id));
         $upline_id = $this->mlm_function->get_upline_network_id($network_id);
         $data['upline_code'] = $this->mlm_function->get_network_code($upline_id);
-        $data['upline_name'] = $this->mlm_function->get_member_name($upline_id);
+        $data['upline_name'] = stripslashes($this->mlm_function->get_member_name($upline_id));
         $member_position = $this->function_lib->get_one('sys_network', 'network_position', array('network_id'=>$network_id));
         $data['member_position'] = $member_position == 'L' ? 'Kiri' : 'Kanan';
         $data['member_join_datetime'] = $this->function_lib->get_one('sys_member', 'member_join_datetime', array('member_network_id'=>$network_id));

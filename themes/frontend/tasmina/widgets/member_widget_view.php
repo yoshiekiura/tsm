@@ -17,10 +17,10 @@
                 <li>
                     <div class="badge badge-success"><?php echo $i++; ?></div>
                     <div class="member_img">
-                        <img src="<?php echo $image_url;?>" alt="<?php echo $row->member_name; ?>">
+                        <img src="<?php echo $image_url;?>" alt="<?php echo stripslashes($row->member_name); ?>">
                     </div>
                     <div class="member_id">
-                        <h4><?php echo $row->member_name; ?> (<?php echo $row->network_code; ?>)</h4>
+                        <h4><?php echo stripslashes($row->member_name); ?> (<?php echo $row->network_code; ?>)</h4>
                         <span><?php echo convert_date($row->member_join_datetime,'id'); ?></span>
                     </div>
                 </li>
@@ -71,10 +71,10 @@
                 <li>
                     <div class="badge badge-success"><?php echo $i++; ?></div>
                     <div class="member_img">
-                        <img src="<?php echo $image_url;?>" alt="<?php echo $row->member_name; ?>">
+                        <img src="<?php echo $image_url;?>" alt="<?php echo stripslashes($row->member_name); ?>">
                     </div>
                     <div class="member_id">
-                        <h4><?php echo $row->member_name; ?> (<?php echo $row->network_code; ?>)</h4>
+                        <h4><?php echo stripslashes($row->member_name); ?> (<?php echo $row->network_code; ?>)</h4>
                         <!-- <span><?php echo $this->function_lib->set_number_format($row->total_bonus); ?></span> -->
                         <span>-</span>
                     </div>
@@ -125,10 +125,10 @@
                 <li>
                     <div class="badge badge-success"><?php echo $i++; ?></div>
                     <div class="member_img">
-                        <img src="<?php echo $image_url;?>" alt="<?php echo $row->member_name; ?>">
+                        <img src="<?php echo $image_url;?>" alt="<?php echo stripslashes($row->member_name); ?>">
                     </div>
                     <div class="member_id">
-                        <h4><?php echo $row->member_name; ?> (<?php echo $this->mlm_function->get_network_code($row->network_sponsor_network_id); ?>)</h4>
+                        <h4><?php echo stripslashes($row->member_name); ?> (<?php echo $this->mlm_function->get_network_code($row->network_sponsor_network_id); ?>)</h4>
                         <span><?php echo convert_date($row->member_join_datetime,'id'); ?></span>
                     </div>
                 </li>
@@ -179,10 +179,10 @@
                 <li>
                     <div class="badge badge-success"><?php echo $i++; ?></div>
                     <div class="member_img">
-                        <img src="<?php echo $image_url;?>" alt="<?php echo $row->member_name; ?>">
+                        <img src="<?php echo $image_url;?>" alt="<?php echo stripslashes($row->member_name); ?>">
                     </div>
                     <div class="member_id">
-                        <h4><?php echo $row->member_name; ?> (<?php echo $row->network_code; ?>)</h4>
+                        <h4><?php echo stripslashes($row->member_name); ?> (<?php echo $row->network_code; ?>)</h4>
                         <span><?php echo $row->reward_qualified_reward_bonus; ?></span>
                     </div>
                 </li>

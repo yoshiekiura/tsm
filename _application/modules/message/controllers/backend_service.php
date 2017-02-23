@@ -92,9 +92,9 @@ class Backend_service extends Backend_Service_Controller {
                 'cell' => array(
                     'message_id' => $row->message_id,
                     'sender_network_code' => ($last_message->message_is_read == '0' && $last_message->message_par_id != '0') ? '<strong>' . $row->sender_network_code . '</strong>' : $row->sender_network_code,
-                    'sender_member_name' => ($last_message->message_is_read == '0' && $last_message->message_par_id != '0') ? '<strong>' . $row->sender_member_name . '</strong>' : $row->sender_member_name,
+                    'sender_member_name' => ($last_message->message_is_read == '0' && $last_message->message_par_id != '0') ? '<strong>' . stripslashes($row->sender_member_name) . '</strong>' : stripslashes($row->sender_member_name),
                     'receiver_network_code' => ($last_message->message_is_read == '0' && $last_message->message_par_id != '0') ? '<strong>' . $row->receiver_network_code . '</strong>' : $row->receiver_network_code,
-                    'receiver_member_name' => ($last_message->message_is_read == '0' && $last_message->message_par_id != '0') ? '<strong>' . $row->receiver_member_name . '</strong>' : $row->receiver_member_name,
+                    'receiver_member_name' => ($last_message->message_is_read == '0' && $last_message->message_par_id != '0') ? '<strong>' . stripslashes($row->receiver_member_name) . '</strong>' : stripslashes($row->receiver_member_name),
                     'message_subject' => ($last_message->message_is_read == '0' && $last_message->message_par_id != '0') ? '<strong>' . $row->message_title . '</strong>' : $row->message_title,
                     'message_input_datetime' => ($last_message->message_is_read == '0' && $last_message->message_par_id != '0') ? '<strong>' . convert_datetime($row->message_input_datetime, 'id') . '</strong>' : convert_datetime($row->message_input_datetime, 'id'),
                     'message_is_read' => $is_read,

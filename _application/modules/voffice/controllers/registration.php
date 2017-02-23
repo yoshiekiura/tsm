@@ -543,7 +543,7 @@ class Registration extends Member_Controller {
         if ($this->input->post('code')) {
             $member_name = $this->mlm_function->get_member_name_by_network_code($this->input->post('code'));
         }
-        echo json_encode($member_name);
+        echo json_encode(stripslashes($member_name));
     }
 
     public function validate_bank_account($rek) {

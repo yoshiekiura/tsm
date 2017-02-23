@@ -105,7 +105,7 @@ class Backend extends Backend_Controller {
                     'network_position_text' => $row->network_position_text,
                     'network_total_downline_left' => $this->function_lib->set_number_format($row->network_total_downline_left),
                     'network_total_downline_right' => $this->function_lib->set_number_format($row->network_total_downline_right),
-                    'member_name' => $row->member_name,
+                    'member_name' => stripslashes($row->member_name),
                     'member_nickname' => $row->member_nickname,
                     'member_phone' => $row->member_phone,
                     'member_mobilephone' => $row->member_mobilephone,
@@ -118,7 +118,7 @@ class Backend extends Backend_Controller {
                     'member_bank_name' => $row->member_bank_name,
                     'member_bank_city' => $row->member_bank_city,
                     'member_bank_branch' => $row->member_bank_branch,
-                    'member_bank_account_name' => $row->member_bank_account_name,
+                    'member_bank_account_name' => stripslashes($row->member_bank_account_name),
                     'member_bank_account_no' => $row->member_bank_account_no,
                     'member_serial_id' => $row->member_serial_id,
                     'member_serial_pin' => $row->member_serial_pin,
@@ -226,13 +226,13 @@ class Backend extends Backend_Controller {
                     'activation_administrator_name' => $row->activation_administrator_name, 
                     'serial_buyer_datetime' => convert_datetime($row->serial_buyer_datetime, 'id'),
                     'buyer_network_code' => $row->buyer_network_code,
-                    'buyer_member_name' => $row->buyer_member_name,
+                    'buyer_member_name' => stripslashes($row->buyer_member_name),
                     'buyer_member_nickname' => $row->buyer_member_nickname,
                     'buyer_member_phone' => $row->buyer_member_phone,
                     'buyer_member_mobilephone' => $row->buyer_member_mobilephone,
                     'serial_user_datetime' => convert_datetime($row->serial_user_datetime, 'id'),
                     'user_network_code' => $row->user_network_code,
-                    'user_member_name' => $row->user_member_name,
+                    'user_member_name' => stripslashes($row->user_member_name),
                     'user_member_nickname' => $row->user_member_nickname,
                     'user_member_phone' => $row->user_member_phone,
                     'user_member_mobilephone' => $row->user_member_mobilephone,
@@ -534,7 +534,7 @@ class Backend extends Backend_Controller {
                     
                     $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->getAlignment()->setHorizontal('left');
                     $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->applyFromArray($arr_style_content);
-                    $excel->setActiveSheetIndex(0)->setCellValueExplicit($cell_column . $cell_row, strtoupper($row->member_name), PHPExcel_Cell_DataType::TYPE_STRING);
+                    $excel->setActiveSheetIndex(0)->setCellValueExplicit($cell_column . $cell_row, strtoupper(stripslashes($row->member_name)), PHPExcel_Cell_DataType::TYPE_STRING);
                     $cell_column++;
                     
                     $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->getAlignment()->setHorizontal('left');
@@ -559,7 +559,7 @@ class Backend extends Backend_Controller {
                     
                     $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->getAlignment()->setHorizontal('left');
                     $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->applyFromArray($arr_style_content);
-                    $excel->setActiveSheetIndex(0)->setCellValueExplicit($cell_column . $cell_row, strtoupper($row->bonus_transfer_bank_account_name), PHPExcel_Cell_DataType::TYPE_STRING);
+                    $excel->setActiveSheetIndex(0)->setCellValueExplicit($cell_column . $cell_row, strtoupper(stripslashes($row->bonus_transfer_bank_account_name)), PHPExcel_Cell_DataType::TYPE_STRING);
                     $cell_column++;
                     
                     $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->getAlignment()->setHorizontal('left');

@@ -44,7 +44,7 @@ if ($query->num_rows() > 0) {
                         <label class="control-label col-md-3">Sponsor</label>
                         <div class="col-md-6">
                             <div class="input-group" id="defaultrange">
-                                <?php echo $row->sponsor_network_code; ?> (<?php echo $row->sponsor_member_name; ?>)
+                                <?php echo $row->sponsor_network_code; ?> (<?php echo stripslashes($row->sponsor_member_name); ?>)
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@ if ($query->num_rows() > 0) {
                         <label class="control-label col-md-3">Kode Upline</label>
                         <div class="col-md-6">
                             <div class="input-group" id="defaultrange">
-                                <?php echo $row->upline_network_code; ?> (<?php echo $row->upline_member_name; ?>)
+                                <?php echo $row->upline_network_code; ?> (<?php echo stripslashes($row->upline_member_name); ?>)
                             </div>
                         </div>
                     </div>
@@ -106,7 +106,7 @@ if ($query->num_rows() > 0) {
                         <label class="control-label col-md-3">Nama Lengkap</label>
                         <div class="col-md-6">
                             <div class="input-group" id="defaultrange">
-                                <?php echo ($row->member_name != '') ? $row->member_name : '-'; ?>
+                                <?php echo ($row->member_name != '') ? stripslashes($row->member_name) : '-'; ?>
                             </div>
                         </div>
                     </div>
@@ -267,7 +267,7 @@ if ($query->num_rows() > 0) {
                         <label class="control-label col-md-3">Nama Rekening</label>
                         <div class="col-md-6">
                             <div class="input-group" id="defaultrange">
-                                <?php echo ($row->member_bank_account_name != '') ? $row->member_bank_account_name : '-'; ?>
+                                <?php echo ($row->member_bank_account_name != '') ? stripslashes($row->member_bank_account_name) : '-'; ?>
                             </div>
                         </div>
                     </div>

@@ -31,7 +31,7 @@
             extract($arr_data);
             ?>
             <div style="border-bottom:1px solid #e3b015;">
-                <h4 style="padding:0; margin:0 0 7px 0;"><strong><?php echo $network_code; ?> (<?php echo $member_name; ?>)</strong></h4>
+                <h4 style="padding:0; margin:0 0 7px 0;"><strong><?php echo $network_code; ?> (<?php echo stripslashes($member_name); ?>)</strong></h4>
             </div>
             <table width="100%" class="table-id">
                 <tr>

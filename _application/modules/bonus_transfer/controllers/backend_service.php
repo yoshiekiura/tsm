@@ -218,7 +218,7 @@ class Backend_service extends Backend_Service_Controller {
                 'cell' => array(
                     'network_id' => $row->network_id,
                     'network_code' => $row->network_code,
-                    'member_name' => $row->member_name,
+                    'member_name' => stripslashes($row->member_name),
                     'member_nickname' => $row->member_nickname,
                     'member_phone' => $row->member_phone,
                     'member_mobilephone' => $row->member_mobilephone,
@@ -226,7 +226,7 @@ class Backend_service extends Backend_Service_Controller {
                     'member_bank_name' => $row->member_bank_name,
                     'member_bank_city' => $row->member_bank_city,
                     'member_bank_branch' => $row->member_bank_branch,
-                    'member_bank_account_name' => $row->member_bank_account_name,
+                    'member_bank_account_name' => stripslashes($row->member_bank_account_name),
                     'member_bank_account_no' => $row->member_bank_account_no,
                     'bonus_total' => $this->function_lib->set_number_format($row->bonus_total),
                     'adm_charge' => $this->function_lib->set_number_format($row->adm_charge),
@@ -623,7 +623,7 @@ class Backend_service extends Backend_Service_Controller {
                     
                     $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->getAlignment()->setHorizontal('left');
                     $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->applyFromArray($arr_style_content);
-                    $excel->setActiveSheetIndex(0)->setCellValueExplicit($cell_column . $cell_row, strtoupper($row->member_name), PHPExcel_Cell_DataType::TYPE_STRING);
+                    $excel->setActiveSheetIndex(0)->setCellValueExplicit($cell_column . $cell_row, strtoupper(stripslashes($row->member_name)), PHPExcel_Cell_DataType::TYPE_STRING);
                     $cell_column++;
                     
                     $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->getAlignment()->setHorizontal('left');
@@ -633,7 +633,7 @@ class Backend_service extends Backend_Service_Controller {
                     
                     $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->getAlignment()->setHorizontal('left');
                     $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->applyFromArray($arr_style_content);
-                    $excel->setActiveSheetIndex(0)->setCellValueExplicit($cell_column . $cell_row, strtoupper($row->bonus_transfer_bank_name), PHPExcel_Cell_DataType::TYPE_STRING);
+                    $excel->setActiveSheetIndex(0)->setCellValueExplicit($cell_column . $cell_row, strtoupper(stripslashes($row->bonus_transfer_bank_name)), PHPExcel_Cell_DataType::TYPE_STRING);
                     $cell_column++;
                     
                     $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->getAlignment()->setHorizontal('left');
@@ -931,7 +931,7 @@ class Backend_service extends Backend_Service_Controller {
                     
                     $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->getAlignment()->setHorizontal('left');
                     $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->applyFromArray($arr_style_content);
-                    $excel->setActiveSheetIndex(0)->setCellValueExplicit($cell_column . $cell_row, strtoupper($row->member_name), PHPExcel_Cell_DataType::TYPE_STRING);
+                    $excel->setActiveSheetIndex(0)->setCellValueExplicit($cell_column . $cell_row, strtoupper(stripslashes($row->member_name)), PHPExcel_Cell_DataType::TYPE_STRING);
                     $cell_column++;
                     
                     $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->getAlignment()->setHorizontal('left');
@@ -956,7 +956,7 @@ class Backend_service extends Backend_Service_Controller {
                     
                     $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->getAlignment()->setHorizontal('left');
                     $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->applyFromArray($arr_style_content);
-                    $excel->setActiveSheetIndex(0)->setCellValueExplicit($cell_column . $cell_row, strtoupper($row->bonus_transfer_bank_account_name), PHPExcel_Cell_DataType::TYPE_STRING);
+                    $excel->setActiveSheetIndex(0)->setCellValueExplicit($cell_column . $cell_row, strtoupper(stripslashes($row->bonus_transfer_bank_account_name)), PHPExcel_Cell_DataType::TYPE_STRING);
                     $cell_column++;
                     
                     $excel->getActiveSheet()->getStyle($cell_column . $cell_row)->getAlignment()->setHorizontal('left');
