@@ -28,10 +28,9 @@ class Registration extends Member_Controller {
         $this->load->library('mlm/binary/netgrow_match', null, 'netgrow_match');
         $this->load->library('mlm/binary/netgrow_level_match', null, 'netgrow_level_match');
 
-        $this->load->library(array('encrypt', 'payment_lib'));
+        $this->load->library(array('encrypt'));
         $this->config->load('key');
 
-        $this->payment_registration = TRUE;
     }
 
     public function index() {
@@ -168,6 +167,11 @@ class Registration extends Member_Controller {
                     'label' => 'Nomor Rekening',
                     'rules' => 'required|min_length[8]|numeric|callback_validate_bank_account'
                     ),
+                array(
+                    'field' => 'reg_nasabah_bank',
+                    'label' => 'Nama Nasabah',
+                    'rules' => 'min_length[3]|callback_validate_bank_account_name'
+                    ),
                 );
 
             if ($this->input->post('reg_paket')) {
@@ -218,7 +222,7 @@ class Registration extends Member_Controller {
                 //data bank
                 $arr_member_bank = array();
                 $arr_member_bank['member_bank_bank_id'] = $_POST['reg_id_bank'];
-                $arr_member_bank['member_bank_account_name'] = $_POST['reg_nasabah_bank'];
+                $arr_member_bank['member_bank_account_name'] = addslashes($_POST['reg_nasabah_bank']);
                 $arr_member_bank['member_bank_account_no'] = $_POST['reg_no_rekening_bank'];
 
                 //data devisor (pewaris)
@@ -606,15 +610,36 @@ class Registration extends Member_Controller {
     public function validate_name($name) {
         $is_error = false;
         // validasi karakter (hanya angka dan spasi)
-        if ( ! preg_match("/^[a-zA-Z ]+$/", $name)) {
+        if ( ! preg_match("/^[a-zA-Z .,']+$/", $name)) {
             $is_error = true;
-            $msg = 'Nama hanya boleh mengandung karakter huruf dan spasi.';
+            $msg = 'Nama hanya boleh mengandung karakter huruf, spasi, petik satu, titik dan koma.';
         }
 
         if (!$is_error) {
             return true;
         } else {
             $this->form_validation->set_message('validate_name', $msg);
+            return false;
+        }
+    }
+
+    public function validate_bank_account_name($name) {
+        $is_error = false;
+        // jika kosong
+        if (empty($name) OR $name == '') {
+            return true;
+        }
+
+        // validasi karakter (hanya angka dan spasi)
+        if ( ! preg_match("/^[a-zA-Z .,']+$/", $name)) {
+            $is_error = true;
+            $msg = 'Nama Nasabah hanya boleh mengandung karakter huruf, spasi, petik satu, titik dan koma.';
+        }
+
+        if (!$is_error) {
+            return true;
+        } else {
+            $this->form_validation->set_message('validate_bank_account_name', $msg);
             return false;
         }
     }
