@@ -41,6 +41,8 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+        <link rel="shortcut icon" href="<?php echo $themes_url; ?>/images/favicon.ico" />
         
         <!-- jQuery 2.2.0 -->
         <script src="<?php echo $themes_url; ?>/plugins/jQuery/jQuery-2.2.0.min.js"></script>
