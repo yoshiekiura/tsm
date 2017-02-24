@@ -198,7 +198,7 @@
                                 echo '<div class="col-md-9">';
                                 echo '<span><strong>(' . $row_downline->network_code . ') ' . strtoupper(stripslashes($row_downline->member_name)) . '</strong></span>';
                                 echo '<span><strong>Tanggal</strong>: ' . convert_date($row_downline->member_join_datetime) . '</span>';
-                                echo '<span><strong>Sponsor</strong>: (' . $row_downline->sponsor_network_code . ') ' . strtoupper($row_downline->sponsor_member_name) . '</span>';
+                                echo '<span><strong>Sponsor</strong>: (' . $row_downline->sponsor_network_code . ') ' . strtoupper(stripslashes($row_downline->sponsor_member_name)) . '</span>';
                                 echo '</div>';
                                 echo '</div>';
                                 echo '</li>';
