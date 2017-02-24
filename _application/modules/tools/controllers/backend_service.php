@@ -67,10 +67,10 @@ class Backend_service extends Backend_Service_Controller {
         $params = isset($_POST) ? $_POST : array();
         if ($user == 'admin') {
             $prefix_column = 'administrator_access_otp_';
-            $user_id = 'id';
+            $user_id = 'administrator_id';
             $user_name = 'administrator_name';
             $params['table'] = 'site_administrator_access_otp';
-            $params['join'] = 'INNER JOIN site_administrator ON administrator_access_otp_id = administrator_id';
+            $params['join'] = 'INNER JOIN site_administrator ON administrator_access_otp_administrator_id = administrator_id';
         } elseif ($user == 'member') {
             $prefix_column = 'member_access_otp_';
             $user_id = 'network_id';
