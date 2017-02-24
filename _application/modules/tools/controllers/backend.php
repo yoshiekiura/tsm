@@ -38,4 +38,34 @@ class Backend extends Backend_Controller {
         template('backend', 'tools/backend_tools_cek_data_view', $data);
     }
 
+    function info_otp($user='admin') {
+        if ($user != 'admin' && $user != 'member') {
+            redirect('backend/tools/info_otp/admin');
+        }
+
+        $otp_active = false; 
+        if ($user == 'admin') {
+            // check if configuration is active
+            if ($this->sys_configuration['otp_login_admin']) {
+                $otp_active = true;
+            }
+
+        } elseif ($user == 'member') {
+            if ($this->sys_configuration['otp_member_active']) {
+                $otp_active = true;
+            }
+        }
+
+        $data['arr_breadcrumbs'] = array(
+            'Tools' => '#',
+            'Info OTP ' . ucfirst($user) => 'backend/tools/info_otp/admin',
+        );
+        $data['title'] = 'Info OTP ' . ucfirst($user);
+        $data['otp_active'] = $otp_active;
+        $data['otp_user'] = $user;
+        $data['get_data_url'] = $this->service_module_url . '/get_data_otp/' . $user;
+
+        template('backend', 'tools/backend_tools_info_otp_view', $data);
+    }
+
 }

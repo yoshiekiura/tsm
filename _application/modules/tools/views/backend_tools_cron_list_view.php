@@ -7,7 +7,7 @@
         dataType: 'json',
         colModel: [
             { display: 'No.', name: 'no', width: 50, sortable: false, align: 'center' },
-            { display: 'Nama Cron', name: 'cron_title', width: 180, sortable: true, align: 'center' },
+            { display: 'Nama Cron', name: 'cron_log_name', width: 180, sortable: true, align: 'center' },
             { display: 'Tanggal Cron', name: 'cron_log_date', width: 180, sortable: true, align: 'center' },
             { display: 'Tanggal Cron Berjalan', name: 'cron_log_run_datetime', width: 180, sortable: true, align: 'center', datasource: false },
         ],
