@@ -50,14 +50,14 @@ class Service_member_model extends CI_Model {
 		$day = date('d');
 		$range = 2;
 
-		$result['summary'][0]['total_member'] = $this->function_lib->set_number_format($this->get_total_member(1, $year, $month));
+		$result['summary']['total_member'] = $this->function_lib->set_number_format($this->get_total_member(1, $year, $month));
 
 		$last_join = $this->function_lib->set_number_format($this->get_total_member(1, $year, $month));
-		$result['summary'][0]['last_join'] = $last_join." Member ({$month_idn} {$year})";       
+		$result['summary']['last_join'] = $last_join." Member ({$month_idn} {$year})";       
 
 		$arr_last_serial_create = $this->get_total_last_created_serial();
 		$last_serial_create_date = convert_date($arr_last_serial_create->date_only, 'id');
-		$result['summary'][0]['last_serial_create'] = $arr_last_serial_create->total_created." Serial ({$last_serial_create_date})";
+		$result['summary']['last_serial_create'] = $arr_last_serial_create->total_created." Serial ({$last_serial_create_date})";
 
 		 // REGISTRASI 
 		for ($i=$range; $i >= 0; $i--) { 
