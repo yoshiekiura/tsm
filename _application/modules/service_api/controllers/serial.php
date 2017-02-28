@@ -1,136 +1,65 @@
 <?php
-
-/*
- * Cron Serial Api
+/**
+ * Service API Serial Controller
  *
- * @author	Yonkz Tamvan
- * @copyright	Copyright (c) 2016, Esoftdream.net
+ * @author      Fahrur Rifai <developer11@esoftdream.net>
+ * @copyright   Copyright (c) 2017, Esoftdream.net
  */
-
-// -----------------------------------------------------------------------------
-
 class Serial extends MY_Controller {
 
     function __construct() {
         parent::__construct();
-        set_time_limit(0);
+        $this->load->model('service_api/service_serial_model');
+        $this->load->config->load('key');
+        $this->api_key = $this->config->item('key_api');
 
+        $this->year = date("Y");
+        $this->month = date("m");
         $this->datetime = date("Y-m-d H:i:s");
-        $this->date = date("Y-m-d", mktime(0, 0, 0, date("m"), date("d") - 0, date("Y")));
-
-        //set harian
-        $this->yesterday = date("Y-m-d", mktime(0, 0, 0, date("m"), date("d") - 1, date("Y")));
-
-        //set mingguan
-        $this->weekly_start_day = 0; //0 = minggu - sabtu
-        //set bulanan
-        $this->monthly_start_day = 1; //tanggal yang memungkinkan: 1 s/d 28
-
-        //$this->load->model('cron_common_model');
     }
 
-    public function serialsapi($month = '06', $year = '2016') {
-       
-
-        $apikey = 'k0pr7684LJoN011';
-        $cek_apikey = $_GET['apikey'];
-        // $cek_apikey = 'k0pr7684LJoN011';
-
-
-        if ($apikey == $cek_apikey) {
-            $valid_apikey = TRUE;
+    private function is_valid_key($key) {
+        $response = array();
+        if ($key === $this->api_key) {
+            $response['status'] = true;
+            $response['message'] = 'Valid Key';
         } else {
-            $valid_apikey = FALSE;
+            $response['status'] = false;
+            $response['message'] = 'Invalid Key';
+        }
+        return $response;
+    }
+
+    public function info() {
+        $api_key = $this->input->get('key') ? $this->input->get('key') : '';
+        $request_error = false;
+        $month = $this->input->get('month') ? $this->input->get('month', TRUE) : $this->month;
+        $year = $this->input->get('year') ? $this->input->get('year', TRUE) : $this->year;
+        
+        $api_response = $this->is_valid_key($api_key);
+
+        if ($api_response['status'] == FALSE) {
+            $arr_output['status'] = 400;
+            $arr_output['message'] = $api_response['message'];
+            $request_error = true;
         }
 
-        if ($valid_apikey == TRUE) {
-
-            if (empty($_GET)) {
-
-
-
-                $data = array();
-                $temp = array();
-                $no = 1;
-
-                
-                $this->CI->function_lib->get_one("sys_serial_type", "serial_type_name", "serial_type_is_active  = 1");
-
-                $temp['serial_create'] = $this->CI->function_lib->get_one("sys_serial", "COUNT(serial_id)", "MONTH(serial_create_datetime)='" . $month . "'");
-                $temp['serial_is_activation'] = $this->CI->function_lib->get_one("sys_serial_activation", "COUNT(serial_activation_serial_id)", "MONTH(serial_activation_datetime)='" . $month . "' AND YEAR(serial_activation_datetime) = '" . $year . "'   ");
-                $temp['serial_is_sold'] = $this->CI->function_lib->get_one("sys_serial_buyer", "COUNT(serial_buyer_serial_id)", "MONTH(serial_buyer_datetime)='" . $month . "' AND YEAR(serial_buyer_datetime) = '" . $year . "' ");
-                $temp['serial_is_used'] = $this->CI->function_lib->get_one("sys_serial", "COUNT(serial_id)", "MONTH(serial_create_datetime)='" . $month . "' AND serial_is_used  = 1 ");
-
-                $data_month[] = $temp;
-
-                //summary
-                $temp_summary = array();
-                $temp_summary['type_serial'] = $this->CI->function_lib->get_one("sys_serial_type", "serial_type_name", "serial_type_is_active  = 1 ");
-                $temp_summary['serial_create'] = $this->CI->function_lib->get_one("sys_serial", "COUNT(serial_id)");
-                $temp_summary['serial_activation'] = $this->CI->function_lib->get_one("sys_serial_activation", "COUNT(serial_activation_serial_id)", "");
-                $temp_summary['serial_sold'] = $this->CI->function_lib->get_one("sys_serial_buyer", "COUNT(serial_buyer_serial_id)", "");
-                $temp_summary['serial_used'] = $this->CI->function_lib->get_one("sys_serial", "COUNT(serial_id)", "serial_is_used  = 1 ");
-                $summary[] = $temp_summary;
-
-                $month = convert_month($month, 'text', '', 'ina');
-                $data = array(
-                    "status" => 200,
-                    "data" => array(
-                        'year' => $year,
-                        'month' => $month,
-                        "selling" => $data_month,
-                    ),
-                    "summary" => $summary
-                );
-
-            } else {
-                
-                $month = $_GET['month'];
-                $year = $_GET['year'];
-                
-                $data = array();
-                $temp = array();
-                $no = 1;
-
-
-                $temp['type_serial'] = $this->CI->function_lib->get_one("sys_serial_type", "serial_type_name", "serial_type_is_active  = 1 ");
-
-                $temp['serial_create'] = $this->CI->function_lib->get_one("sys_serial", "COUNT(serial_id)", "MONTH(serial_create_datetime)='" . $month . "'");
-                $temp['serial_is_activation'] = $this->CI->function_lib->get_one("sys_serial_activation", "COUNT(serial_activation_serial_id)", "MONTH(serial_activation_datetime)='" . $month . "' AND YEAR(serial_activation_datetime) = '" . $year . "'   ");
-                $temp['serial_is_sold'] = $this->CI->function_lib->get_one("sys_serial_buyer", "COUNT(serial_buyer_serial_id)", "MONTH(serial_buyer_datetime)='" . $month . "' AND YEAR(serial_buyer_datetime) = '" . $year . "' ");
-                $temp['serial_is_used'] = $this->CI->function_lib->get_one("sys_serial", "COUNT(serial_id)", "MONTH(serial_create_datetime)='" . $month . "' AND serial_is_used  = 1 ");
-
-                $data_month[] = $temp;
-
-                //summary
-                $temp_summary = array();
-                $temp_summary['type_serial'] = $this->CI->function_lib->get_one("sys_serial_type", "serial_type_name", "serial_type_is_active  = 1 ");
-                $temp_summary['serial_create'] = $this->CI->function_lib->get_one("sys_serial", "COUNT(serial_id)");
-                $temp_summary['serial_activation'] = $this->CI->function_lib->get_one("sys_serial_activation", "COUNT(serial_activation_serial_id)", "");
-                $temp_summary['serial_sold'] = $this->CI->function_lib->get_one("sys_serial_buyer", "COUNT(serial_buyer_serial_id)", "");
-                $temp_summary['serial_used'] = $this->CI->function_lib->get_one("sys_serial", "COUNT(serial_id)", "serial_is_used  = 1 ");
-                $summary[] = $temp_summary;
-
-                $month = convert_month($month, 'text', '', 'ina');
-                $data = array(
-                    "status" => 200,
-                    "data" => array(
-                        'year' => $year,
-                        'month' => $month,
-                        "selling" => $data_month,
-                    ),
-                    "summary" => $summary
-                );
-
-            }
-        } else {
-            $data['status'] = False;
-            $data['message'] = 'Tidak diketahui';
+        if (($month > 12) || $month < 1 || !is_numeric($month)) {
+            $arr_output['status'] = 400;
+            $arr_output['message'] = 'Bad Request. Invalid month';
+            $request_error = true;
         }
 
-        echo json_encode($data);
+        $data_result = $this->service_serial_model->get_serial_info($year, $month);
+        if ( ! $request_error) {
+            $arr_output['status'] = 200;
+            $arr_output['data'] = $data_result;
+        }
+
+        set_status_header($arr_output['status']); // set server status header
+        $this->output->set_content_type('json');
+        echo json_encode($arr_output);
+        
     }
 
 }
-
-?>
