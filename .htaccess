@@ -1,3 +1,5 @@
 RewriteEngine on
 RewriteCond $1 !^(index\.php|addons|assets|themes|cron|(.*).js|robots\.txt)
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
 RewriteRule ^(.*)$ ./index.php/?$1 [L]
