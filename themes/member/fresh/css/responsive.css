@@ -110,6 +110,47 @@ Extra Small Devices Only
 	.main-sidebar {
 		padding-top: 10px;
 	}
+	
+	/* Geneology */
+	.std{
+	    width: 100%;
+	    border-collapse: collapse;
+	    display: block;
+	    padding: 10px;
+	    -moz-transform: scale(1, 1);
+	    -ms-transform: scale(1, 1);
+	    -webkit-transform: scale(1, 1);
+	    -o-transform: scale(1, 1);
+	    transform: scale(1, 1);
+	    margin: 0; 
+	}
+	#chart .jOrgChart {
+        margin: 10px 0px!important;
+        padding: 0px!important;
+        overflow-x: auto!important;
+        overflow-y: hidden!important;
+    }
+    #chart .jOrgChart .node {
+        text-align: center!important;
+        padding:5px!important;
+        font-size:5pt!important;
+    }
+    #chart .jOrgChart .node .node-image img {
+        display: inline-block;
+        height: auto!important;
+    }
+    #chart .jOrgChart .node a {
+        font-size: 7pt!important;
+        font-weight: bold!important;
+    }
+    #chart .jOrgChart .node .node-expand {
+        margin: 10px auto!important;   
+    }
+
+    .content-header {
+        position: relative;
+        padding: 85px 15px 0 15px;
+    }
 }
 
 @media (min-width: 481px) and (max-width: 550px)  {

@@ -393,7 +393,7 @@ class Registration extends Member_Controller {
                     $arr_message['message'] .= '<div class="success alert alert-success">';
                     $arr_message['message'] .= '<div class="alert-title"><b>PROSES REGISTRASI BERHASIL DILAKUKAN</b></div>';
                     $arr_message['message'] .= '<ul>';
-                    $arr_message['message'] .= '<li>Registrasi member dengan nama <strong>' . $arr_member['member_name'] . '</strong> berhasil diproses.</li>';
+                    $arr_message['message'] .= '<li>Registrasi member dengan nama <strong>' . stripslashes($arr_member['member_name']) . '</strong> berhasil diproses.</li>';
                     // for ($hu = 1; $hu <= count($_SESSION['network_code']); $hu++) {
                     //     $arr_message['message'] .= '<li>URL web replikasi anda <strong>' . base_url() . $_SESSION['network_code'][$hu] . '</strong></li>';
                     // }

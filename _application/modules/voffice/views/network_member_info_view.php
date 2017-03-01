@@ -47,12 +47,12 @@
                 <tr>
                     <td><strong>Sponsor</strong></td>
                     <td align="center">:</td>
-                    <td><?php echo $sponsor_network_code; ?> (<?php echo $sponsor_member_name; ?>)</td>
+                    <td><?php echo $sponsor_network_code; ?> (<?php echo stripslashes($sponsor_member_name); ?>)</td>
                 </tr>
                 <tr>
                     <td><strong>Upline</strong></td>
                     <td align="center">:</td>
-                    <td><?php echo $upline_network_code; ?> (<?php echo $upline_member_name; ?>)</td>
+                    <td><?php echo $upline_network_code; ?> (<?php echo stripslashes($upline_member_name); ?>)</td>
                 </tr>
                 <tr>
                     <td><strong>Sponsoring</strong></td>
