@@ -50,7 +50,7 @@ class Service_member_model extends CI_Model {
 		$day = date('d');
 		$range = 2;
 
-		$result['summary']['total_member'] = $this->function_lib->set_number_format($this->get_total_member(1, $year, $month));
+		$result['summary']['total_member'] = $this->function_lib->set_number_format($this->get_total_member(1));
 
 		$last_join = $this->function_lib->set_number_format($this->get_total_member(1, $year, $month));
 		$result['summary']['last_join'] = $last_join." Member ({$month_idn} {$year})";       
