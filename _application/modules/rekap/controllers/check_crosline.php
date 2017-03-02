@@ -34,7 +34,7 @@ class check_crosline extends MY_Controller{
                 $is_crossline = $this->mlm_function->check_uplink($row->network_upline_network_id, $row->network_sponsor_network_id);
                 
                 if(!$is_crossline) {
-                    echo $network_id . ' Crossline <br>';
+                    echo $row->network_id . ' Crossline <br>';
                 }
             }
         }
