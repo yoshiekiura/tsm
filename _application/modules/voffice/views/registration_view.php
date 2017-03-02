@@ -40,7 +40,7 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
             </div>
             <form name="frm_reg" action="<?php echo base_url() . $form_action; ?>" method="post" class="form-horizontal form-bordered" id="registerHere">
                 <input type="hidden" name="uri_string" value="<?php echo uri_string(); ?>" />
-                <input type="hidden" name="reg_new_sponsor" id="reg_new_sponsor" value="<?php echo (isset($this->arr_flashdata['input_reg_new_sponsor'])) ? $this->arr_flashdata['input_reg_new_sponsor'] : $reg_sponsor; ?>">
+                <input type="text" name="reg_new_sponsor" id="reg_new_sponsor" value="<?php echo (isset($this->arr_flashdata['input_reg_new_sponsor'])) ? $this->arr_flashdata['input_reg_new_sponsor'] : $reg_sponsor; ?>">
                 <div class="box-body">
                     <div class="form-group">
                         <label class="control-label col-md-2">ID Sponsor <span class="required">*</span></label>
@@ -211,6 +211,7 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
     $(document).ready(function() {
         check_member_data('reg_nama_sponsor', $("#reg_sponsor").val());
         check_member_data('reg_nama_upline', $("#reg_upline").val());
+        check_no_rekening('reg_no_rekening_bank', $("#reg_no_rekening_bank").val());
 
         $("#reg_sponsor").blur(function() {
             check_member_data('reg_nama_sponsor', $("#reg_sponsor").val());

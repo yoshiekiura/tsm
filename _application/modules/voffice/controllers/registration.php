@@ -195,9 +195,9 @@ class Registration extends Member_Controller {
 
                 //$this->db->trans_begin();
                 //data network
-                $sponsor_network_id = $this->CI->mlm_function->get_network_id($_POST['reg_sponsor']);
+                $sponsor_network_id = $this->CI->mlm_function->get_network_id($_POST['reg_new_sponsor']);
                 $arr_network = array();
-                $arr_network['network_sponsor_network_code'] = addslashes(strtoupper($_POST['reg_sponsor']));
+                $arr_network['network_sponsor_network_code'] = addslashes(strtoupper($_POST['reg_new_sponsor']));
                 $arr_network['network_upline_network_code'] = addslashes(strtoupper($_POST['reg_upline']));
                 $arr_network['network_position_text'] = $_POST['reg_posisi'];
                 $arr_network['network_position'] = ($arr_network['network_position_text'] == 'kiri') ? 'L' : 'R';
@@ -246,7 +246,7 @@ class Registration extends Member_Controller {
                 $_SESSION['network_code'] = array();
 
                 /* INITIAL SPONSOR */
-                $arr_network['network_initial_sponsor_network_id'] = $sponsor_network_id;
+                $arr_network['network_initial_sponsor_network_id'] = $this->CI->mlm_function->get_network_id($_POST['reg_sponsor']);;
                 /* END INITIAL SPONSOR */
 
                 // cek no rek di sys_member_bank
