@@ -250,16 +250,16 @@ class Registration extends Member_Controller {
                 /* END INITIAL SPONSOR */
 
                 // cek no rek di sys_member_bank
-                $cek_no_rek = $this->function_lib->get_one('sys_member_bank', 'member_bank_network_id', array('member_bank_account_no'=>$_POST['reg_no_rekening_bank']));
-                if ( ! empty($cek_no_rek) OR $cek_no_rek != '') {
-                    $parent_group_network_id = $this->function_lib->get_one('sys_network_group', 'network_group_parent_network_id', array('network_group_member_network_id'=>$cek_no_rek));
-                    $parent_sponsor_network_id = $this->function_lib->get_one('sys_network', 'network_sponsor_network_id', array('network_id'=>$parent_group_network_id));
+                // $cek_no_rek = $this->function_lib->get_one('sys_member_bank', 'member_bank_network_id', array('member_bank_account_no'=>$_POST['reg_no_rekening_bank']));
+                // if ( ! empty($cek_no_rek) OR $cek_no_rek != '') {
+                //     $parent_group_network_id = $this->function_lib->get_one('sys_network_group', 'network_group_parent_network_id', array('network_group_member_network_id'=>$cek_no_rek));
+                //     $parent_sponsor_network_id = $this->function_lib->get_one('sys_network', 'network_sponsor_network_id', array('network_id'=>$parent_group_network_id));
 
-                    $arr_network['network_sponsor_network_id'] = $parent_sponsor_network_id;
-                    $arr_network['network_sponsor_network_code'] = $this->function_lib->get_one('sys_network', 'network_code', array('network_id'=>$parent_sponsor_network_id));
+                //     $arr_network['network_sponsor_network_id'] = $parent_sponsor_network_id;
+                //     $arr_network['network_sponsor_network_code'] = $this->function_lib->get_one('sys_network', 'network_code', array('network_id'=>$parent_sponsor_network_id));
 
-                    $this->$plan_type->set_parent_network_group($parent_group_network_id);
-                }
+                //     $this->$plan_type->set_parent_network_group($parent_group_network_id);
+                // }
 
                 for ($hu = 1; $hu <= $serial_type_node; $hu++) {
                     if ($hu > 1) {
@@ -434,6 +434,7 @@ class Registration extends Member_Controller {
                 $arr_message['message'] = '<div class="error alert alert-danger"><div class="alert-title"><b>PROSES REGISTRASI GAGAL DILAKUKAN</b></div><ul>' . validation_errors() . '</ul></div>';
                 $_SESSION['input_message'] = serialize($arr_message);
 
+                $this->session->set_flashdata('input_reg_new_sponsor', $this->input->post('reg_new_sponsor'));
                 $this->session->set_flashdata('input_reg_sponsor', $this->input->post('reg_sponsor'));
                 $this->session->set_flashdata('input_reg_upline', $this->input->post('reg_upline'));
                 $this->session->set_flashdata('input_reg_paket', $this->input->post('reg_paket'));
@@ -499,8 +500,8 @@ class Registration extends Member_Controller {
     public function check_position() {
         $is_error = false;
 
-        if ($this->input->post('reg_sponsor') && $this->input->post('reg_upline')) {
-            $sponsor_code = strtoupper(trim($this->input->post('reg_sponsor')));
+        if ($this->input->post('reg_new_sponsor') && $this->input->post('reg_upline')) {
+            $sponsor_code = strtoupper(trim($this->input->post('reg_new_sponsor')));
             $upline_code = strtoupper(trim($this->input->post('reg_upline')));
             $position = $this->input->post('reg_posisi');
 

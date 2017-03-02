@@ -40,6 +40,7 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
             </div>
             <form name="frm_reg" action="<?php echo base_url() . $form_action; ?>" method="post" class="form-horizontal form-bordered" id="registerHere">
                 <input type="hidden" name="uri_string" value="<?php echo uri_string(); ?>" />
+                <input type="hidden" name="reg_new_sponsor" id="reg_new_sponsor" value="<?php echo (isset($this->arr_flashdata['input_reg_new_sponsor'])) ? $this->arr_flashdata['input_reg_new_sponsor'] : $reg_sponsor; ?>">
                 <div class="box-body">
                     <div class="form-group">
                         <label class="control-label col-md-2">ID Sponsor <span class="required">*</span></label>
@@ -332,8 +333,15 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
                             '</div> </div>';
                             $("#" + id).closest('.form-group').append(htmlinfo);
                             $("#" + id).after('<span class="help-block no_rek_msg">'+results.message+'</span>');
+
+                            // set new sponsor
+                            set_new_sponsor(new_sponsor_code);
+
                         } else if (results.change == 'no') {
                             $("#" + id).after('<span class="help-block no_rek_msg">'+results.message+'</span>');
+
+                            // revert back to old sponsor
+                            set_new_sponsor($("#reg_sponsor").val());
                         }
                         toggle_submit('enable');
                     } else if(results.status == 'failed') {
@@ -342,10 +350,17 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
                         $(".help-block.no_rek_msg").remove();
                         $("#" + id).parent().addClass('has-error');
                         $("#" + id).after('<span class="help-block no_rek_msg">'+results.message+'</span>');
+
+                        // revert back to old sponsor
+                        set_new_sponsor($("#reg_sponsor").val());
                     }
                 }
             });
         }
+    }
+
+    function set_new_sponsor(code) {
+        $('#reg_new_sponsor').val(code);
     }
 
     function confirmation() {
