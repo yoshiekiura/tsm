@@ -20,6 +20,8 @@ class check_crosline extends MY_Controller{
     function __construct() {
         parent::__construct();
         
+        error_reporting(E_ALL);
+        
     }
     
     function index() {
@@ -31,7 +33,9 @@ class check_crosline extends MY_Controller{
         
         if($arr_member->num_rows() >0){
             foreach ($arr_member->result() as $row) {
-                $is_crossline = $this->mlm_function->check_uplink($row->network_upline_network_id, $row->network_sponsor_network_id);
+                $upline_network_code = $this->mlm_function->get_network_code($row->network_upline_network_id);
+                $sponsor_network_code = $this->mlm_function->get_network_code($row->network_sponsor_network_id);
+                $is_crossline = $this->mlm_function->check_uplink($upline_network_code, $sponsor_network_code);
                 
                 if(!$is_crossline) {
                     echo $row->network_id . ' Crossline <br>';
