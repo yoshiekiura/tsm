@@ -68,5 +68,22 @@ class Backend extends Backend_Controller {
     	}
     }
 
+    public function rekap_all_bonus() {
+    	// get first member register
+    	$this->db->group_by('DATE(member_join_datetime)');
+    	$this->db->order_by('member_join_datetime', 'ASC');
+    	$this->db->select('DATE(member_join_datetime) as join_date');
+    	$q = $this->db->get('sys_member');
+    	if ($q->num_rows() > 0) {
+    		foreach ($q->result() as $row) {
+    			// if register date is NOT today, then do it
+    			if ($row->join_date != $this->date) {
+    				// rekap daily
+	    			$this->rekap_daily_bonus($row->join_date);
+    			}
+    		}
+    	}
+    }
+
     
 }

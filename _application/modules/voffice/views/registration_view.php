@@ -241,17 +241,27 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
         });
 
         $("#reg_no_rekening_bank").keyup(function() {
-            if ($(this).val() != '') {
+            if ($("#reg_nasabah_bank").val() == '') {
                 toggle_submit('disabled');
-
-                $(this).parent().removeClass('has-error').removeClass('has-success');
+                $("#reg_nasabah_bank").parent().addClass('has-error');
                 $('#info_change_sponsor').remove();
-                $(".help-block.no_rek_msg").remove();    
-                $(this).after('<span class="help-block no_rek_msg">Sedang mencari nomor rekening yang sama..</span>');
-                
-                delay(function(){
-                    check_no_rekening('reg_no_rekening_bank', $("#reg_no_rekening_bank").val());
-                }, 2000);
+                $(".help-block.nama_nasabah_msg").remove();    
+                $("#reg_nasabah_bank").after('<span class="help-block nama_nasabah_msg">Nama Nasabah harus diisi</span>');
+            } else {
+                if ($(this).val() != '') {
+                    toggle_submit('disabled');
+
+                    $("#reg_nasabah_bank").parent().removeClass('has-error');
+                    $(this).parent().removeClass('has-error').removeClass('has-success');
+                    $('#info_change_sponsor').remove();
+                    $(".help-block.nama_nasabah_msg").remove();    
+                    $(".help-block.no_rek_msg").remove();    
+                    $(this).after('<span class="help-block no_rek_msg">Sedang mencari nomor rekening yang sama..</span>');
+                    
+                    delay(function(){
+                        check_no_rekening('reg_no_rekening_bank', $("#reg_no_rekening_bank").val());
+                    }, 2000);
+                }
             }
         });
 
@@ -271,9 +281,21 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
             }
         });
 
-        // $("#reg_nama").blur(function() {
-        //     $("#reg_nasabah_bank").val($(this).val());
-        // });
+        $("#reg_nama").blur(function() {
+            $("#reg_nasabah_bank").val($(this).val());
+            $("#reg_nasabah_bank").blur(); // fire
+        });
+
+        $("#reg_nasabah_bank").blur(function() {
+            if ($("#reg_nasabah_bank").val() == '') {
+                toggle_submit('disabled');
+                $("#reg_nasabah_bank").parent().addClass('has-error');
+                $(".help-block.nama_nasabah_msg").remove();    
+                $("#reg_nasabah_bank").after('<span class="help-block nama_nasabah_msg">Nama Nasabah harus diisi</span>');
+            } else {
+                $("#reg_no_rekening_bank").keyup();
+            }
+        });
     });
 
     function toggle_submit(status) {
@@ -313,7 +335,11 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
             $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url('voffice/registration/check_rekening'); ?>',
-                data: {no_rek: no_rek},
+                data: {
+                    no_rek: no_rek,
+                    upline: $('#reg_upline').val(),
+                    nama_nasabah: $('#reg_nasabah_bank').val()
+                },
                 dataType: 'json',
                 async: false,
                 beforeSend: function() {

@@ -39,6 +39,7 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
             </div>
             <form name="frm_reg" action="<?php echo base_url() . $form_action; ?>" method="post" class="form-horizontal form-bordered" id="registerHere">
                 <input type="hidden" name="uri_string" value="<?php echo uri_string(); ?>" />
+                <input type="hidden" name="reg_new_sponsor" id="reg_new_sponsor" value="<?php echo (isset($this->arr_flashdata['input_reg_new_sponsor'])) ? $this->arr_flashdata['input_reg_new_sponsor'] : $reg_sponsor; ?>">
                 <div class="box-body">
                     <div class="form-group">
                         <label class="control-label col-md-2">ID Sponsor <span class="required">*</span></label>
@@ -225,22 +226,28 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
             check_member_data('reg_nama_upline', $("#reg_upline").val());
         });
 
-        $("#reg_repassword, #reg_password").blur(function() {
-            $(".help-block.password_msg").remove();    
-            if ($("#reg_password").val() != '') {
-                if ($("#reg_password").val() != $("#reg_repassword").val()) {
-                    $("#reg_repassword, #reg_password").parent().addClass('has-error');
-                    $("#reg_repassword").after('<span class="help-block password_msg">Password dan Konfirmasi Password tidak sama.</span>');
-                    toggle_submit('disabled');
-                } else {
-                    $("#reg_repassword, #reg_password").parent().removeClass('has-error').addClass('has-success');
-                    $(".help-block.password_msg").remove();    
-                    toggle_submit('enable');
-                }
-            } else {
+        $("#reg_no_rekening_bank").keyup(function() {
+            if ($("#reg_nasabah_bank").val() == '') {
                 toggle_submit('disabled');
-                $("#reg_password").parent().addClass('has-error');
-                $("#reg_password").after('<span class="help-block password_msg">Password harus diisi.</span>');
+                $("#reg_nasabah_bank").parent().addClass('has-error');
+                $('#info_change_sponsor').remove();
+                $(".help-block.nama_nasabah_msg").remove();    
+                $("#reg_nasabah_bank").after('<span class="help-block nama_nasabah_msg">Nama Nasabah harus diisi</span>');
+            } else {
+                if ($(this).val() != '') {
+                    toggle_submit('disabled');
+
+                    $("#reg_nasabah_bank").parent().removeClass('has-error');
+                    $(this).parent().removeClass('has-error').removeClass('has-success');
+                    $('#info_change_sponsor').remove();
+                    $(".help-block.nama_nasabah_msg").remove();    
+                    $(".help-block.no_rek_msg").remove();    
+                    $(this).after('<span class="help-block no_rek_msg">Sedang mencari nomor rekening yang sama..</span>');
+                    
+                    delay(function(){
+                        check_no_rekening('reg_no_rekening_bank', $("#reg_no_rekening_bank").val());
+                    }, 2000);
+                }
             }
         });
 
@@ -275,9 +282,21 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
             }
         });
 
-        // $("#reg_nama").blur(function() {
-        //     $("#reg_nasabah_bank").val($(this).val());
-        // });
+        $("#reg_nama").blur(function() {
+            $("#reg_nasabah_bank").val($(this).val());
+            $("#reg_nasabah_bank").blur(); // fire
+        });
+
+        $("#reg_nasabah_bank").blur(function() {
+            if ($("#reg_nasabah_bank").val() == '') {
+                toggle_submit('disabled');
+                $("#reg_nasabah_bank").parent().addClass('has-error');
+                $(".help-block.nama_nasabah_msg").remove();    
+                $("#reg_nasabah_bank").after('<span class="help-block nama_nasabah_msg">Nama Nasabah harus diisi</span>');
+            } else {
+                $("#reg_no_rekening_bank").keyup();
+            }
+        });
     });
 
     function toggle_submit(status) {
@@ -317,7 +336,11 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
             $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url('voffice/registration/check_rekening'); ?>',
-                data: {no_rek: no_rek},
+                data: {
+                    no_rek: no_rek,
+                    upline: $('#reg_upline').val(),
+                    nama_nasabah: $('#reg_nasabah_bank').val()
+                },
                 dataType: 'json',
                 async: false,
                 beforeSend: function() {
@@ -338,8 +361,15 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
                             '</div> </div>';
                             $("#" + id).closest('.form-group').append(htmlinfo);
                             $("#" + id).after('<span class="help-block no_rek_msg">'+results.message+'</span>');
+
+                            // set new sponsor
+                            set_new_sponsor(new_sponsor_code);
+
                         } else if (results.change == 'no') {
                             $("#" + id).after('<span class="help-block no_rek_msg">'+results.message+'</span>');
+
+                            // revert back to old sponsor
+                            set_new_sponsor($("#reg_sponsor").val());
                         }
                         toggle_submit('enable');
                     } else if(results.status == 'failed') {
@@ -348,10 +378,17 @@ echo (isset($this->arr_flashdata['message'])) ? $this->arr_flashdata['message'] 
                         $(".help-block.no_rek_msg").remove();
                         $("#" + id).parent().addClass('has-error');
                         $("#" + id).after('<span class="help-block no_rek_msg">'+results.message+'</span>');
+
+                        // revert back to old sponsor
+                        set_new_sponsor($("#reg_sponsor").val());
                     }
                 }
             });
         }
+    }
+
+    function set_new_sponsor(code) {
+        $('#reg_new_sponsor').val(code);
     }
 
     function confirmation() {

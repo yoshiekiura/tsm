@@ -170,7 +170,7 @@ class Registration extends Member_Controller {
                 array(
                     'field' => 'reg_nasabah_bank',
                     'label' => 'Nama Nasabah',
-                    'rules' => 'min_length[3]|callback_validate_bank_account_name'
+                    'rules' => 'required|min_length[3]|callback_validate_bank_account_name'
                     ),
                 );
 
@@ -524,7 +524,7 @@ class Registration extends Member_Controller {
                 }
             } else {
                 $is_error = true;
-                $message = 'Upline tidak berada pada jaringan sponsor, ilahkan cari posisi yang lain.';
+                $message = 'Upline tidak berada pada jaringan sponsor, silahkan cari posisi yang lain.';
             }
         } else {
             $is_error = true;
@@ -627,9 +627,9 @@ class Registration extends Member_Controller {
     public function validate_bank_account_name($name) {
         $is_error = false;
         // jika kosong
-        if (empty($name) OR $name == '') {
-            return true;
-        }
+        // if (empty($name) OR $name == '') {
+        //     return true;
+        // }
 
         // validasi karakter (hanya angka dan spasi)
         if ( ! preg_match("/^[a-zA-Z .,']+$/", $name)) {
@@ -649,6 +649,8 @@ class Registration extends Member_Controller {
         header("Content-type: application/json");
         $result = array();
         $rek = $this->input->post('no_rek');
+        $upline_code = $this->input->post('upline');
+        $bank_account_name = $this->input->post('nama_nasabah');
         $is_error = false;
 
         // validasi panjang karakter 
@@ -689,16 +691,36 @@ class Registration extends Member_Controller {
                 $parent_group_network_id = $this->function_lib->get_one('sys_network_group', 'network_group_parent_network_id', array('network_group_member_network_id'=>$cek_no_rek));
                 $parent_sponsor_network_id = $this->function_lib->get_one('sys_network', 'network_sponsor_network_id', array('network_id'=>$parent_group_network_id));
 
-                $result['sponsor_network_id'] = $parent_sponsor_network_id;
-                $result['sponsor_network_code'] = $this->function_lib->get_one('sys_network', 'network_code', array('network_id'=>$parent_sponsor_network_id));
-                $result['sponsor_name'] = $this->mlm_function->get_member_name($parent_sponsor_network_id);
-                $result['message'] = 'Perubahan Data Sponsor.';
-                $result['change'] = 'yes';
+                // check sponsor bank account name
+                $parent_bank_account_name = $this->function_lib->get_one('sys_member_bank', 'member_bank_account_name', array('member_bank_network_id'=>$parent_group_network_id));
+                if ($bank_account_name == $parent_bank_account_name) {
+
+                    // check upline and new sponsor
+                    $upline_id = $this->mlm_function->get_network_id($upline_code);
+                    $check_uplink = $this->function_lib->get_one('sys_netgrow_node', 'netgrow_node_network_id', array('netgrow_node_network_id'=>$parent_sponsor_network_id, 'netgrow_node_downline_network_id'=>$upline_id));
+                    // if it crossline
+                    if (empty($check_uplink) OR $check_uplink=='') {                    
+                        $result['status'] = 'failed';
+                        $result['message'] = 'Proses Registrasi tidak dapat dilakukan. Nomor rekening yang anda inputkan sudah terdaftar di jaringan lain (crossline)';
+                    } else { // else, change sponsor
+                        $result['sponsor_network_id'] = $parent_sponsor_network_id;
+                        $result['sponsor_network_code'] = $this->function_lib->get_one('sys_network', 'network_code', array('network_id'=>$parent_sponsor_network_id));
+                        $result['sponsor_name'] = $this->mlm_function->get_member_name($parent_sponsor_network_id);
+                        $result['message'] = 'Perubahan Data Sponsor. .'.$bank_account_name.'. .'.$sponsor_bank_account_name.'.';
+                        $result['change'] = 'yes';
+                        $result['status'] = 'success';
+                    }
+
+                } else {
+                    $result['status'] = 'failed';
+                    $result['message'] = 'Proses Registrasi tidak dapat dilakukan, No. rekening sudah terdaftar';
+                }
+
             } else {
                 $result['message'] = 'Nomor Rekening valid.';
                 $result['change'] = 'no';
+                $result['status'] = 'success';
             }
-            $result['status'] = 'success';
         } else {
             $result['status'] = 'failed';
         }
