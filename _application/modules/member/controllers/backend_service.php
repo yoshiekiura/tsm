@@ -129,10 +129,10 @@ class Backend_service extends Backend_Service_Controller {
                     'member_serial_pin' => $row->member_serial_pin,
                     'member_serial_type_label' => $row->member_serial_type_label,
                     'sponsor_network_code' => $row->sponsor_network_code,
-                    'sponsor_member_name' => $row->sponsor_member_name,
+                    'sponsor_member_name' => stripslashes($row->sponsor_member_name),
                     'sponsor_member_nickname' => $row->sponsor_member_nickname,
                     'upline_network_code' => $row->upline_network_code,
-                    'upline_member_name' => $row->upline_member_name,
+                    'upline_member_name' => stripslashes($row->upline_member_name),
                     'upline_member_nickname' => $row->upline_member_nickname,
                     'member_is_active' => $is_active,
                     'detail' => $detail,
@@ -245,7 +245,9 @@ class Backend_service extends Backend_Service_Controller {
             $data_member_detail['member_detail_identity_no'] = $member_detail_identity_no;
             
             $data_member_bank = array();
-            $data_member_bank['member_bank_bank_id'] = $member_bank_bank_id;
+            if ($member_bank_bank_id) {
+                $data_member_bank['member_bank_bank_id'] = $member_bank_bank_id;
+            }
             $data_member_bank['member_bank_city'] = $member_bank_city;
             $data_member_bank['member_bank_branch'] = $member_bank_branch;
             $data_member_bank['member_bank_account_name'] = addslashes($member_bank_account_name);
