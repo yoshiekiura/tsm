@@ -706,7 +706,7 @@ class Registration extends Member_Controller {
                         $result['sponsor_network_id'] = $parent_sponsor_network_id;
                         $result['sponsor_network_code'] = $this->function_lib->get_one('sys_network', 'network_code', array('network_id'=>$parent_sponsor_network_id));
                         $result['sponsor_name'] = $this->mlm_function->get_member_name($parent_sponsor_network_id);
-                        $result['message'] = 'Perubahan Data Sponsor. .'.$bank_account_name.'. .'.$sponsor_bank_account_name.'.';
+                        $result['message'] = 'Perubahan Data Sponsor.';
                         $result['change'] = 'yes';
                         $result['status'] = 'success';
                     }
