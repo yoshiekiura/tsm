@@ -694,21 +694,28 @@ class Registration extends Member_Controller {
                 // check sponsor bank account name
                 $parent_bank_account_name = $this->function_lib->get_one('sys_member_bank', 'member_bank_account_name', array('member_bank_network_id'=>$parent_group_network_id));
                 if ($bank_account_name == $parent_bank_account_name) {
-
+                    $is_crossline = false;
                     // check upline and new sponsor
                     $upline_id = $this->mlm_function->get_network_id($upline_code);
-                    $check_uplink = $this->function_lib->get_one('sys_netgrow_node', 'netgrow_node_network_id', array('netgrow_node_network_id'=>$parent_sponsor_network_id, 'netgrow_node_downline_network_id'=>$upline_id));
-                    // if it crossline
-                    if (empty($check_uplink) OR $check_uplink=='') {                    
-                        $result['status'] = 'failed';
-                        $result['message'] = 'Proses Registrasi tidak dapat dilakukan. Nomor rekening yang anda inputkan sudah terdaftar di jaringan lain (crossline)';
-                    } else { // else, change sponsor
+                    if($upline_id != $parent_group_network_id) {
+                        $check_uplink = $this->function_lib->get_one('sys_netgrow_node', 'netgrow_node_network_id', array('netgrow_node_network_id'=>$parent_group_network_id, 'netgrow_node_downline_network_id'=>$upline_id));
+                        // if it crossline
+                        if (empty($check_uplink) OR $check_uplink=='') {
+
+                            $is_crossline = true;
+                            $result['status'] = 'failed';
+                            $result['message'] = 'Proses Registrasi tidak dapat dilakukan. Nomor rekening yang anda inputkan sudah terdaftar di jaringan lain (crossline)';
+                        }
+                    }
+
+                    if(!$is_crossline) {
                         $result['sponsor_network_id'] = $parent_sponsor_network_id;
                         $result['sponsor_network_code'] = $this->function_lib->get_one('sys_network', 'network_code', array('network_id'=>$parent_sponsor_network_id));
                         $result['sponsor_name'] = $this->mlm_function->get_member_name($parent_sponsor_network_id);
                         $result['message'] = 'Perubahan Data Sponsor.';
                         $result['change'] = 'yes';
                         $result['status'] = 'success';
+
                     }
 
                 } else {
