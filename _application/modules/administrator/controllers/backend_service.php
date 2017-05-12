@@ -164,7 +164,7 @@ class Backend_Service extends Backend_Service_Controller {
         $this->load->library('form_validation');
         $this->load->library('upload');
         $this->load->library('image_lib');
-        $this->form_validation->set_rules('username', '<b>Username</b>', 'required|min_length[5]|max_length[15]|unique[site_administrator.administrator_username]');
+        $this->form_validation->set_rules('username', '<b>Username</b>', 'required|min_length[5]|max_length[15]|alpha_dash|callback_admin_username');
         $this->form_validation->set_rules('password', '<b>Password Baru</b>', 'required|matches[password_conf]');
         $this->form_validation->set_rules('password_conf', '<b>Ulangi Password Baru</b>', 'required');
         $this->form_validation->set_rules('name', '<b>Nama</b>', 'required');
@@ -225,7 +225,7 @@ class Backend_Service extends Backend_Service_Controller {
         $this->load->library('form_validation');
         $this->load->library('upload');
         $this->load->library('image_lib');
-        $this->form_validation->set_rules('username', '<b>Username</b>', 'required|min_length[5]|max_length[15]|unique[site_administrator.administrator_username.administrator_id.' . $this->input->post('id') . ']');
+        $this->form_validation->set_rules('username', '<b>Username</b>', 'required|min_length[5]|max_length[15]|alpha_dash|unique[site_administrator.administrator_username.administrator_id.' . $this->input->post('id') . ']');
         $this->form_validation->set_rules('name', '<b>Nama</b>', 'required');
 
         if ($this->form_validation->run($this) == FALSE) {

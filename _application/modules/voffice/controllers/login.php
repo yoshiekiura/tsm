@@ -65,7 +65,7 @@ class Login extends MY_Controller {
             $query = $this->login_model->get_data_member_by_username($username);
             if($query->num_rows() > 0) {
                 $row = $query->row();
-                if (($row->member_account_username === $username) && ($this->encrypt->decode($row->member_account_password, $this->config->item('key_member')) === $password)) {
+                if (($row->member_account_username === $username || $row->network_code === $username) && ($this->encrypt->decode($row->member_account_password, $this->config->item('key_member')) === $password)) {
                     if ($row->member_is_active == '0') {
                         
                         //inactive

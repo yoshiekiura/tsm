@@ -22,7 +22,7 @@ class Login_model extends CI_Model {
             INNER JOIN sys_member ON member_network_id = network_id 
             INNER JOIN sys_member_account ON member_account_network_id = network_id 
             INNER JOIN sys_member_detail ON member_detail_network_id = network_id 
-            WHERE member_account_username = '" . $username . "' 
+            WHERE member_account_username = '" . $username . "'  OR network_code = '".$username."'
         ";
         return $this->db->query($sql);
     }

@@ -151,7 +151,7 @@ class Backend_service extends Backend_Service_Controller {
         $this->load->library('form_validation');
         $this->load->library('upload');
         $this->load->library('image_lib');
-        $this->form_validation->set_rules('account_username', '<b>Username</b>', 'required|min_length[5]|max_length[15]|callback_username_check[' . $this->input->post('id') . ']');
+        $this->form_validation->set_rules('account_username', '<b>Username</b>', 'required|min_length[5]|max_length[15]|alpha_dash|callback_username_check[' . $this->input->post('id') . ']');
         $this->form_validation->set_rules('name', '<b>Nama Lengkap</b>', 'required|callback_validate_name');
         // $this->form_validation->set_rules('nickname', '<b>Nama Alias</b>', 'required');
         // $this->form_validation->set_rules('detail_address', '<b>Alamat</b>', 'required');
