@@ -689,6 +689,48 @@ class mlm_function {
     }
 
     /**
+     * function untuk mendapatkan string select query bonus untuk bonus aktif (baru)
+     * @return String
+     */
+    function get_string_bonus_select_new() {
+        $arr_active_bonus = $this->get_arr_active_bonus();
+        
+        $str_select = "";
+        $str_total_in_bonus_select = "";
+        $str_total_out_bonus_select = "";
+        $str_total_saldo_bonus_select = "";
+        if(is_array($arr_active_bonus)) {
+            $str_total_in_bonus_select .= "(";
+            $str_total_out_bonus_select .= "(";
+            $str_total_saldo_bonus_select .= "(";
+            foreach($arr_active_bonus as $bonus_item) {
+                $str_select .= "bonus_" . $bonus_item['name'] . "_acc AS bonus_" . $bonus_item['name'] . "_in, ";
+                $str_select .= "bonus_" . $bonus_item['name'] . "_paid AS bonus_" . $bonus_item['name'] . "_out, ";
+                $str_select .= "(bonus_" . $bonus_item['name'] . "_acc - bonus_" . $bonus_item['name'] . "_paid) AS bonus_" . $bonus_item['name'] . "_saldo, ";
+                
+                $str_total_in_bonus_select .= "bonus_" . $bonus_item['name'] . "_acc + ";
+                $str_total_out_bonus_select .= "bonus_" . $bonus_item['name'] . "_paid + ";
+                $str_total_saldo_bonus_select .= "(bonus_" . $bonus_item['name'] . "_acc - bonus_" . $bonus_item['name'] . "_paid) + ";
+            }
+            $str_total_in_bonus_select = rtrim($str_total_in_bonus_select, ' + ');
+            $str_total_in_bonus_select .= ") AS bonus_total_in, ";
+            
+            $str_total_out_bonus_select = rtrim($str_total_out_bonus_select, ' + ');
+            $str_total_out_bonus_select .= ") AS bonus_total_out, ";
+            
+            $str_total_saldo_bonus_select = rtrim($str_total_saldo_bonus_select, ' + ');
+            $str_total_saldo_bonus_select .= ") AS bonus_total_saldo";
+            
+            $str_select .= $str_total_in_bonus_select;
+            $str_select .= $str_total_out_bonus_select;
+            $str_select .= $str_total_saldo_bonus_select;
+        }
+        $str_select = rtrim($str_select, ", ");
+        
+        return $str_select;
+    }
+
+    /**
      * function untuk mendapatkan nilai bonus member
      * @param String $bonus_name nama bonus yang akan dicari
      * @param int $network_id network_id member yang akan dicari

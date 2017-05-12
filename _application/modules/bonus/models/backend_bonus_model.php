@@ -17,7 +17,7 @@ class Backend_bonus_model extends CI_Model {
     
     function get_query_bonus_data($params, $count = false) {
         
-        $str_select = $this->mlm_function->get_string_bonus_select();
+        $str_select = $this->mlm_function->get_string_bonus_select_new();
         extract($this->function_lib->get_query_condition($params, $count));
         $sql = "
             SELECT $parent_select 
@@ -42,9 +42,7 @@ class Backend_bonus_model extends CI_Model {
                 INNER JOIN sys_member ON member_network_id = network_id 
                 INNER JOIN sys_member_bank ON member_bank_network_id = network_id 
                 LEFT JOIN ref_bank ON bank_id = member_bank_bank_id 
-                LEFT JOIN sys_bonus_log ON bonus_log_network_id = network_id 
-                LEFT JOIN sys_bonus_transfer_detail ON bonus_log_id = bonus_transfer_detail_bonus_log_id 
-                LEFT JOIN sys_bonus_transfer ON bonus_transfer_id = bonus_transfer_detail_bonus_transfer_id AND bonus_transfer_status NOT IN ('failed') 
+                LEFT JOIN sys_bonus ON bonus_network_id = network_id 
                 GROUP BY network_id 
             ) result 
             $where $sort $limit
