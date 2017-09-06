@@ -1,7 +1,7 @@
 <h2>Tambah Kontak Kami</h2>
 <div class="box">
     <div class="box-title">
-        <div class="caption"><i class="icon-reorder"></i>Form Ubah Kontak Kami</div>
+        <div class="caption"><i class="icon-reorder"></i>Form Tambah Kontak Kami</div>
     </div>
     <div class="box-body form">
         <?php echo form_open($form_action, array('class' => 'form-horizontal form-bordered')); ?>

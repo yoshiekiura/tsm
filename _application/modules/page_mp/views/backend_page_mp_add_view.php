@@ -1,7 +1,7 @@
 <h2>Tambah Halaman Marketing Plan</h2>
 <div class="box">
     <div class="box-title">
-        <div class="caption"><i class="icon-reorder"></i>Form Ubah Halaman Marketing Plan</div>
+        <div class="caption"><i class="icon-reorder"></i>Form Tambah Halaman Marketing Plan</div>
     </div>
     <div class="box-body form">
         <?php echo form_open_multipart($form_action, array('class' => 'form-horizontal form-bordered')); ?>
